@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'First Aid Education',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -28,9 +29,9 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 156, 6, 6)),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'First Aid Training'),
     );
   }
 }
@@ -54,19 +55,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late VideoPlayerController _controller;
+  late Future<void> _initializeVideoPlayerFuture;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+@override
+void initState() {
+  super.initState();
+  // FIX 1: Use a direct link to an MP4 file. 'https://github.io' is a website, not a video.
+  _controller = VideoPlayerController.networkUrl(
+    Uri.parse('https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
+  );
+
+  _initializeVideoPlayerFuture = _controller.initialize();
+}
+
+  _initializeVideoPlayerFuture = _controller.initialize().then((_) {
+    // Optional: Ensure the first frame is shown after initialization
+    setState(() {});
+  });
+}
+
+ @override
+  void dispose() {
+    _controller.dispose(); // 3. Clean up memory
+    super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -88,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
+        child: FutureBuilder(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -102,20 +115,28 @@ class _MyHomePageState extends State<MyHomePage> {
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+                   future: _initializeVideoPlayerFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              // 4. Display the video once loaded
+              return AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        onPressed: () {
+          // 5. Simple play/pause toggle
+          setState(() {
+            _controller.value.isPlaying ? _controller.pause() : _controller.play();
+          });
+        },
+        child: Icon(_controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
       ),
     );
   }
