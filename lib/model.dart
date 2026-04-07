@@ -38,7 +38,17 @@ class Ailment {
       progress: map['progress'],
     );
   }
-
-  extension AilmentCopy on Ailment
-  
+}
+extension AilmentCopy on Ailment {
+  Ailment copyWith({
+    String? name,
+    String? description,
+    int? progress,
+  }) {
+    return Ailment(
+      name: name ?? this.name,
+      description: description ?? this.description,
+      progress: progress ?? this.progress,
+    );
+  }
 }

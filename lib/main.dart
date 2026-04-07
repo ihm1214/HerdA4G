@@ -92,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
         ),
       ),
+      
     );
   }
 }
