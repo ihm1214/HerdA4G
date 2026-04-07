@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'trivia_question_page.dart';
  
 void main() {
   runApp(const MyApp());
@@ -65,6 +66,35 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
+          const SizedBox(height: 48),
+            SizedBox(
+              width: 200,
+              height: 54,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TriviaQuestionPage(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF6C63FF),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                child: const Text(
+                  'Start Quiz',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
           FutureBuilder(
             future: _initializeVideoPlayerFuture,
             builder: (context, snapshot) {
@@ -78,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
               }
             },
           ),
+          
         ],
       ),
       floatingActionButton: FloatingActionButton(
