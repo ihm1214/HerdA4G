@@ -82,7 +82,7 @@ class _TriviaQuestionPageState extends State<TriviaQuestionPage> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 14,
                 mainAxisSpacing: 14,
-                childAspectRatio: 1.4,
+                childAspectRatio: 1.1,
                 physics: const NeverScrollableScrollPhysics(),
                 children: List.generate(answers.length, (index) {
                   final isSelected = selectedAnswer == index;
