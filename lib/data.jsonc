@@ -1,0 +1,55 @@
+// shift+alt+f to auto format data
+{
+    "Questions": [
+        {
+            "question": "What is the FIRST step in treating a cut?",
+            "answers": [
+                "Apply ointment",
+                "Clean the wound",
+                "Apply direct pressure",
+                "Elevate the limb"
+            ],
+            "correctAnswer": "Clean the wound"
+        },
+        {
+            "question": ". If blood soaks through a bandage, what should you do?",
+            "answers": [
+                "Remove it and replace it",
+                "Add more bandages on top",
+                "Stop applying pressure",
+                "Wash the wound again"
+            ],
+            "correctAnswer": "Add more bandages on top"
+        },
+        {
+            "question": "Which of the following is BEST for cleaning a minor cut?",
+            "answers": [
+                "Hydrogen peroxide",
+                "Alcohol",
+                "Clean running water",
+                "Soap poured directly inside"
+            ],
+            "correctAnswer": "Clean running water"
+        },
+        {
+            "question": "When should you seek medical attention for a cut?",
+            "answers": [
+                "Small scratch",
+                "Bleeding stops quickly",
+                "Deep or won’t stop bleeding",
+                "Slight redness"
+            ],
+            "correctAnswer": "Deep or won’t stop bleeding"
+        },
+        {
+            "question": "What is a sign of infection?",
+            "answers": [
+                "Slight pain immediately",
+                "Clear fluid",
+                "Redness and swelling",
+                "Dry skin"
+            ],
+            "correctAnswer": "Redness and swelling"
+        }
+    ]
+}
