@@ -76,20 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-<<<<<<< HEAD
-      body: Column(
-        children: [
-          const SizedBox(height: 48),
-            SizedBox(
-              width: 200,
-              height: 54,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Cuts(title: 'Cuts'),
-=======
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : _loadError != null
@@ -123,7 +109,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: const Text('Retry'),
                         ),
                       ],
->>>>>>> origin/master
                     ),
                   ),
                 )

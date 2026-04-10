@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const TriviaApp());
-}
-
 class TriviaApp extends StatelessWidget {
   const TriviaApp({super.key});
 
