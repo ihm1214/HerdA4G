@@ -1,0 +1,263 @@
+{
+  "categories": [
+    {
+      "id": "cuts",
+      "icon": "assets/icons/blooddrop.png",
+      "name": "Cuts",
+      "description": "Basic wound care",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "minor",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Minor Cuts",
+          "description": "Small cuts and scrapes",
+          "steps": [
+            {
+              "step": 1,
+              "instruction": "Wash your hands before touching the wound.",
+              "imageUrl": "assets/images/apply-pressure-to-stop-bleeding.jpg"
+            },
+            {
+              "step": 2,
+              "instruction": "Rinse the cut with clean running water to remove dirt and debris."
+            },
+            {
+              "step": 3,
+              "instruction": "Apply gentle pressure with clean gauze until bleeding stops."
+            },
+            {
+              "step": 4,
+              "instruction": "Cover the area with a sterile bandage and change it daily."
+            }
+          ]
+        },
+        {
+          "id": "deep",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Deeper Cuts",
+          "description": "Cuts that may need extra care",
+          "steps": [
+            {
+              "step": 1,
+              "instruction": "Apply firm pressure with a clean cloth or gauze.",
+              "imageUrl": "assets/images/apply-pressure-to-stop-bleeding.jpg"
+            },
+            {
+              "step": 2,
+              "instruction": "Elevate the injured area if possible."
+            },
+            {
+              "step": 3,
+              "instruction": "If bleeding does not stop after 10 minutes, seek urgent medical care."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "burns",
+      "icon": "assets/icons/blooddrop.png",
+      "name": "Burns",
+      "description": "Heat and scald injuries",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "minor-burns",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Minor Burns",
+          "description": "Small surface burns",
+          "steps": [
+            {
+              "step": 1,
+              "instruction": "Cool the burn under cool running water for 20 minutes."
+            },
+            {
+              "step": 2,
+              "instruction": "Remove rings or tight items before swelling starts."
+            },
+            {
+              "step": 3,
+              "instruction": "Cover loosely with a clean non-stick dressing."
+            }
+          ]
+        },
+        {
+          "id": "severe-burns",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Severe Burns",
+          "description": "Large, deep, or blistering burns",
+          "steps": [
+            {
+              "step": 1,
+              "instruction": "Call emergency services for large or deep burns."
+            },
+            {
+              "step": 2,
+              "instruction": "Do not apply ice, butter, or ointments to the burned area."
+            },
+            {
+              "step": 3,
+              "instruction": "Cover with a clean cloth and monitor for shock."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sprains",
+      "icon": "assets/icons/blooddrop.png",
+      "name": "Sprains",
+      "description": "Joint and soft tissue injuries",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "ankle",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Ankle Sprain",
+          "description": "Swelling or pain after twisting the ankle",
+          "steps": [
+            {
+              "step": 1,
+              "instruction": "Rest the ankle and avoid putting weight on it."
+            },
+            {
+              "step": 2,
+              "instruction": "Apply ice wrapped in cloth for 15 to 20 minutes at a time."
+            },
+            {
+              "step": 3,
+              "instruction": "Use a compression wrap if it does not cause extra pain."
+            },
+            {
+              "step": 4,
+              "instruction": "Elevate the foot above heart level when possible."
+            }
+          ]
+        },
+        {
+          "id": "wrist",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Wrist Sprain",
+          "description": "Pain and tenderness after a fall or strain",
+          "steps": [
+            {
+              "step": 1,
+              "instruction": "Stop using the wrist and rest it in a comfortable position."
+            },
+            {
+              "step": 2,
+              "instruction": "Apply ice and a light compression bandage."
+            },
+            {
+              "step": 3,
+              "instruction": "Seek medical assessment if the wrist looks deformed or pain is severe."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "choking",
+      "icon": "assets/icons/blooddrop.png",
+      "name": "Choking",
+      "description": "Airway obstruction emergencies",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "adult",
+          "icon": "🫁",
+          "name": "Adult Choking",
+          "description": "A conscious adult unable to cough or speak",
+          "steps": [
+            {
+              "step": 1,
+              "instruction": "Ask if the person can speak or cough."
+            },
+            {
+              "step": 2,
+              "instruction": "If they cannot breathe, give five back blows between the shoulder blades."
+            },
+            {
+              "step": 3,
+              "instruction": "Follow with five abdominal thrusts and repeat until the object clears."
+            },
+            {
+              "step": 4,
+              "instruction": "Call emergency services if the airway does not clear quickly."
+            }
+          ]
+        },
+        {
+          "id": "child",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Child Choking",
+          "description": "Choking response for children",
+          "steps": [
+            {
+              "step": 1,
+              "instruction": "Keep the child calm and check if they can cough."
+            },
+            {
+              "step": 2,
+              "instruction": "Give age-appropriate back blows and thrusts if the airway is blocked."
+            },
+            {
+              "step": 3,
+              "instruction": "Call emergency services immediately if breathing is impaired."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fever",
+     "icon": "assets/icons/blooddrop.png",
+      "name": "Fever",
+      "description": "Temperature and hydration care",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "home-care",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Home Care",
+          "description": "Steps for mild fever management",
+          "steps": [
+            {
+              "step": 1,
+              "instruction": "Drink plenty of fluids and rest."
+            },
+            {
+              "step": 2,
+              "instruction": "Wear light clothing and keep the room comfortably cool."
+            },
+            {
+              "step": 3,
+              "instruction": "Use fever medicine only as directed on the label or by a clinician."
+            }
+          ]
+        },
+        {
+          "id": "warning-signs",
+         "icon": "assets/icons/blooddrop.png",
+          "name": "Warning Signs",
+          "description": "When fever needs medical help",
+          "steps": [
+            {
+              "step": 1,
+              "instruction": "Seek care for trouble breathing, confusion, or a stiff neck."
+            },
+            {
+              "step": 2,
+              "instruction": "Get help for fever that lasts several days or keeps returning."
+            },
+            {
+              "step": 3,
+              "instruction": "Watch closely for dehydration, especially in children and older adults."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
