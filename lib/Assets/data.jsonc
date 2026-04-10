@@ -50,6 +50,16 @@
                 "Dry skin"
             ],
             "correctAnswer": "Redness and swelling"
+        },
+        {
+            "question": "When should you seek medical attention for a cut?",
+            "answers": [
+                "The cut is deep or won't stop bleeding",
+                "Signs of infection appear",
+                "It was caused by something rusty or dirty",
+                "All of the above"
+            ],
+            "correctAnswer": "All of the above"
         }
     ]
 }

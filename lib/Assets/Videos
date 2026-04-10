@@ -1,0 +1,16 @@
+{
+  "media": [
+    {
+      "id": 1,
+      "type": "image",
+      "src": "./assets/images/photo.jpg",
+      "alt": "A photo"
+    },
+    {
+      "id": 2,
+      "type": "video",
+      "src": "./assets/videos/clip.mp4",
+      "thumbnail": "./assets/images/clip-thumb.jpg"
+    }
+  ]
+}
