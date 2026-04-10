@@ -43,10 +43,8 @@ class _HomepageState extends State<Homepage> {
         children: [
           const SizedBox(height: 48),
             SizedBox(
-              align: center,
               width: 200,
               height: 54,
-              font-color: Colors.white,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(

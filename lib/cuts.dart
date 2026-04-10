@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'trivia_question_page.dart';
+//import 'trivia_question_page.dart';
+import 'trivia.dart';
 
 
 class Cuts extends StatefulWidget {
@@ -55,7 +56,7 @@ class _cuts extends State<Cuts> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const TriviaQuestionPage(),
+                      builder: (context) => const TriviaApp(),
                     ),
                   );
                 },
