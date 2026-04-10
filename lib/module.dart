@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'model.dart';
+import 'trivia_question_page.dart';
 
 class Module extends StatelessWidget {
   final AilmentTopic topic;
@@ -54,34 +55,68 @@ class _StepCard extends StatelessWidget {
                         fontSize: 12,
                         fontWeight: FontWeight.w600),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(step.instruction,
-                      style: const TextStyle(fontSize: 15, height: 1.5)),
-                ),
+                )
               ],
             ),
-            // Optional image from assets
-            if (step.imageUrl != null) ...[
-              const SizedBox(height: 12),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  step.imageUrl!,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => Container(
-                    height: 120,
-                    color: Colors.grey.shade100,
-                    child: const Center(
-                      child: Text('Image unavailable',
-                          style: TextStyle(color: Colors.grey)),
-                    ),
+          // Optional image from assets
+          if (step.imageUrl != null) ...[
+            const SizedBox(height: 12),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                step.imageUrl!,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (_, _, _) => Container(
+                  height: 120,
+                  color: Colors.grey.shade100,
+                  child: const Center(
+                    child: Text('Image unavailable',
+                        style: TextStyle(color: Colors.grey)),
                   ),
                 ),
               ),
+            ),
+          ],
+          const SizedBox(height: 12),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(step.instruction,
+                    style: const TextStyle(fontSize: 15, height: 1.5)),
+              ),
             ],
+          ),
+          const SizedBox(height: 48),
+          SizedBox(
+            width: 200,
+            height: 54,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TriviaQuestionPage(),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF6C63FF),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+              child: const Text(
+                'Start Quiz',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
           ],
         ),
       ),
