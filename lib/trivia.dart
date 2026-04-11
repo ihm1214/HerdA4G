@@ -216,7 +216,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
       borderRadius: BorderRadius.circular(12),
       boxShadow: [
         BoxShadow(
-            color: kRed.withOpacity(0.3),
+            color: kRed,
             blurRadius: 8,
             offset: const Offset(0, 3)),
       ],
@@ -230,7 +230,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-                color: kWhite.withOpacity(0.2),
+                color: kWhite,
                 borderRadius: BorderRadius.circular(8)),
             child: const Center(
               child: Icon(Icons.arrow_back_ios_rounded,
@@ -260,7 +260,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: kWhite.withOpacity(0.2),
+            color: kWhite,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
@@ -283,10 +283,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
       decoration: BoxDecoration(
         color: kWhite,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: kRed.withOpacity(0.25), width: 1.5),
+        border: Border.all(color: kRed, width: 1.5),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black,
               blurRadius: 6,
               offset: const Offset(0, 2)),
         ],
@@ -301,7 +301,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             decoration: BoxDecoration(
               color: kRedLight,
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: kRed.withOpacity(0.3)),
+              border: Border.all(color: kRed),
             ),
             child: Text(
               'Q${_questionIndex + 1}',
@@ -401,7 +401,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
         labelFg = kWhite;
         icon = Icons.cancel_rounded;
       } else {
-        borderColor = kBorder.withOpacity(0.5);
+        borderColor = kBorder;
         textColor = kTextMuted;
       }
     }
@@ -418,7 +418,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
           boxShadow: (isSelected || (_answered && isCorrect))
               ? [
                   BoxShadow(
-                      color: borderColor.withOpacity(0.25),
+                      color: borderColor,
                       blurRadius: 8,
                       offset: const Offset(0, 3))
                 ]
@@ -571,7 +571,7 @@ class _NavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = enabled ? kRed : kTextMuted.withOpacity(0.4);
+    final color = enabled ? kRed : kTextMuted;
     final kids = <Widget>[
       if (!reversed) ...[
         Icon(icon, color: color, size: 18),
@@ -596,7 +596,7 @@ class _NavButton extends StatelessWidget {
           color: enabled ? kRedLight : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-              color: enabled ? kRed.withOpacity(0.3) : Colors.transparent),
+              color: enabled ? kRed: Colors.transparent),
         ),
         child: Row(mainAxisSize: MainAxisSize.min, children: kids),
       ),
