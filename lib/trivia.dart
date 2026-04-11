@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class TriviaApp extends StatelessWidget {
@@ -21,58 +22,28 @@ class TriviaApp extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Data model
-//
-// When your JSON is ready, replace the placeholder `questions` list below.
-// Load your JSON (from assets, network, etc.) and map like:
-//
-//   final loaded = (jsonDecode(raw) as List)
-//       .map((e) => TriviaQuestion.fromJson(e))
-//       .toList();
-//
-// Expected JSON shape:
-// [
-//   {
-//     "question": "...",
-//     "answers": ["...", "...", "...", "..."],
-//     "correctIndex": 0
-//   }
-// ]
-// ---------------------------------------------------------------------------
-
 class TriviaQuestion {
   final String question;
-  final List<String> answers; // always 4 items
-  final int correctIndex;     // 0–3
+  final List<String> answers;
+  final String correctAnswer;
 
   const TriviaQuestion({
     required this.question,
     required this.answers,
-    required this.correctIndex,
+    required this.correctAnswer,
   });
+
+  int get correctIndex => answers.indexOf(correctAnswer);
 
   factory TriviaQuestion.fromJson(Map<String, dynamic> json) {
     return TriviaQuestion(
       question: json['question'] as String,
       answers: List<String>.from(json['answers'] as List),
-      correctIndex: json['correctIndex'] as int,
+      correctAnswer: json['correctAnswer'] as String,
     );
   }
 }
 
-// ← Replace this list with your JSON-loaded data when ready
-final List<TriviaQuestion> questions = [
-  const TriviaQuestion(
-    question: 'Question',
-    answers: ['1', '2', '3', '4'],
-    correctIndex: 0,
-  ),
-];
-
-// ---------------------------------------------------------------------------
-// Colors
-// ---------------------------------------------------------------------------
 
 const Color kRed         = Color(0xFFCC0000);
 const Color kRedLight    = Color(0xFFFFEBEB);
@@ -86,9 +57,7 @@ const Color kBorder      = Color(0xFFDDDDDD);
 const Color kTextDark    = Color(0xFF1A1A1A);
 const Color kTextMuted   = Color(0xFF666666);
 
-// ---------------------------------------------------------------------------
-// Screen
-// ---------------------------------------------------------------------------
+// Screen Setup
 
 class TriviaScreen extends StatefulWidget {
   const TriviaScreen({super.key});
@@ -99,10 +68,40 @@ class TriviaScreen extends StatefulWidget {
 
 class _TriviaScreenState extends State<TriviaScreen> {
   int _questionIndex = 0;
-  int? _selectedAnswer; // null = unanswered
+  int? _selectedAnswer;
+  List<TriviaQuestion> _questions = [];
+  bool _loading = true;
+  String? _error;
 
-  TriviaQuestion get _current => questions[_questionIndex];
+  TriviaQuestion get _current => _questions[_questionIndex];
   bool get _answered => _selectedAnswer != null;
+  bool get _isLast => _questionIndex == _questions.length - 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadQuestions();
+  }
+
+  Future<void> _loadQuestions() async {
+    try {
+      final raw = await DefaultAssetBundle.of(context)
+          .loadString('assets/data/ailments.json');
+      final decoded = jsonDecode(raw) as Map<String, dynamic>;
+      final loaded = (decoded['Questions'] as List)
+          .map((e) => TriviaQuestion.fromJson(e as Map<String, dynamic>))
+          .toList();
+      setState(() {
+        _questions = loaded;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = 'Failed to load questions: $e';
+        _loading = false;
+      });
+    }
+  }
 
   void _pickAnswer(int index) {
     if (_answered) return;
@@ -110,19 +109,75 @@ class _TriviaScreenState extends State<TriviaScreen> {
   }
 
   void _goNext() {
-    if (_questionIndex < questions.length - 1) {
-      setState(() { _questionIndex++; _selectedAnswer = null; });
+    if (!_isLast) {
+      setState(() {
+        _questionIndex++;
+        _selectedAnswer = null;
+      });
     }
   }
 
   void _goPrev() {
     if (_questionIndex > 0) {
-      setState(() { _questionIndex--; _selectedAnswer = null; });
+      setState(() {
+        _questionIndex--;
+        _selectedAnswer = null;
+      });
     }
   }
 
+//Build
   @override
   Widget build(BuildContext context) {
+    if (_loading) {
+      return const Scaffold(
+        backgroundColor: kBackground,
+        body: Center(
+          child: CircularProgressIndicator(color: kRed),
+        ),
+      );
+    }
+
+    if (_error != null) {
+      return Scaffold(
+        backgroundColor: kBackground,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.error_outline, color: kRed, size: 48),
+                const SizedBox(height: 16),
+                Text(
+                  _error!,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: kTextDark, fontSize: 15),
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _loading = true;
+                      _error = null;
+                    });
+                    _loadQuestions();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kRed,
+                    foregroundColor: kWhite,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                  child: const Text('Try Again'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: kBackground,
       body: SafeArea(
@@ -138,7 +193,9 @@ class _TriviaScreenState extends State<TriviaScreen> {
                   _buildQuestionCard(),
                   const SizedBox(height: 16),
                   _buildAnswerGrid(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
+                  if (_answered) _buildNextButton(),
+                  const SizedBox(height: 12),
                   _buildNavBar(),
                 ],
               ),
@@ -149,48 +206,75 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // ── Header ────────────────────────────────────────────────────────────────
-
+  // Header
+  
   Widget _buildHeader() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(
-        color: kRed,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(color: kRed, blurRadius: 8, offset: const Offset(0, 3)),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 36, height: 36,
-            decoration: BoxDecoration(color: kWhite, borderRadius: BorderRadius.circular(6)),
-            child: const Center(child: Icon(Icons.add, color: kRed, size: 26)),
-          ),
-          const SizedBox(width: 12),
-          const Text(
-            'First Aid Trivia',
-            style: TextStyle(color: kWhite, fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: 0.5),
-          ),
-          const Spacer(),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    decoration: BoxDecoration(
+      color: kRed,
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+            color: kRed.withOpacity(0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 3)),
+      ],
+    ),
+    child: Row(
+      children: [
+        // Back Button
+        GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: Container(
+            width: 36,
+            height: 36,
             decoration: BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              '${_questionIndex + 1} / ${questions.length}',
-              style: const TextStyle(color: kWhite, fontWeight: FontWeight.w600, fontSize: 14),
+                color: kWhite.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(8)),
+            child: const Center(
+              child: Icon(Icons.arrow_back_ios_rounded,
+                  color: kWhite, size: 18),
             ),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+        const SizedBox(width: 10),
+        // First Aid Icon
+        Container(
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+              color: kWhite, borderRadius: BorderRadius.circular(6)),
+          child: const Center(child: Icon(Icons.add, color: kRed, size: 26)),
+        ),
+        const SizedBox(width: 12),
+        const Text(
+          'First Aid Trivia',
+          style: TextStyle(
+              color: kWhite,
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.5),
+        ),
+        const Spacer(),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: kWhite.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Text(
+            '${_questionIndex + 1} / ${_questions.length}',
+            style: const TextStyle(
+                color: kWhite, fontWeight: FontWeight.w600, fontSize: 14),
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
-  // ── Question card ─────────────────────────────────────────────────────────
+  // Question Block
 
   Widget _buildQuestionCard() {
     return Container(
@@ -199,9 +283,12 @@ class _TriviaScreenState extends State<TriviaScreen> {
       decoration: BoxDecoration(
         color: kWhite,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: kRed, width: 1.5),
+        border: Border.all(color: kRed.withOpacity(0.25), width: 1.5),
         boxShadow: [
-          BoxShadow(color: Colors.black, blurRadius: 6, offset: const Offset(0, 2)),
+          BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 2)),
         ],
       ),
       child: Row(
@@ -209,15 +296,19 @@ class _TriviaScreenState extends State<TriviaScreen> {
         children: [
           Container(
             margin: const EdgeInsets.only(top: 2),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
               color: kRedLight,
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: kRed),
+              border: Border.all(color: kRed.withOpacity(0.3)),
             ),
             child: Text(
               'Q${_questionIndex + 1}',
-              style: const TextStyle(color: kRedDark, fontWeight: FontWeight.w700, fontSize: 13),
+              style: const TextStyle(
+                  color: kRedDark,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13),
             ),
           ),
           const SizedBox(width: 14),
@@ -225,7 +316,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
             child: Text(
               _current.question,
               style: const TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w600, color: kTextDark, height: 1.4,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: kTextDark,
+                height: 1.4,
               ),
             ),
           ),
@@ -234,7 +328,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // ── 2 × 2 answer grid ────────────────────────────────────────────────────
+  // 2 x 2 question grid
 
   Widget _buildAnswerGrid() {
     return Expanded(
@@ -263,12 +357,15 @@ class _TriviaScreenState extends State<TriviaScreen> {
             );
           } else {
             return Column(
-              children: List.generate(4, (i) => Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: i < 3 ? 14 : 0),
-                  child: _buildTile(i),
+              children: List.generate(
+                4,
+                (i) => Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: i < 3 ? 14 : 0),
+                    child: _buildTile(i),
+                  ),
                 ),
-              )),
+              ),
             );
           }
         },
@@ -277,29 +374,35 @@ class _TriviaScreenState extends State<TriviaScreen> {
   }
 
   Widget _buildTile(int index) {
-    final bool isCorrect  = index == _current.correctIndex;
+    final bool isCorrect = index == _current.correctIndex;
     final bool isSelected = _selectedAnswer == index;
-    const labels = ['1', '2', '3', '4'];
+    const labels = ['A', 'B', 'C', 'D'];
 
-    Color bgColor     = kTileDefault;
+    Color bgColor = kTileDefault;
     Color borderColor = kBorder;
-    Color textColor   = kTextDark;
-    Color labelBg     = kRedLight;
-    Color labelFg     = kRedDark;
+    Color textColor = kTextDark;
+    Color labelBg = kRedLight;
+    Color labelFg = kRedDark;
     IconData? icon;
 
     if (_answered) {
       if (isCorrect) {
-        bgColor = kGreenLight; borderColor = kGreen;
-        textColor = kGreen;   labelBg = kGreen; labelFg = kWhite;
+        bgColor = kGreenLight;
+        borderColor = kGreen;
+        textColor = kGreen;
+        labelBg = kGreen;
+        labelFg = kWhite;
         icon = Icons.check_circle_rounded;
       } else if (isSelected) {
-        bgColor = kRedLight;  borderColor = kRed;
-        textColor = kRedDark; labelBg = kRed; labelFg = kWhite;
+        bgColor = kRedLight;
+        borderColor = kRed;
+        textColor = kRedDark;
+        labelBg = kRed;
+        labelFg = kWhite;
         icon = Icons.cancel_rounded;
       } else {
-        borderColor = kBorder;
-        textColor   = kTextMuted;
+        borderColor = kBorder.withOpacity(0.5);
+        textColor = kTextMuted;
       }
     }
 
@@ -313,21 +416,33 @@ class _TriviaScreenState extends State<TriviaScreen> {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: borderColor, width: 1.5),
           boxShadow: (isSelected || (_answered && isCorrect))
-              ? [BoxShadow(color: borderColor, blurRadius: 8, offset: const Offset(0, 3))]
+              ? [
+                  BoxShadow(
+                      color: borderColor.withOpacity(0.25),
+                      blurRadius: 8,
+                      offset: const Offset(0, 3))
+                ]
               : [],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           child: Row(
             children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
-                width: 32, height: 32,
-                decoration: BoxDecoration(color: labelBg, borderRadius: BorderRadius.circular(8)),
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                    color: labelBg,
+                    borderRadius: BorderRadius.circular(8)),
                 child: Center(
                   child: Text(
                     labels[index],
-                    style: TextStyle(color: labelFg, fontWeight: FontWeight.w700, fontSize: 15),
+                    style: TextStyle(
+                        color: labelFg,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15),
                   ),
                 ),
               ),
@@ -336,7 +451,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
                 child: Text(
                   _current.answers[index],
                   style: TextStyle(
-                    color: textColor, fontSize: 15, fontWeight: FontWeight.w500, height: 1.35,
+                    color: textColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    height: 1.35,
                   ),
                 ),
               ),
@@ -344,7 +462,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
                 const SizedBox(width: 8),
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
-                  child: Icon(icon, key: ValueKey(icon), color: isCorrect ? kGreen : kRed, size: 24),
+                  child: Icon(icon,
+                      key: ValueKey(icon),
+                      color: isCorrect ? kGreen : kRed,
+                      size: 24),
                 ),
               ],
             ],
@@ -354,7 +475,37 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // ── Nav bar ───────────────────────────────────────────────────────────────
+  // Next Button
+
+  Widget _buildNextButton() {
+    return AnimatedOpacity(
+      opacity: _answered ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 300),
+      child: SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: _isLast ? null : _goNext,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kRed,
+            foregroundColor: kWhite,
+            disabledBackgroundColor: kBorder,
+            disabledForegroundColor: kTextMuted,
+            padding: const EdgeInsets.symmetric(vertical: 14),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)),
+            elevation: 0,
+          ),
+          child: Text(
+            _isLast ? 'Finished!' : 'Next Question',
+            style: const TextStyle(
+                fontSize: 16, fontWeight: FontWeight.w700),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Nav Bar
 
   Widget _buildNavBar() {
     return Container(
@@ -374,7 +525,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             onTap: _goPrev,
           ),
           Row(
-            children: List.generate(questions.length, (i) {
+            children: List.generate(_questions.length, (i) {
               final active = i == _questionIndex;
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
@@ -391,7 +542,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
           _NavButton(
             icon: Icons.arrow_forward_ios_rounded,
             label: 'Next',
-            enabled: _questionIndex < questions.length - 1,
+            enabled: _questionIndex < _questions.length - 1,
             onTap: _goNext,
             reversed: true,
           ),
@@ -401,9 +552,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Nav button
-// ---------------------------------------------------------------------------
+// Navigation Buttons
 
 class _NavButton extends StatelessWidget {
   final IconData icon;
@@ -422,20 +571,32 @@ class _NavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = enabled ? kRed : kTextMuted;
+    final color = enabled ? kRed : kTextMuted.withOpacity(0.4);
     final kids = <Widget>[
-      if (!reversed) ...[Icon(icon, color: color, size: 18), const SizedBox(width: 6)],
-      Text(label, style: TextStyle(color: color, fontWeight: FontWeight.w600, fontSize: 14)),
-      if (reversed) ...[const SizedBox(width: 6), Icon(icon, color: color, size: 18)],
+      if (!reversed) ...[
+        Icon(icon, color: color, size: 18),
+        const SizedBox(width: 6)
+      ],
+      Text(label,
+          style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 14)),
+      if (reversed) ...[
+        const SizedBox(width: 6),
+        Icon(icon, color: color, size: 18)
+      ],
     ];
     return GestureDetector(
       onTap: enabled ? onTap : null,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        padding:
+            const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
           color: enabled ? kRedLight : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: enabled ? kRed : Colors.transparent),
+          border: Border.all(
+              color: enabled ? kRed.withOpacity(0.3) : Colors.transparent),
         ),
         child: Row(mainAxisSize: MainAxisSize.min, children: kids),
       ),
