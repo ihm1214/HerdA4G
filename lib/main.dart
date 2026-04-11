@@ -3,6 +3,7 @@ import 'categories.dart';
 import 'services/primary_service.dart';
 import 'model.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -16,7 +17,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'First Aid Education',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 250, 183, 178),
+        ),
         useMaterial3: true,
       ),
       home: const HomeScreen(),
@@ -63,11 +66,32 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+ Widget _buildIcon(String icon) {
+    if (icon.startsWith('assets/')) {
+      return Image.asset(
+        icon,
+        width: 24,
+        height: 24,
+        errorBuilder: (context, error, stackTrace) =>
+            const Icon(Icons.medical_services),
+      );
+    }
+    return Text(icon, style: const TextStyle(fontSize: 20));
+  }
+
   @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('First Aid Education'),
+        backgroundColor: const Color.fromARGB(255, 250, 183, 178),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildIcon('assets/icons/icon-cross.png'),
+            const SizedBox(width: 8),
+            Text('First Aid Education'),
+          ],
+        ),
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
@@ -112,9 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Category grid
                   Expanded(
                     child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: MediaQuery.of(context).size.width > 800 ? 4 : MediaQuery.of(context).size.width > 600 ? 3 : 2,
                         crossAxisSpacing: 12,
                         mainAxisSpacing: 12,
                         childAspectRatio: 1.1,
@@ -136,147 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-            )
-  }
-}
-
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  final FirstAidService _service = FirstAidService();
-  bool _largeText = false;
-  bool _showImages = true;
-  bool _darkMode = false;
-  bool _loading = true;
-  String? _loadError;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadPreferences();
-  }
-
-  Future<void> _loadPreferences() async {
-    try {
-      final preferences = await _service.loadPreferences();
-      if (!mounted) return;
-      setState(() {
-        _largeText = preferences[FirstAidService.keyLargeText] ?? false;
-        _showImages = preferences[FirstAidService.keyShowImages] ?? true;
-        _darkMode = preferences[FirstAidService.keyDarkMode] ?? false;
-        _loading = false;
-        _loadError = null;
-      });
-    } catch (error) {
-      if (!mounted) return;
-      setState(() {
-        _loading = false;
-        _loadError = error.toString();
-      });
-    }
-  }
-
-  Future<void> _setPreference(String key, bool value) async {
-    await _service.savePreference(key, value);
-    if (!mounted) return;
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
-      body: _loading
-          ? const Center(child: CircularProgressIndicator())
-          : _loadError != null
-              ? Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.error_outline, size: 40),
-                        const SizedBox(height: 12),
-                        Text(
-                          'Could not load settings.',
-                          style: Theme.of(context).textTheme.titleMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(_loadError!, textAlign: TextAlign.center),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _loading = true;
-                              _loadError = null;
-                            });
-                            _loadPreferences();
-                          },
-                          child: const Text('Retry'),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              : ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                SwitchListTile(
-                  title: const Text('Large text'),
-                  value: _largeText,
-                  onChanged: (value) {
-                    setState(() => _largeText = value);
-                    _setPreference(FirstAidService.keyLargeText, value);
-                  },
-                ),
-                SwitchListTile(
-                  title: const Text('Show images'),
-                  value: _showImages,
-                  onChanged: (value) {
-                    setState(() => _showImages = value);
-                    _setPreference(FirstAidService.keyShowImages, value);
-                  },
-                ),
-                SwitchListTile(
-                  title: const Text('Dark mode'),
-                  value: _darkMode,
-                  onChanged: (value) {
-                    setState(() => _darkMode = value);
-                    _setPreference(FirstAidService.keyDarkMode, value);
-                  },
-                ),
-              ],
             ),
-    );
-  }
-}
-
-class _EmergencyButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12)),
-        ),
-        icon: const Icon(Icons.emergency),
-        label: const Text('Call 911 — Emergency',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-        onPressed: () {
-          // TODO: launch('tel:911') using url_launcher package
-        },
-      ),
     );
   }
 }
@@ -289,7 +172,13 @@ class _CategoryCard extends StatelessWidget {
 
   Widget _buildIcon(String icon) {
     if (icon.startsWith('assets/')) {
-      return Image.asset(icon, width: 32, height: 32);
+      return Image.asset(
+        icon,
+        width: 32,
+        height: 32,
+        errorBuilder: (context, error, stackTrace) =>
+            const Icon(Icons.healing, size: 32),
+      );
     } else {
       return Text(icon, style: const TextStyle(fontSize: 32));
     }

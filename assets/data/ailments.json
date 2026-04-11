@@ -2,7 +2,7 @@
   "categories": [
     {
       "id": "cuts",
-      "icon": "assets/icons/blooddrop.png",
+      "icon": "assets/icons/cuts.webp",
       "name": "Cuts",
       "description": "Basic wound care",
       "progress": 0,
@@ -15,8 +15,7 @@
           "steps": [
             {
               "step": 1,
-              "instruction": "Wash your hands before touching the wound.",
-              "imageUrl": "assets/images/apply-pressure-to-stop-bleeding.jpg"
+              "instruction": "Wash your hands before touching the wound."
             },
             {
               "step": 2,
@@ -40,8 +39,7 @@
           "steps": [
             {
               "step": 1,
-              "instruction": "Apply firm pressure with a clean cloth or gauze.",
-              "imageUrl": "assets/images/apply-pressure-to-stop-bleeding.jpg"
+              "instruction": "Apply firm pressure with a clean cloth or gauze."
             },
             {
               "step": 2,
@@ -57,7 +55,7 @@
     },
     {
       "id": "burns",
-      "icon": "assets/icons/blooddrop.png",
+      "icon": "assets/icons/burns.png",
       "name": "Burns",
       "description": "Heat and scald injuries",
       "progress": 0,
@@ -106,7 +104,7 @@
     },
     {
       "id": "sprains",
-      "icon": "assets/icons/blooddrop.png",
+      "icon": "assets/icons/sprain.png",
       "name": "Sprains",
       "description": "Joint and soft tissue injuries",
       "progress": 0,
@@ -159,7 +157,7 @@
     },
     {
       "id": "choking",
-      "icon": "assets/icons/blooddrop.png",
+      "icon": "assets/icons/choke.png",
       "name": "Choking",
       "description": "Airway obstruction emergencies",
       "progress": 0,
@@ -212,7 +210,7 @@
     },
     {
       "id": "fever",
-     "icon": "assets/icons/blooddrop.png",
+     "icon": "assets/icons/feber.webp",
       "name": "Fever",
       "description": "Temperature and hydration care",
       "progress": 0,

@@ -14,29 +14,8 @@ class FirstAidService {
     final String jsonString =
       await rootBundle.loadString('assets/data/ailments.json');
     final Map<String, dynamic> data = json.decode(jsonString);
-    debugPrint(JsonEncoder.withIndent('  ').convert(data));
     return (data['categories'] as List)
         .map((c) => AilmentCategory.fromJson(c))
         .toList();
   }
-
-  // ─── SharedPreferences helpers ───────────────────────────────────────────
-  Future<Map<String, bool>> loadPreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    return {
-      _prefLargeText: prefs.getBool(_prefLargeText) ?? false,
-      _prefShowImages: prefs.getBool(_prefShowImages) ?? true,
-      _prefDarkMode: prefs.getBool(_prefDarkMode) ?? false,
-    };
-  }
-
-  Future<void> savePreference(String key, bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(key, value);
-  }
-
-  // Convenience getters
-  static String get keyLargeText => _prefLargeText;
-  static String get keyShowImages => _prefShowImages;
-  static String get keyDarkMode => _prefDarkMode;
 }
