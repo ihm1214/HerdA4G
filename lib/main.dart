@@ -14,14 +14,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'First Aid',
+      title: 'First Aid Education',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
       home: const HomeScreen(),
       routes: {
-        '/settings': (_) => const SettingsScreen(),
       },
     );
   }
@@ -68,13 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('First Aid'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: () => Navigator.pushNamed(context, '/settings'),
-          ),
-        ],
+        title: const Text('First Aid Education'),
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
@@ -88,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const Icon(Icons.error_outline, size: 40),
                         const SizedBox(height: 12),
                         Text(
-                          'Could not load first aid data.',
+                          'Could not load data.',
                           style: Theme.of(context).textTheme.titleMedium,
                           textAlign: TextAlign.center,
                         ),
@@ -116,9 +109,6 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  // Emergency call button
-                  _EmergencyButton(),
-                  const SizedBox(height: 16),
                   // Category grid
                   Expanded(
                     child: GridView.builder(
@@ -137,17 +127,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) =>
-                                  Categories(category: cat)),
+                              builder: (_) => Categories(category: cat),
                             ),
+                          ),
                         );
                       },
                     ),
-                  ),
+                  )
                 ],
               ),
-            ),
-    );
+            )
   }
 }
 
@@ -305,14 +294,6 @@ class _CategoryCard extends StatelessWidget {
       return Text(icon, style: const TextStyle(fontSize: 32));
     }
   }
-  
-  /*A Hardcoded test case ... Widget _buildIcon(String icon) {
-    return Image.asset(
-      'assets/icons/drop-of-blood-50.png',
-      width: 32,
-      height: 32,
-    );
-  }*/
 
   @override
   Widget build(BuildContext context) {
