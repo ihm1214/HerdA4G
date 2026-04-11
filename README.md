@@ -68,4 +68,4 @@ assets/
 
 ## Contact
 
-For questions or support, reach out to the team at [ihhmoore@wpi.edu] or open an issue on GitHub.
+For questions or support, reach out to the team at [ihmoore@wpi.edu] or open an issue on GitHub.
