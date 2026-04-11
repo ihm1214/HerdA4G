@@ -270,7 +270,7 @@
             "correctAnswer": "Clean the wound"
         },
         {
-            "question": ". If blood soaks through a bandage, what should you do?",
+            "question": "If blood soaks through a bandage, what should you do?",
             "answers": [
                 "Remove it and replace it",
                 "Add more bandages on top",
