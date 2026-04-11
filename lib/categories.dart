@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'model.dart';
 import 'module.dart';
+import 'trivia.dart';
+
 class Categories extends StatelessWidget {
   final AilmentCategory category;
+  static const Color _darkRed = Color(0xFFB71C1C);
 
   const Categories({super.key, required this.category});
 
@@ -14,7 +17,7 @@ class Categories extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 250, 183, 178),
@@ -55,6 +58,24 @@ class Categories extends StatelessWidget {
                   ),
                 );
               },
+            ),
+          ),
+          SafeArea(
+            top: false,
+            minimum: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const TriviaApp()),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _darkRed,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('Start Quiz'),
+              ),
             ),
           ),
         ],
