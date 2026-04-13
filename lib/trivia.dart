@@ -225,28 +225,28 @@ class _TriviaScreenState extends State<TriviaScreen> {
       children: [
         // Back Button
         GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: () => Navigator.of(context, rootNavigator: true).pop(),
           child: Container(
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-                color: kWhite.withOpacity(0.2),
+                color: kWhite,
                 borderRadius: BorderRadius.circular(8)),
             child: const Center(
               child: Icon(Icons.arrow_back_ios_rounded,
-                  color: kWhite, size: 18),
+                  color: kRed, size: 18),
             ),
           ),
         ),
         const SizedBox(width: 10),
         // First Aid Icon
-        Container(
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-              color: kWhite, borderRadius: BorderRadius.circular(6)),
-          child: const Center(child: Icon(Icons.add, color: kRed, size: 26)),
-        ),
+        // Container(
+        //   width: 36,
+        //   height: 36,
+        //   decoration: BoxDecoration(
+        //       color: kWhite, borderRadius: BorderRadius.circular(6)),
+        //   child: const Center(child: Icon(Icons.add, color: kRed, size: 26)),
+        // ),
         const SizedBox(width: 12),
         const Text(
           'First Aid Trivia',
@@ -345,7 +345,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
                     Expanded(child: _buildTile(1)),
                   ]),
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 18),
                 Expanded(
                   child: Row(children: [
                     Expanded(child: _buildTile(2)),
@@ -431,8 +431,9 @@ class _TriviaScreenState extends State<TriviaScreen> {
             children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
-                width: 32,
-                height: 32,
+                //this is where to adjust the answer dimensions
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
                     color: labelBg,
                     borderRadius: BorderRadius.circular(8)),
@@ -452,7 +453,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
                   _current.answers[index],
                   style: TextStyle(
                     color: textColor,
-                    fontSize: 15,
+                    fontSize: MediaQuery.of(context).size.width > 800 ? 20 : MediaQuery.of(context).size.width > 600 ? 15 : 10,
+                    
                     fontWeight: FontWeight.w500,
                     height: 1.35,
                   ),
