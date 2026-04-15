@@ -308,7 +308,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
               style: const TextStyle(
                   color: kRedDark,
                   fontWeight: FontWeight.w700,
-                  fontSize: 13),
+                  fontSize: 18),
             ),
           ),
           const SizedBox(width: 14),
@@ -316,7 +316,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             child: Text(
               _current.question,
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 25,
                 fontWeight: FontWeight.w600,
                 color: kTextDark,
                 height: 1.4,
@@ -331,6 +331,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
   // 2 x 2 question grid
 
   Widget _buildAnswerGrid() {
+    
     return Expanded(
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -345,7 +346,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
                     Expanded(child: _buildTile(1)),
                   ]),
                 ),
-                const SizedBox(height: 18),
+                const SizedBox(height: 2),
                 Expanded(
                   child: Row(children: [
                     Expanded(child: _buildTile(2)),
@@ -426,12 +427,12 @@ class _TriviaScreenState extends State<TriviaScreen> {
         ),
         child: Padding(
           padding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           child: Row(
             children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
-                //this is where to adjust the answer dimensions
+                //this is where to adjust the answer box dimensions
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
