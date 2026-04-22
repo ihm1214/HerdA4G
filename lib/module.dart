@@ -3,19 +3,23 @@ import 'model.dart';
 
 class Module extends StatelessWidget {
   final AilmentTopic topic;
+  static const bool _showStepImages = false;
 
   const Module({super.key, required this.topic});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(topic.name)),
+      appBar: AppBar( backgroundColor: const Color.fromARGB(255, 250, 183, 178),title: Text(topic.name)),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: topic.steps.length,
         itemBuilder: (context, index) {
           final step = topic.steps[index];
-          return _StepCard(step: step);
+          return _StepCard(
+            step: step,
+            showImage: _showStepImages,
+          );
         },
       ),
     );
@@ -24,7 +28,9 @@ class Module extends StatelessWidget {
 
 class _StepCard extends StatelessWidget {
   final AilmentStep step;
-  const _StepCard({required this.step});
+  final bool showImage;
+
+  const _StepCard({required this.step, required this.showImage});
 
   @override
   Widget build(BuildContext context) {
@@ -54,16 +60,10 @@ class _StepCard extends StatelessWidget {
                         fontSize: 12,
                         fontWeight: FontWeight.w600),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(step.instruction,
-                      style: const TextStyle(fontSize: 15, height: 1.5)),
-                ),
+                )
               ],
             ),
-            // Optional image from assets
-            if (step.imageUrl != null) ...[
+            if (showImage && step.imageUrl != null && step.imageUrl!.isNotEmpty) ...[
               const SizedBox(height: 12),
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
@@ -71,17 +71,29 @@ class _StepCard extends StatelessWidget {
                   step.imageUrl!,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => Container(
+                  errorBuilder: (context, error, stackTrace) => Container(
                     height: 120,
                     color: Colors.grey.shade100,
                     child: const Center(
-                      child: Text('Image unavailable',
-                          style: TextStyle(color: Colors.grey)),
+                      child: Text(
+                        'Image unavailable',
+                        style: TextStyle(color: Colors.grey),
+                      ),
                     ),
                   ),
                 ),
               ),
             ],
+            const SizedBox(height: 12),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(step.instruction,
+                      style: const TextStyle(fontSize: 15, height: 1.5)),
+                ),
+              ],
+            ),
           ],
         ),
       ),

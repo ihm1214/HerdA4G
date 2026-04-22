@@ -3,13 +3,9 @@ class AilmentStep {
   final String instruction;
   final String? imageUrl;
 
-  AilmentStep({
-    required this.step,
-    required this.instruction,
-    this.imageUrl,
-  });
+  AilmentStep({required this.step, required this.instruction, this.imageUrl});
 
-   factory AilmentStep.fromJson(Map<String, dynamic> json) {
+  factory AilmentStep.fromJson(Map<String, dynamic> json) {
     return AilmentStep(
       step: json['step'],
       instruction: json['instruction'],
@@ -17,6 +13,7 @@ class AilmentStep {
     );
   }
 }
+
 class AilmentCategory {
   final String id;
   final String icon;
@@ -38,10 +35,34 @@ class AilmentCategory {
     return AilmentCategory(
       id: json['id'],
       icon: json['icon'],
-      topics: (json['topics'] as List).map((topic) => AilmentTopic.fromJson(topic)).toList(),
+      topics: (json['topics'] as List)
+          .map((topic) => AilmentTopic.fromJson(topic))
+          .toList(),
       name: json['name'],
       description: json['description'],
       progress: json['progress'],
+    );
+  }
+}
+
+class TriviaQuestion {
+  final String question;
+  final List<String> answers;
+  final String correctAnswer;
+
+  const TriviaQuestion({
+    required this.question,
+    required this.answers,
+    required this.correctAnswer,
+  });
+
+  int get correctIndex => answers.indexOf(correctAnswer);
+
+  factory TriviaQuestion.fromJson(Map<String, dynamic> json) {
+    return TriviaQuestion(
+      question: json['question'] as String,
+      answers: List<String>.from(json['answers'] as List),
+      correctAnswer: json['correctAnswer'] as String,
     );
   }
 }
@@ -63,12 +84,28 @@ class AilmentTopic {
 
   factory AilmentTopic.fromJson(Map<String, dynamic> json) {
     return AilmentTopic(
-      steps: (json['steps'] as List).map((step) => AilmentStep.fromJson(step)).toList(),
+      steps: (json['steps'] as List)
+          .map((step) => AilmentStep.fromJson(step))
+          .toList(),
       name: json['name'],
       description: json['description'],
       id: json['id'],
       icon: json['icon'],
     );
   }
+}
 
+class CategoryQuizProgress {
+  final String categoryId;
+  final int correctAnswers;
+  final int totalQuestions;
+
+  const CategoryQuizProgress({
+    required this.categoryId,
+    required this.correctAnswers,
+    required this.totalQuestions,
+  });
+
+  double get progress =>
+      totalQuestions == 0 ? 0 : correctAnswers / totalQuestions;
 }

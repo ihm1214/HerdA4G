@@ -2,7 +2,7 @@
   "categories": [
     {
       "id": "cuts",
-      "icon": "assets/icons/blooddrop.png",
+      "icon": "assets/icons/cuts.webp",
       "name": "Cuts",
       "description": "Basic wound care",
       "progress": 0,
@@ -15,8 +15,7 @@
           "steps": [
             {
               "step": 1,
-              "instruction": "Wash your hands before touching the wound.",
-              "imageUrl": "assets/images/apply-pressure-to-stop-bleeding.jpg"
+              "instruction": "Wash your hands before touching the wound."
             },
             {
               "step": 2,
@@ -40,8 +39,7 @@
           "steps": [
             {
               "step": 1,
-              "instruction": "Apply firm pressure with a clean cloth or gauze.",
-              "imageUrl": "assets/images/apply-pressure-to-stop-bleeding.jpg"
+              "instruction": "Apply firm pressure with a clean cloth or gauze."
             },
             {
               "step": 2,
@@ -57,7 +55,7 @@
     },
     {
       "id": "burns",
-      "icon": "assets/icons/blooddrop.png",
+      "icon": "assets/icons/burns.png",
       "name": "Burns",
       "description": "Heat and scald injuries",
       "progress": 0,
@@ -106,7 +104,7 @@
     },
     {
       "id": "sprains",
-      "icon": "assets/icons/blooddrop.png",
+      "icon": "assets/icons/sprain.png",
       "name": "Sprains",
       "description": "Joint and soft tissue injuries",
       "progress": 0,
@@ -159,7 +157,7 @@
     },
     {
       "id": "choking",
-      "icon": "assets/icons/blooddrop.png",
+      "icon": "assets/icons/choke.png",
       "name": "Choking",
       "description": "Airway obstruction emergencies",
       "progress": 0,
@@ -212,7 +210,7 @@
     },
     {
       "id": "fever",
-     "icon": "assets/icons/blooddrop.png",
+     "icon": "assets/icons/feber.webp",
       "name": "Fever",
       "description": "Temperature and hydration care",
       "progress": 0,
@@ -258,6 +256,68 @@
           ]
         }
       ]
-    }
-  ]
+  }
+],
+"Questions": [
+        {
+            "question": "What is the FIRST step in treating a cut?",
+            "answers": [
+                "Apply ointment",
+                "Clean the wound",
+                "Apply direct pressure",
+                "Elevate the limb"
+            ],
+            "correctAnswer": "Clean the wound"
+        },
+        {
+            "question": "If blood soaks through a bandage, what should you do?",
+            "answers": [
+                "Remove it and replace it",
+                "Add more bandages on top",
+                "Stop applying pressure",
+                "Wash the wound again"
+            ],
+            "correctAnswer": "Add more bandages on top"
+        },
+        {
+            "question": "Which of the following is BEST for cleaning a minor cut?",
+            "answers": [
+                "Hydrogen peroxide",
+                "Alcohol",
+                "Clean running water",
+                "Soap poured directly inside"
+            ],
+            "correctAnswer": "Clean running water"
+        },
+        {
+            "question": "When should you seek medical attention for a cut?",
+            "answers": [
+                "Small scratch",
+                "Bleeding stops quickly",
+                "Deep or won’t stop bleeding",
+                "Slight redness"
+            ],
+            "correctAnswer": "Deep or won’t stop bleeding"
+        },
+        {
+            "question": "What is a sign of infection?",
+            "answers": [
+                "Slight pain immediately",
+                "Clear fluid",
+                "Redness and swelling",
+                "Dry skin"
+            ],
+            "correctAnswer": "Redness and swelling"
+        },
+        {
+            "question": "When should you seek medical attention for a cut?",
+            "answers": [
+                "The cut is deep or won't stop bleeding",
+                "Signs of infection appear",
+                "It was caused by something rusty or dirty",
+                "All of the above"
+            ],
+            "correctAnswer": "All of the above"
+        }
+    ]
 }

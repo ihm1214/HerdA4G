@@ -14,15 +14,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'First Aid',
+      title: 'First Aid Education',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 250, 183, 178),
+        ),
         useMaterial3: true,
       ),
       home: const HomeScreen(),
-      routes: {
-        '/settings': (_) => const SettingsScreen(),
-      },
+      routes: {},
     );
   }
 }
@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _loadData() async {
     try {
+      await _service.loadStoredQuizProgress();
       final categories = await _service.loadCategories();
       if (!mounted) return;
       setState(() {
@@ -64,67 +65,78 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Widget _buildIcon(String icon) {
+    if (icon.startsWith('assets/')) {
+      return Image.asset(
+        icon,
+        width: 24,
+        height: 24,
+        errorBuilder: (context, error, stackTrace) =>
+            const Icon(Icons.medical_services),
+      );
+    }
+    return Text(icon, style: const TextStyle(fontSize: 20));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('First Aid'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: () => Navigator.pushNamed(context, '/settings'),
-          ),
-        ],
+        backgroundColor: const Color.fromARGB(255, 250, 183, 178),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildIcon('assets/icons/icon-cross.png'),
+            const SizedBox(width: 8),
+            Text('First Aid Education'),
+          ],
+        ),
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : _loadError != null
-              ? Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.error_outline, size: 40),
-                        const SizedBox(height: 12),
-                        Text(
-                          'Could not load first aid data.',
-                          style: Theme.of(context).textTheme.titleMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          _loadError!,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _loading = true;
-                              _loadError = null;
-                            });
-                            _loadData();
-                          },
-                          child: const Text('Retry'),
-                        ),
-                      ],
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.error_outline, size: 40),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Could not load data.',
+                      style: Theme.of(context).textTheme.titleMedium,
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-                )
-              : Padding(
+                    const SizedBox(height: 8),
+                    Text(_loadError!, textAlign: TextAlign.center),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _loading = true;
+                          _loadError = null;
+                        });
+                        _loadData();
+                      },
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  // Emergency call button
-                  _EmergencyButton(),
-                  const SizedBox(height: 16),
-                  // Category grid
                   Expanded(
                     child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: MediaQuery.of(context).size.width > 800
+                            ? 4
+                            : MediaQuery.of(context).size.width > 600
+                            ? 3
+                            : 2,
                         crossAxisSpacing: 12,
                         mainAxisSpacing: 12,
                         childAspectRatio: 1.1,
@@ -134,12 +146,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         final cat = _categories[index];
                         return _CategoryCard(
                           category: cat,
+                          service: _service,
                           onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) =>
-                                  Categories(category: cat)),
+                              builder: (_) => Categories(category: cat),
                             ),
+                          ),
                         );
                       },
                     ),
@@ -151,168 +164,30 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  final FirstAidService _service = FirstAidService();
-  bool _largeText = false;
-  bool _showImages = true;
-  bool _darkMode = false;
-  bool _loading = true;
-  String? _loadError;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadPreferences();
-  }
-
-  Future<void> _loadPreferences() async {
-    try {
-      final preferences = await _service.loadPreferences();
-      if (!mounted) return;
-      setState(() {
-        _largeText = preferences[FirstAidService.keyLargeText] ?? false;
-        _showImages = preferences[FirstAidService.keyShowImages] ?? true;
-        _darkMode = preferences[FirstAidService.keyDarkMode] ?? false;
-        _loading = false;
-        _loadError = null;
-      });
-    } catch (error) {
-      if (!mounted) return;
-      setState(() {
-        _loading = false;
-        _loadError = error.toString();
-      });
-    }
-  }
-
-  Future<void> _setPreference(String key, bool value) async {
-    await _service.savePreference(key, value);
-    if (!mounted) return;
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
-      body: _loading
-          ? const Center(child: CircularProgressIndicator())
-          : _loadError != null
-              ? Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.error_outline, size: 40),
-                        const SizedBox(height: 12),
-                        Text(
-                          'Could not load settings.',
-                          style: Theme.of(context).textTheme.titleMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(_loadError!, textAlign: TextAlign.center),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _loading = true;
-                              _loadError = null;
-                            });
-                            _loadPreferences();
-                          },
-                          child: const Text('Retry'),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              : ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                SwitchListTile(
-                  title: const Text('Large text'),
-                  value: _largeText,
-                  onChanged: (value) {
-                    setState(() => _largeText = value);
-                    _setPreference(FirstAidService.keyLargeText, value);
-                  },
-                ),
-                SwitchListTile(
-                  title: const Text('Show images'),
-                  value: _showImages,
-                  onChanged: (value) {
-                    setState(() => _showImages = value);
-                    _setPreference(FirstAidService.keyShowImages, value);
-                  },
-                ),
-                SwitchListTile(
-                  title: const Text('Dark mode'),
-                  value: _darkMode,
-                  onChanged: (value) {
-                    setState(() => _darkMode = value);
-                    _setPreference(FirstAidService.keyDarkMode, value);
-                  },
-                ),
-              ],
-            ),
-    );
-  }
-}
-
-class _EmergencyButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12)),
-        ),
-        icon: const Icon(Icons.emergency),
-        label: const Text('Call 911 — Emergency',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-        onPressed: () {
-          // TODO: launch('tel:911') using url_launcher package
-        },
-      ),
-    );
-  }
-}
-
 class _CategoryCard extends StatelessWidget {
   final AilmentCategory category;
+  final FirstAidService service;
   final VoidCallback onTap;
 
-  const _CategoryCard({required this.category, required this.onTap});
+  const _CategoryCard({
+    required this.category,
+    required this.service,
+    required this.onTap,
+  });
 
   Widget _buildIcon(String icon) {
     if (icon.startsWith('assets/')) {
-      return Image.asset(icon, width: 32, height: 32);
+      return Image.asset(
+        icon,
+        width: 32,
+        height: 32,
+        errorBuilder: (context, error, stackTrace) =>
+            const Icon(Icons.healing, size: 32),
+      );
     } else {
       return Text(icon, style: const TextStyle(fontSize: 32));
     }
   }
-  
-  /*A Hardcoded test case ... Widget _buildIcon(String icon) {
-    return Image.asset(
-      'assets/icons/drop-of-blood-50.png',
-      width: 32,
-      height: 32,
-    );
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -327,16 +202,47 @@ class _CategoryCard extends StatelessWidget {
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildIcon(category.icon),
-              const SizedBox(height: 8),
-              Text(category.name,
-                  style: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.w500),
-                  textAlign: TextAlign.center),
-            ],
+          child: AnimatedBuilder(
+            animation: service,
+            builder: (context, _) {
+              final categoryProgress = service.getCategoryQuizProgress(
+                category.id,
+              );
+
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildIcon(category.icon),
+                  const SizedBox(height: 8),
+                  Text(
+                    category.name,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${categoryProgress.correctAnswers}/${categoryProgress.totalQuestions}',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: LinearProgressIndicator(
+                      value: categoryProgress.progress,
+                      minHeight: 7,
+                      backgroundColor: Colors.grey.shade200,
+                      color: const Color.fromARGB(255, 250, 183, 178),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
