@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'model.dart';
 import 'module.dart';
 import 'trivia.dart';
-import 'services/primary_service.dart';
 
 class Categories extends StatelessWidget {
   final AilmentCategory category;
