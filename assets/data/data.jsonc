@@ -71,91 +71,85 @@
             ],
             "correctAnswer": "All of the above"
         },
-    {
-"question": "How should you treat mild burns?",
-"answers": [
-    "Flush the area with large amounts of cool water",
-    "Apply ointment",
-    "Goon",
-    "Goon"
-],
-"correctAnswer": "Flush the area with large amounts of cool water"
-    },
-
-{
-"question": "What should you do after cooling and cleaning a burn?",
-"answers": [
-    "Apply a non-stick dressing to the burn site",
-    "Goon",
-    "Goon",
-    "Goon"
-],
-"correctAnswer": "Apply a non-stick dressing to the burn site"
-    },
-
-{
-"question": "How should you treat blisters on a burn?",
-"answers": [
-    "Do not break the blisters and wrap it in a sterile non-stick dressing",
-    "Goon",
-    "Goon",
-    "Goon"
-],
-"correctAnswer": "Do not break the blisters and wrap it in a sterile non-stick dressing"
-    },
-
-{
-"question": "What are the signs of a 1st degree burn?",
-"answers": [
-    "Only the top layer of skin is affected",
-    "Mild swelling",
-    "Redness, dry skin, or skin peeling",
-    "All of the above"
-],
-"correctAnswer": "All of the above"
-    },
-
-{
-"question": "What are the signs of a second degree burn?",
-"answers": [
-    "Blisters form",
-    "The burn and skin look wet, shiny, or moist",
-    "There is significant swelling around the burned area",
-    "All of the above"
-],
-"correctAnswer": "All of the above"
-    },
-
-    {
-"question": "What are the signs of a third degree burn?",
-"answers": [
-    "Dry and charred skin, the area feeling very painful or not at all, and significant swelling",
-    "Blisters forming and mild swelling",
-    "Not very painful, skin is red and shiny or moist",
-    "None of the above"
-],
-"correctAnswer": "Dry and charred skin, the area feeling very painful or not at all, and significant swelling"
-    },
-{
-"question": "What are the care steps for a severe burn?",
-"answers": [
-    "Call 911 immediately and do not remove clothing stuck to the burn",
-    "Apply cool, not cold, water for five minutes then gently dry",
-    "If you can, elevate the burn above the heart and cover with a dressing",
-    "All of the above, in this order"
-],
-"correctAnswer": "All of the above, in this order"
-    },
-
-    {
-        "question": "What are the care steps for a severe burn?",
-        "answers": [
-            "Call 911 immediately and do not remove clothing stuck to the burn",
-            "Apply cool, not cold, water for five minutes then gently dry",
-            "If you can, elevate the burn above the heart and cover with a dressing",
-            "All of the above, in this order"
-        ],
-        "correctAnswer": "All of the above, in this order"
-    }
+        {
+            "question": "How should you treat mild burns?",
+            "answers": [
+                "Flush the area with large amounts of cool water",
+                "Apply ointment",
+                "Goon",
+                "Goon"
+            ],
+            "correctAnswer": "Flush the area with large amounts of cool water"
+        },
+        {
+            "question": "What should you do after cooling and cleaning a burn?",
+            "answers": [
+                "Apply a non-stick dressing to the burn site",
+                "Goon",
+                "Goon",
+                "Goon"
+            ],
+            "correctAnswer": "Apply a non-stick dressing to the burn site"
+        },
+        {
+            "question": "How should you treat blisters on a burn?",
+            "answers": [
+                "Do not break the blisters and wrap it in a sterile non-stick dressing",
+                "Goon",
+                "Goon",
+                "Goon"
+            ],
+            "correctAnswer": "Do not break the blisters and wrap it in a sterile non-stick dressing"
+        },
+        {
+            "question": "What are the signs of a 1st degree burn?",
+            "answers": [
+                "Only the top layer of skin is affected",
+                "Mild swelling",
+                "Redness, dry skin, or skin peeling",
+                "All of the above"
+            ],
+            "correctAnswer": "All of the above"
+        },
+        {
+            "question": "What are the signs of a second degree burn?",
+            "answers": [
+                "Blisters form",
+                "The burn and skin look wet, shiny, or moist",
+                "There is significant swelling around the burned area",
+                "All of the above"
+            ],
+            "correctAnswer": "All of the above"
+        },
+        {
+            "question": "What are the signs of a third degree burn?",
+            "answers": [
+                "Dry and charred skin, the area feeling very painful or not at all, and significant swelling",
+                "Blisters forming and mild swelling",
+                "Not very painful, skin is red and shiny or moist",
+                "None of the above"
+            ],
+            "correctAnswer": "Dry and charred skin, the area feeling very painful or not at all, and significant swelling"
+        },
+        {
+            "question": "What are the care steps for a severe burn?",
+            "answers": [
+                "Call 911 immediately and do not remove clothing stuck to the burn",
+                "Apply cool, not cold, water for five minutes then gently dry",
+                "If you can, elevate the burn above the heart and cover with a dressing",
+                "All of the above, in this order"
+            ],
+            "correctAnswer": "All of the above, in this order"
+        },
+        {
+            "question": "What are the care steps for a severe burn?",
+            "answers": [
+                "Call 911 immediately and do not remove clothing stuck to the burn",
+                "Apply cool, not cold, water for five minutes then gently dry",
+                "If you can, elevate the burn above the heart and cover with a dressing",
+                "All of the above, in this order"
+            ],
+            "correctAnswer": "All of the above, in this order"
+        }
     ]
 }
