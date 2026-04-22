@@ -1,54 +1,74 @@
-class AilmentWriting {
-  String name;
-  String description;
-  String symptoms;
-  String treatment;
+class AilmentStep {
+  final int step;
+  final String instruction;
+  final String? imageUrl;
 
-  AilmentWriting({
-    required this.name,
-    required this.description,
-    required this.symptoms,
-    required this.treatment,
+  AilmentStep({
+    required this.step,
+    required this.instruction,
+    this.imageUrl,
   });
+
+   factory AilmentStep.fromJson(Map<String, dynamic> json) {
+    return AilmentStep(
+      step: json['step'],
+      instruction: json['instruction'],
+      imageUrl: json['imageUrl'],
+    );
+  }
 }
+class AilmentCategory {
+  final String id;
+  final String icon;
+  final List<AilmentTopic> topics;
+  final String name;
+  final String description;
+  final int progress;
 
-class Ailment {
-  String name;
-  String description;
-  int progress;
-
-  Ailment({
+  AilmentCategory({
+    required this.id,
+    required this.icon,
+    required this.topics,
     required this.name,
     required this.description,
     required this.progress,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'description': description,
-      'progress': progress,
-    };
-  }
-
-  factory Ailment.fromMap(Map<String, dynamic> map) {
-    return Ailment(
-      name: map['name'],
-      description: map['description'],
-      progress: map['progress'],
+  factory AilmentCategory.fromJson(Map<String, dynamic> json) {
+    return AilmentCategory(
+      id: json['id'],
+      icon: json['icon'],
+      topics: (json['topics'] as List).map((topic) => AilmentTopic.fromJson(topic)).toList(),
+      name: json['name'],
+      description: json['description'],
+      progress: json['progress'],
     );
   }
 }
-extension AilmentCopy on Ailment {
-  Ailment copyWith({
-    String? name,
-    String? description,
-    int? progress,
-  }) {
-    return Ailment(
-      name: name ?? this.name,
-      description: description ?? this.description,
-      progress: progress ?? this.progress,
+
+class AilmentTopic {
+  final List<AilmentStep> steps;
+  final String name;
+  final String description;
+  final String id;
+  final String icon;
+
+  AilmentTopic({
+    required this.steps,
+    required this.name,
+    required this.description,
+    required this.id,
+    required this.icon,
+  });
+
+  factory AilmentTopic.fromJson(Map<String, dynamic> json) {
+    return AilmentTopic(
+      steps: (json['steps'] as List).map((step) => AilmentStep.fromJson(step)).toList(),
+      name: json['name'],
+      description: json['description'],
+      id: json['id'],
+      icon: json['icon'],
     );
   }
+
 }
