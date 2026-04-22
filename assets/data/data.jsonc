@@ -61,6 +61,19 @@
             ],
             "correctAnswer": "All of the above"
         },
+
+
+
+
+
+
+
+
+
+
+
+
+        
         {
             "question": "When should you seek medical care for burns?",
             "answers": [
@@ -156,6 +169,84 @@
             "All of the above, in this order"
         ],
         "correctAnswer": "All of the above, in this order"
-    }
+    },
+
+
+
+
+
+
+
+
+
+{
+"question": "What are signs of complete choking?",
+"answers": [
+    "Being unable to cough, speak, or breath",
+    "Hands clutching the throat",
+    "Skin that becomes bluish or paler than normal",
+    "All of the above"
+],
+"correctAnswer": "All of the above"
+    },
+
+    {
+"question": "How can you reduce the risk of choking?",
+"answers": [
+    "Chewing food well before swallowing",
+    "Eating slowly and calmly",
+    "Avoid talking and physical activity while chewing",
+    "All of the above"
+],
+"correctAnswer": "All of the above"
+    },
+    {
+"question": "How can you tell if someone is partially choking but not completely choking?",
+"answers": [
+    "One or both hands are around their throat",
+    "If they are coughing, wheezing, or gasping",
+    "A look of panic"
+],
+"correctAnswer": "If they are coughing, wheezing, or gasping"
+    },
+    {
+"question": "Why should someone who has suffered complete choking always seek medical attention?",
+"answers": [
+    "The lodged object could have damaged the airway",
+    "Back blows or abdominal thrusts could have caused damage",
+    "A and B",
+    "None of the above"
+],
+"correctAnswer": "A and B"
+    },
+{
+"question": "What should you do when a choking person becomes unresponsive?",
+"answers": [
+    "Immediately begin CPR",
+    "Goon",
+    "Goon",
+    "Goon"
+],
+"correctAnswer": "Immediately begin CPR"
+    },
+{"question": "Why should someone who has suffered complete choking always seek medical attention?",
+"answers": [
+    "The lodged object could have damaged the airway",
+    "Back blows or abdominal thrusts could have caused damage",
+    "A and B",
+    "None of the above"
+],
+"correctAnswer": "A and B"
+    },
+{
+"question": "What should you do when a choking person becomes unresponsive?",
+"answers": [
+    "Immediately begin CPR",
+    "Goon",
+    "Goon",
+    "Goon"
+],
+"correctAnswer": "Immediately begin CPR"
+}
     ]
 }
