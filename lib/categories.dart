@@ -17,7 +17,7 @@ class Categories extends StatelessWidget {
   }
 
   @override
- Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 250, 183, 178),
@@ -52,9 +52,7 @@ class Categories extends StatelessWidget {
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => Module(topic: topic),
-                    ),
+                    MaterialPageRoute(builder: (_) => Module(topic: topic)),
                   ),
                 );
               },
@@ -68,7 +66,12 @@ class Categories extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const TriviaApp()),
+                  MaterialPageRoute(
+                    builder: (_) => TriviaApp(
+                      categoryId: category.id,
+                      categoryName: category.name,
+                    ),
+                  ),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _darkRed,
