@@ -1,0 +1,238 @@
+    {
+        "Questions": [
+            {
+                "id": "cuts",
+                "items": [
+                    {
+                        "question": "What is the FIRST step in treating a cut?",
+                        "answers": [
+                            "Apply ointment",
+                            "Clean the wound",
+                            "Apply direct pressure",
+                            "Elevate the limb"
+                        ],
+                        "correctAnswer": "Clean the wound"
+                    },
+                    {
+                        "question": ". If blood soaks through a bandage, what should you do?",
+                        "answers": [
+                            "Remove it and replace it",
+                            "Add more bandages on top",
+                            "Stop applying pressure",
+                            "Wash the wound again"
+                        ],
+                        "correctAnswer": "Add more bandages on top"
+                    },
+                    {
+                        "question": "Which of the following is BEST for cleaning a minor cut?",
+                        "answers": [
+                            "Hydrogen peroxide",
+                            "Alcohol",
+                            "Clean running water",
+                            "Soap poured directly inside"
+                        ],
+                        "correctAnswer": "Clean running water"
+                    },
+                    {
+                        "question": "When should you seek medical attention for a cut?",
+                        "answers": [
+                            "Small scratch",
+                            "Bleeding stops quickly",
+                            "Deep or won’t stop bleeding",
+                            "Slight redness"
+                        ],
+                        "correctAnswer": "Deep or won’t stop bleeding"
+                    },
+                    {
+                        "question": "What is a sign of infection?",
+                        "answers": [
+                            "Slight pain immediately",
+                            "Clear fluid",
+                            "Redness and swelling",
+                            "Dry skin"
+                        ],
+                        "correctAnswer": "Redness and swelling"
+                    },
+                    {
+                        "question": "When should you seek medical attention for a cut?",
+                        "answers": [
+                            "The cut is deep or won't stop bleeding",
+                            "Signs of infection appear",
+                            "It was caused by something rusty or dirty",
+                            "All of the above"
+                        ],
+                        "correctAnswer": "All of the above"
+                    }
+                ]
+            },
+            {
+                "id": "burns",
+                "items": [
+                    {
+                        "question": "When should you seek medical care for burns?",
+                        "answers": [
+                            "The burn affects the face or respiratory tract",
+                            "The victim has a third degree burn",
+                            "The burn affects more than one body part or more than 15% of the body",
+                            "All of the above"
+                        ],
+                        "correctAnswer": "All of the above"
+                    },
+                    {
+                        "question": "How should you treat mild burns?",
+                        "answers": [
+                            "Flush the area with large amounts of cool water",
+                            "Apply ointment",
+                            "Goon",
+                            "Goon"
+                        ],
+                        "correctAnswer": "Flush the area with large amounts of cool water"
+                    },
+                    {
+                        "question": "What should you do after cooling and cleaning a burn?",
+                        "answers": [
+                            "Apply a non-stick dressing to the burn site",
+                            "Goon",
+                            "Goon",
+                            "Goon"
+                        ],
+                        "correctAnswer": "Apply a non-stick dressing to the burn site"
+                    },
+                    {
+                        "question": "How should you treat blisters on a burn?",
+                        "answers": [
+                            "Do not break the blisters and wrap it in a sterile non-stick dressing",
+                            "Goon",
+                            "Goon",
+                            "Goon"
+                        ],
+                        "correctAnswer": "Do not break the blisters and wrap it in a sterile non-stick dressing"
+                    },
+                    {
+                        "question": "What are the signs of a 1st degree burn?",
+                        "answers": [
+                            "Only the top layer of skin is affected",
+                            "Mild swelling",
+                            "Redness, dry skin, or skin peeling",
+                            "All of the above"
+                        ],
+                        "correctAnswer": "All of the above"
+                    },
+                    {
+                        "question": "What are the signs of a second degree burn?",
+                        "answers": [
+                            "Blisters form",
+                            "The burn and skin look wet, shiny, or moist",
+                            "There is significant swelling around the burned area",
+                            "All of the above"
+                        ],
+                        "correctAnswer": "All of the above"
+                    },
+                    {
+                        "question": "What are the signs of a third degree burn?",
+                        "answers": [
+                            "Dry and charred skin, the area feeling very painful or not at all, and significant swelling",
+                            "Blisters forming and mild swelling",
+                            "Not very painful, skin is red and shiny or moist",
+                            "None of the above"
+                        ],
+                        "correctAnswer": "Dry and charred skin, the area feeling very painful or not at all, and significant swelling"
+                    },
+                    {
+                        "question": "What are the care steps for a severe burn?",
+                        "answers": [
+                            "Call 911 immediately and do not remove clothing stuck to the burn",
+                            "Apply cool, not cold, water for five minutes then gently dry",
+                            "If you can, elevate the burn above the heart and cover with a dressing",
+                            "All of the above, in this order"
+                        ],
+                        "correctAnswer": "All of the above, in this order"
+                    },
+                    {
+                        "question": "What are the care steps for a severe burn?",
+                        "answers": [
+                            "Call 911 immediately and do not remove clothing stuck to the burn",
+                            "Apply cool, not cold, water for five minutes then gently dry",
+                            "If you can, elevate the burn above the heart and cover with a dressing",
+                            "All of the above, in this order"
+                        ],
+                        "correctAnswer": "All of the above, in this order"
+                    }
+                ]
+            },
+            {
+                "id": "choking",
+                "items": [
+                    {
+                        "question": "What are signs of complete choking?",
+                        "answers": [
+                            "Being unable to cough, speak, or breath",
+                            "Hands clutching the throat",
+                            "Skin that becomes bluish or paler than normal",
+                            "All of the above"
+                        ],
+                        "correctAnswer": "All of the above"
+                    },
+                    {
+                        "question": "How can you reduce the risk of choking?",
+                        "answers": [
+                            "Chewing food well before swallowing",
+                            "Eating slowly and calmly",
+                            "Avoid talking and physical activity while chewing",
+                            "All of the above"
+                        ],
+                        "correctAnswer": "All of the above"
+                    },
+                    {
+                        "question": "How can you tell if someone is partially choking but not completely choking?",
+                        "answers": [
+                            "One or both hands are around their throat",
+                            "If they are coughing, wheezing, or gasping",
+                            "A look of panic"
+                        ],
+                        "correctAnswer": "If they are coughing, wheezing, or gasping"
+                    },
+                    {
+                        "question": "Why should someone who has suffered complete choking always seek medical attention?",
+                        "answers": [
+                            "The lodged object could have damaged the airway",
+                            "Back blows or abdominal thrusts could have caused damage",
+                            "A and B",
+                            "None of the above"
+                        ],
+                        "correctAnswer": "A and B"
+                    },
+                    {
+                        "question": "What should you do when a choking person becomes unresponsive?",
+                        "answers": [
+                            "Immediately begin CPR",
+                            "Goon",
+                            "Goon",
+                            "Goon"
+                        ],
+                        "correctAnswer": "Immediately begin CPR"
+                    },
+                    {
+                        "question": "Why should someone who has suffered complete choking always seek medical attention?",
+                        "answers": [
+                            "The lodged object could have damaged the airway",
+                            "Back blows or abdominal thrusts could have caused damage",
+                            "A and B",
+                            "None of the above"
+                        ],
+                        "correctAnswer": "A and B"
+                    },
+                    {
+                        "question": "What should you do when a choking person becomes unresponsive?",
+                        "answers": [
+                            "Immediately begin CPR",
+                            "Goon",
+                            "Goon",
+                            "Goon"
+                        ],
+                        "correctAnswer": "Immediately begin CPR"
+                    }
+                ]
+            }
+        ]
+    }
