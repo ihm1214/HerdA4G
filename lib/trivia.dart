@@ -330,7 +330,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
       decoration: BoxDecoration(
         color: kWhite,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: kRed, width: 1.5),
+        border: Border.all(color: kRed.withOpacity(0.25), width: 1.5),
         boxShadow: [
           BoxShadow(
             color: Colors.black,
@@ -348,7 +348,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             decoration: BoxDecoration(
               color: kRedLight,
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: kRed),
+              border: Border.all(color: kRed.withOpacity(0.3)),
             ),
             child: Text(
               'Q${_questionIndex + 1}',
@@ -395,7 +395,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 18),
                 Expanded(
                   child: Row(
                     children: [
@@ -453,7 +453,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
         labelFg = kWhite;
         icon = Icons.cancel_rounded;
       } else {
-        borderColor = kBorder;
+        borderColor = kBorder.withOpacity(0.5);
         textColor = kTextMuted;
       }
     }
@@ -483,8 +483,9 @@ class _TriviaScreenState extends State<TriviaScreen> {
             children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
-                width: 32,
-                height: 32,
+                //this is where to adjust the answer dimensions
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
                   color: labelBg,
                   borderRadius: BorderRadius.circular(8),
@@ -506,7 +507,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
                   _current.answers[index],
                   style: TextStyle(
                     color: textColor,
-                    fontSize: 15,
+                    fontSize: MediaQuery.of(context).size.width > 800 ? 20 : MediaQuery.of(context).size.width > 600 ? 15 : 10,
+                    
                     fontWeight: FontWeight.w500,
                     height: 1.35,
                   ),
@@ -635,7 +637,7 @@ class _NavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = enabled ? kRed : kTextMuted;
+    final color = enabled ? kRed : kTextMuted.withOpacity(0.4);
     final kids = <Widget>[
       if (!reversed) ...[
         Icon(icon, color: color, size: 18),
