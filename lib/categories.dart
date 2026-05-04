@@ -16,6 +16,8 @@ class Categories extends StatelessWidget {
     return Text(icon, style: const TextStyle(fontSize: 20));
   }
 
+// The categories page was made with the help of https://www.youtube.com/watch?v=l8dj0yPBvgQ and https://www.youtube.com/watch?v=Hxh6nNHSUjo
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

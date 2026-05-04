@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:a4g/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// Used a quiz app tutorial to base our quiz off of https://www.youtube.com/watch?v=VEbNXOe2O04
+
 class FirstAidService extends ChangeNotifier {
   static const String _categoryCorrectAnswersKey =
       'category_quiz_correct_answers';
@@ -130,7 +132,8 @@ class FirstAidService extends ChangeNotifier {
     return decoded.map((key, value) => MapEntry(key, value as int));
   }
 
-  // ─── Load JSON from assets ───────────────────────────────────────────────
+  // JSON linking made with help from https://www.youtube.com/watch?v=tgvfhWqS39o
+
   Future<List<AilmentCategory>> loadCategories() async {
     final String jsonString = await rootBundle.loadString(
       'assets/data/ailments.json',

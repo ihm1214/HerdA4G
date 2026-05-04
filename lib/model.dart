@@ -1,3 +1,6 @@
+// model.dart was made with the help of https://www.youtube.com/watch?v=iV8CObuvPAE
+// used the youtube video for basics then expanded using other tutorials
+
 class AilmentStep {
   final int step;
   final String instruction;
@@ -5,6 +8,7 @@ class AilmentStep {
 
   AilmentStep({required this.step, required this.instruction, this.imageUrl});
 
+// JSON linking made with help from https://www.youtube.com/watch?v=tgvfhWqS39o
   factory AilmentStep.fromJson(Map<String, dynamic> json) {
     return AilmentStep(
       step: json['step'],

@@ -3,15 +3,18 @@ import 'categories.dart';
 import 'services/primary_service.dart';
 import 'model.dart';
 
+// Starts the app when running flutter run, came from flutter template https://docs.flutter.dev/get-started/codelab
 void main() {
   runApp(const MyApp());
 }
 
+// Main app widget, sets up theme and home screen, came from flutter template https://docs.flutter.dev/get-started/codelab
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // MaterialApp does some basi setup for the theme of the website. Made with help of https://www.youtube.com/watch?v=iV8CObuvPAE
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'First Aid Education',
@@ -130,6 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   Expanded(
+                    // GridView made with help from https://www.youtube.com/watch?v=bLOtZDTm4r8
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: MediaQuery.of(context).size.width > 800
@@ -149,6 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           service: _service,
                           onTap: () => Navigator.push(
                             context,
+                            // Tab switching made with help from https://www.youtube.com/watch?v=nyvwx7o277U
                             MaterialPageRoute(
                               builder: (_) => Categories(category: cat),
                             ),
@@ -189,19 +194,22 @@ class _CategoryCard extends StatelessWidget {
     }
   }
 
+  //Creates main UI for each category card on the home screen, shows progress and category info, and navigates to category quiz when tapped, made with the help of https://www.youtube.com/watch?v=iV8CObuvPAE
+
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Card( //Preset style card from flutter package, used for each category on the home screen
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(color: Colors.grey.shade200),
       ),
-      child: InkWell(
+      child: InkWell( // Creates a shadow when user clicks on the card
         borderRadius: BorderRadius.circular(12),
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16), // Margin
+          // AnimatedBuilder made with help from https://www.youtube.com/watch?v=N3PcpMFJjsA
           child: AnimatedBuilder(
             animation: service,
             builder: (context, _) {
@@ -233,6 +241,7 @@ class _CategoryCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
+                    // Loading bar made with help from https://www.youtube.com/watch?v=O-rhXZLtpv0
                     child: LinearProgressIndicator(
                       value: categoryProgress.progress,
                       minHeight: 7,

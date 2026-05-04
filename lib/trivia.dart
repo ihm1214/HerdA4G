@@ -85,9 +85,18 @@ class _TriviaScreenState extends State<TriviaScreen> {
     try {
       final raw = await DefaultAssetBundle.of(
         context,
-      ).loadString('assets/data/ailments.json');
+      ).loadString('assets/data/questions.json');
       final decoded = jsonDecode(raw) as Map<String, dynamic>;
-      final loaded = (decoded['Questions'] as List)
+      final questions = decoded['Questions'] as List;
+      
+      // Find the category matching the categoryId
+      final category = questions.firstWhere(
+        (e) => (e as Map<String, dynamic>)['id'] == widget.categoryId,
+        orElse: () => throw Exception('Category ${widget.categoryId} not found'),
+      ) as Map<String, dynamic>;
+      
+      // Extract and map the items to TriviaQuestion objects
+      final loaded = ((category['items'] ?? []) as List)
           .map((e) => TriviaQuestion.fromJson(e as Map<String, dynamic>))
           .toList();
       _questionResults.clear();
@@ -580,15 +589,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             icon: Icons.arrow_back_ios_rounded,
             label: 'Prev',
             enabled: _questionIndex > 0,
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => TriviaApp(
-                  categoryId: widget.categoryId,
-                  categoryName: widget.categoryName,
-                ),
-              ),
-            ),
+            onTap: _goPrev,
           ),
           Row(
             children: List.generate(_questions.length, (i) {
