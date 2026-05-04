@@ -1,17 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:a4g/model.dart';
-import 'services/primary_service.dart';
-
+//TriviaApp structure inspired by : https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html
 class TriviaApp extends StatelessWidget {
   final String categoryId;
   final String categoryName;
 
-  const TriviaApp({
-    super.key,
-    required this.categoryId,
-    required this.categoryName,
-  });
+  const TriviaApp({super.key, required this.categoryId, required this.categoryName});
 
   @override
   Widget build(BuildContext context) {
@@ -26,109 +20,119 @@ class TriviaApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Roboto',
       ),
-      home: TriviaScreen(categoryId: categoryId, categoryName: categoryName),
+      home: TriviaScreen(category: categoryId), // ← uncomment and wire up
     );
   }
 }
 
-const Color kRed = Color(0xFFCC0000);
-const Color kRedLight = Color(0xFFFFEBEB);
-const Color kRedDark = Color(0xFF990000);
-const Color kGreen = Color(0xFF2E7D32);
-const Color kGreenLight = Color(0xFFE8F5E9);
-const Color kWhite = Colors.white;
-const Color kBackground = Color(0xFFF5F5F5);
-const Color kTileDefault = Color(0xFFFAFAFA);
-const Color kBorder = Color(0xFFDDDDDD);
-const Color kTextDark = Color(0xFF1A1A1A);
-const Color kTextMuted = Color(0xFF666666);
+class TriviaQuestion {
+  final String question;
+  final List<String> answers;
+  final String correctAnswer;
 
-// Screen Setup
-
-class TriviaScreen extends StatefulWidget {
-  final String categoryId;
-  final String categoryName;
-
-  const TriviaScreen({
-    super.key,
-    required this.categoryId,
-    required this.categoryName,
+  const TriviaQuestion({
+    required this.question,
+    required this.answers,
+    required this.correctAnswer,
   });
+
+  int get correctIndex => answers.indexOf(correctAnswer);
+
+  factory TriviaQuestion.fromJson(Map<String, dynamic> json) {
+    return TriviaQuestion(
+      question: json['question'] as String,
+      answers: List<String>.from(json['answers'] as List),
+      correctAnswer: json['correctAnswer'] as String,
+    );
+  }
+}
+
+
+//Global color scheme inspired by : https://api.flutter.dev/flutter/dart-ui/Color-class.html
+
+const Color kRed         = Color(0xFFCC0000);
+const Color kRedLight    = Color(0xFFFFEBEB);
+const Color kRedDark     = Color(0xFF990000);
+const Color kGreen       = Color(0xFF2E7D32);
+const Color kGreenLight  = Color(0xFFE8F5E9);
+const Color kWhite       = Colors.white;
+const Color kBackground  = Color(0xFFF5F5F5);
+const Color kTileDefault = Color(0xFFFAFAFA);
+const Color kBorder      = Color(0xFFDDDDDD);
+const Color kTextDark    = Color(0xFF1A1A1A);
+const Color kTextMuted   = Color(0xFF666666);
+
+// Screen Setup inspired by: https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html
+class TriviaScreen extends StatefulWidget {
+  final String category; // e.g. "burns", "cuts"
+
+  const TriviaScreen({super.key, required this.category});
 
   @override
   State<TriviaScreen> createState() => _TriviaScreenState();
 }
 
 class _TriviaScreenState extends State<TriviaScreen> {
-  final FirstAidService _service = FirstAidService();
-
   int _questionIndex = 0;
   int? _selectedAnswer;
   List<TriviaQuestion> _questions = [];
-  final Map<int, bool> _questionResults = {};
   bool _loading = true;
   String? _error;
 
   TriviaQuestion get _current => _questions[_questionIndex];
   bool get _answered => _selectedAnswer != null;
   bool get _isLast => _questionIndex == _questions.length - 1;
-  int get _correctCount =>
-      _questionResults.values.where((isCorrect) => isCorrect).length;
 
   @override
   void initState() {
     super.initState();
     _loadQuestions();
   }
+  //Loading assets in loadQuestions inspired by: https://docs.flutter.dev/ui/assets/assets-and-images
+Future<void> _loadQuestions() async {
+  try {
+    final raw = await DefaultAssetBundle.of(context)
+        .loadString('assets/data/questions.json');
 
-  Future<void> _loadQuestions() async {
-    try {
-      final raw = await DefaultAssetBundle.of(
-        context,
-      ).loadString('assets/data/ailments.json');
-      final decoded = jsonDecode(raw) as Map<String, dynamic>;
-      final loaded = (decoded['Questions'] as List)
-          .map((e) => TriviaQuestion.fromJson(e as Map<String, dynamic>))
-          .toList();
-      _questionResults.clear();
-      final existingProgress = _service.getCategoryQuizProgress(
-        widget.categoryId,
-      );
-      final needsInit = existingProgress.totalQuestions == 0;
-      final totalQuestions = loaded.length;
-      final correctAnswers = needsInit
-          ? 0
-          : existingProgress.correctAnswers.clamp(0, totalQuestions);
+    final decoded = jsonDecode(raw) as Map<String, dynamic>;
+    final allCategories = decoded['Questions'] as List<dynamic>;
 
-      _service.setCategoryQuizProgress(
-        categoryId: widget.categoryId,
-        correctAnswers: correctAnswers,
-        totalQuestions: totalQuestions,
-      );
+    // Use firstWhere with orElse to safely find the matching category
+    final categoryBlock = allCategories.firstWhere(
+      (e) => (e as Map<String, dynamic>)['id']?.toString().trim() ==
+          widget.category.trim(),
+      orElse: () => null,
+    ) as Map<String, dynamic>?;
+
+    if (categoryBlock == null) {
       setState(() {
-        _questions = loaded;
+        _error = 'No questions found for: "${widget.category}"';
         _loading = false;
       });
-    } catch (e) {
-      setState(() {
-        _error = 'Failed to load questions: $e';
-        _loading = false;
-      });
+      return;
     }
+
+    final items = categoryBlock['items'] as List<dynamic>;
+    final loaded = items
+        .map((e) => TriviaQuestion.fromJson(e as Map<String, dynamic>))
+        .toList();
+
+    setState(() {
+      _questions = loaded;
+      _loading = false;
+    });
+  } catch (e, stack) {
+    debugPrint('Load error: $e\n$stack');
+    setState(() {
+      _error = 'Failed to load questions: $e';
+      _loading = false;
+    });
   }
+}
 
   void _pickAnswer(int index) {
     if (_answered) return;
-    final bool isCorrect = index == _current.correctIndex;
-    setState(() {
-      _selectedAnswer = index;
-      _questionResults[_questionIndex] = isCorrect;
-    });
-    _service.setCategoryQuizProgress(
-      categoryId: widget.categoryId,
-      correctAnswers: _correctCount,
-      totalQuestions: _questions.length,
-    );
+    setState(() => _selectedAnswer = index);
   }
 
   void _goNext() {
@@ -149,22 +153,16 @@ class _TriviaScreenState extends State<TriviaScreen> {
     }
   }
 
-  void _goBack() {
-    final navigator = Navigator.of(context);
-    if (navigator.canPop()) {
-      navigator.pop();
-      return;
-    }
-    Navigator.of(context, rootNavigator: true).pop();
-  }
-
-  //Build
+//Build
+//Scaffolding inspired by: https://api.flutter.dev/flutter/material/Scaffold-class.html
   @override
   Widget build(BuildContext context) {
     if (_loading) {
       return const Scaffold(
         backgroundColor: kBackground,
-        body: Center(child: CircularProgressIndicator(color: kRed)),
+        body: Center(
+          child: CircularProgressIndicator(color: kRed),
+        ),
       );
     }
 
@@ -197,8 +195,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
                     backgroundColor: kRed,
                     foregroundColor: kWhite,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                   child: const Text('Try Again'),
                 ),
@@ -211,6 +208,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
 
     return Scaffold(
       backgroundColor: kBackground,
+      //SafeArea inspired by: https://docs.flutter.dev/ui/adaptive-responsive/safearea-mediaquery
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
@@ -238,91 +236,66 @@ class _TriviaScreenState extends State<TriviaScreen> {
   }
 
   // Header
-
+  
   Widget _buildHeader() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(
-        color: kRed,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(color: kRed, blurRadius: 8, offset: const Offset(0, 3)),
-        ],
-      ),
-      child: Row(
-        children: [
-          // Back Button
-          GestureDetector(
-            onTap: _goBack,
-            child: Container(
-              width: 36,
-              height: 36,
-              decoration: BoxDecoration(
-                color: kWhite,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Center(
-                child: Icon(
-                  Icons.arrow_back_ios_rounded,
-                  color: kRed,
-                  size: 18,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
-          // First Aid Icon
-          Container(
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    decoration: BoxDecoration(
+      color: kRed,
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+            color: kRed.withOpacity(0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 3)),
+      ],
+    ),
+    child: Row(
+      children: [
+        // Back Button
+        GestureDetector(
+          onTap: () => Navigator.of(context, rootNavigator: true).pop(),
+          child: Container(
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.circular(6),
+                color: kWhite,
+                borderRadius: BorderRadius.circular(8)),
+            child: const Center(
+              child: Icon(Icons.arrow_back_ios_rounded,
+                  color: kRed, size: 18),
             ),
-            child: const Center(child: Icon(Icons.add, color: kRed, size: 26)),
           ),
-          const SizedBox(width: 12),
-          const Text(
-            'First Aid Trivia',
-            style: TextStyle(
+        ),
+        const SizedBox(width: 10),
+        const SizedBox(width: 12),
+        const Text(
+          'First Aid Trivia',
+          style: TextStyle(
               color: kWhite,
               fontSize: 20,
               fontWeight: FontWeight.w700,
-              letterSpacing: 0.5,
-            ),
+              letterSpacing: 0.5),
+        ),
+        const Spacer(),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: kWhite.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(20),
           ),
-          const Spacer(),
-          Text(
-            widget.categoryName,
+          child: Text(
+            '${_questionIndex + 1} / ${_questions.length}',
             style: const TextStyle(
-              color: kWhite,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
+                color: kWhite, fontWeight: FontWeight.w600, fontSize: 14),
           ),
-          const SizedBox(width: 10),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              '${_questionIndex + 1} / ${_questions.length}',
-              style: const TextStyle(
-                color: kWhite,
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 
   // Question Block
-
   Widget _buildQuestionCard() {
     return Container(
       width: double.infinity,
@@ -333,10 +306,9 @@ class _TriviaScreenState extends State<TriviaScreen> {
         border: Border.all(color: kRed.withOpacity(0.25), width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black,
-            blurRadius: 6,
-            offset: const Offset(0, 2),
-          ),
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 2)),
         ],
       ),
       child: Row(
@@ -344,7 +316,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
         children: [
           Container(
             margin: const EdgeInsets.only(top: 2),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
               color: kRedLight,
               borderRadius: BorderRadius.circular(6),
@@ -353,10 +326,9 @@ class _TriviaScreenState extends State<TriviaScreen> {
             child: Text(
               'Q${_questionIndex + 1}',
               style: const TextStyle(
-                color: kRedDark,
-                fontWeight: FontWeight.w700,
-                fontSize: 13,
-              ),
+                  color: kRedDark,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18),
             ),
           ),
           const SizedBox(width: 14),
@@ -364,7 +336,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             child: Text(
               _current.question,
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 25,
                 fontWeight: FontWeight.w600,
                 color: kTextDark,
                 height: 1.4,
@@ -376,9 +348,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // 2 x 2 question grid
+  // 2 x 2 question layout inspired by: https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html
 
   Widget _buildAnswerGrid() {
+    
     return Expanded(
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -387,23 +360,19 @@ class _TriviaScreenState extends State<TriviaScreen> {
             return Column(
               children: [
                 Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(child: _buildTile(0)),
-                      const SizedBox(width: 14),
-                      Expanded(child: _buildTile(1)),
-                    ],
-                  ),
+                  child: Row(children: [
+                    Expanded(child: _buildTile(0)),
+                    const SizedBox(width: 14),
+                    Expanded(child: _buildTile(1)),
+                  ]),
                 ),
-                const SizedBox(height: 18),
+                const SizedBox(height: 2),
                 Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(child: _buildTile(2)),
-                      const SizedBox(width: 14),
-                      Expanded(child: _buildTile(3)),
-                    ],
-                  ),
+                  child: Row(children: [
+                    Expanded(child: _buildTile(2)),
+                    const SizedBox(width: 14),
+                    Expanded(child: _buildTile(3)),
+                  ]),
                 ),
               ],
             );
@@ -425,6 +394,9 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
+//Individual tile build inspired by: https://docs.flutter.dev/cookbook/animation/animated-container
+//                               and https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html
+//                               and https://api.flutter.dev/flutter/widgets/GestureDetector-class.html
   Widget _buildTile(int index) {
     final bool isCorrect = index == _current.correctIndex;
     final bool isSelected = _selectedAnswer == index;
@@ -470,34 +442,32 @@ class _TriviaScreenState extends State<TriviaScreen> {
           boxShadow: (isSelected || (_answered && isCorrect))
               ? [
                   BoxShadow(
-                    color: borderColor,
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
-                  ),
+                      color: borderColor.withOpacity(0.25),
+                      blurRadius: 8,
+                      offset: const Offset(0, 3))
                 ]
               : [],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           child: Row(
             children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
-                //this is where to adjust the answer dimensions
+                //this is where to adjust the answer box dimensions
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: labelBg,
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                    color: labelBg,
+                    borderRadius: BorderRadius.circular(8)),
                 child: Center(
                   child: Text(
                     labels[index],
                     style: TextStyle(
-                      color: labelFg,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15,
-                    ),
+                        color: labelFg,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15),
                   ),
                 ),
               ),
@@ -516,14 +486,13 @@ class _TriviaScreenState extends State<TriviaScreen> {
               ),
               if (icon != null) ...[
                 const SizedBox(width: 8),
+                //Animation for switching inspired by: https://api.flutter.dev/flutter/widgets/AnimatedSwitcher-class.html
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
-                  child: Icon(
-                    icon,
-                    key: ValueKey(icon),
-                    color: isCorrect ? kGreen : kRed,
-                    size: 24,
-                  ),
+                  child: Icon(icon,
+                      key: ValueKey(icon),
+                      color: isCorrect ? kGreen : kRed,
+                      size: 24),
                 ),
               ],
             ],
@@ -533,37 +502,72 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // Next Button
-
+  // Next Button inspired by: https://docs.flutter.dev/cookbook/animation/opacity-animation
+  //                      and https://api.flutter.dev/flutter/material/ElevatedButton-class.html
   Widget _buildNextButton() {
-    return AnimatedOpacity(
-      opacity: _answered ? 1.0 : 0.0,
-      duration: const Duration(milliseconds: 300),
-      child: SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: _isLast ? null : _goNext,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: kRed,
-            foregroundColor: kWhite,
-            disabledBackgroundColor: kBorder,
-            disabledForegroundColor: kTextMuted,
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            elevation: 0,
+  return AnimatedOpacity(
+    opacity: _answered ? 1.0 : 0.0,
+    duration: const Duration(milliseconds: 300),
+    child: SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: _isLast
+            ? () {
+                Navigator.of(context, rootNavigator: true).pop();
+              }
+            : _goNext,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: _isLast ? kGreen : kRed,
+          foregroundColor: kWhite,
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-          child: Text(
-            _isLast ? 'Finished!' : 'Next Question',
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          elevation: _isLast ? 4 : 0,
+          shadowColor: _isLast ? kGreen.withOpacity(0.5) : null,
+        ),
+        child: Text(
+          _isLast ? 'Finished!' : 'Next Question',
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+  // Widget _buildNextButton() {
+  //   return AnimatedOpacity(
+  //     opacity: _answered ? 1.0 : 0.0,
+  //     duration: const Duration(milliseconds: 300),
+  //     child: SizedBox(
+  //       width: double.infinity,
+  //       child: ElevatedButton(
+  //         onPressed: _isLast ? null : _goNext,
+  //         style: ElevatedButton.styleFrom(
+  //           backgroundColor: kRed,
+  //           foregroundColor: kWhite,
+  //           disabledBackgroundColor: kBorder,
+  //           disabledForegroundColor: kTextMuted,
+  //           padding: const EdgeInsets.symmetric(vertical: 14),
+  //           shape: RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(10)),
+  //           elevation: 0,
+  //         ),
+  //         child: Text(
+  //           _isLast ? 'Finished!' : 'Next Question',
+  //           style: const TextStyle(
+  //               fontSize: 16, fontWeight: FontWeight.w700),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  // Nav Bar
+  // Nav Bar inspired by: https://docs.flutter.dev/cookbook/navigation/navigation-basics
+  //                  and https://api.flutter.dev/flutter/widgets/Navigator/pop.html
+  //                  and https://docs.flutter.dev/ui/navigation
 
   Widget _buildNavBar() {
     return Container(
@@ -580,15 +584,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             icon: Icons.arrow_back_ios_rounded,
             label: 'Prev',
             enabled: _questionIndex > 0,
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => TriviaApp(
-                  categoryId: widget.categoryId,
-                  categoryName: widget.categoryName,
-                ),
-              ),
-            ),
+            onTap: _goPrev,
           ),
           Row(
             children: List.generate(_questions.length, (i) {
@@ -618,7 +614,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
   }
 }
 
-// Navigation Buttons
+// Navigation Buttons inspired by: https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html
+//                             and https://api.flutter.dev/flutter/dart-ui/VoidCallback.html
 
 class _NavButton extends StatelessWidget {
   final IconData icon;
@@ -641,29 +638,28 @@ class _NavButton extends StatelessWidget {
     final kids = <Widget>[
       if (!reversed) ...[
         Icon(icon, color: color, size: 18),
-        const SizedBox(width: 6),
+        const SizedBox(width: 6)
       ],
-      Text(
-        label,
-        style: TextStyle(
-          color: color,
-          fontWeight: FontWeight.w600,
-          fontSize: 14,
-        ),
-      ),
+      Text(label,
+          style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 14)),
       if (reversed) ...[
         const SizedBox(width: 6),
-        Icon(icon, color: color, size: 18),
+        Icon(icon, color: color, size: 18)
       ],
     ];
     return GestureDetector(
       onTap: enabled ? onTap : null,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        padding:
+            const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
           color: enabled ? kRedLight : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: enabled ? kRed : Colors.transparent),
+          border: Border.all(
+              color: enabled ? kRed.withOpacity(0.3) : Colors.transparent),
         ),
         child: Row(mainAxisSize: MainAxisSize.min, children: kids),
       ),
