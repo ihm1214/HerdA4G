@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'model.dart';
 
+// Initialization made with help from Flutter template
 class Module extends StatelessWidget {
   final AilmentTopic topic;
   static const bool _showStepImages = false;
@@ -26,6 +27,7 @@ class Module extends StatelessWidget {
   }
 }
 
+// Card UI made with the help of https://www.youtube.com/watch?v=IBgafr0dgpQ
 class _StepCard extends StatelessWidget {
   final AilmentStep step;
   final bool showImage;
