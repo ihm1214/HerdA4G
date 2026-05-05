@@ -1,27 +1,96 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'model.dart';
 
 // Initialization made with help from Flutter template
-class Module extends StatelessWidget {
+class Module extends StatefulWidget {
   final AilmentTopic topic;
   static const bool _showStepImages = false;
 
   const Module({super.key, required this.topic});
 
   @override
+  State<Module> createState() => _ModuleState();
+}
+
+class _ModuleState extends State<Module> {
+  final FlutterTts _tts = FlutterTts();
+  bool _isSpeaking = false;
+
+  @override
+  void dispose() {
+    _tts.stop();
+    super.dispose();
+  }
+
+  Future<void> _toggleSpeech() async {
+    if (_isSpeaking) {
+      await _tts.stop();
+      setState(() => _isSpeaking = false);
+    } else {
+      setState(() => _isSpeaking = true);
+      for (int i = 0; i < widget.topic.steps.length; i++) {
+        if (!_isSpeaking) break;
+        await _tts.speak("Step ${i + 1}. ${widget.topic.steps[i].instruction}");
+        await _tts.awaitSpeakCompletion(true);
+      }
+      setState(() => _isSpeaking = false);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( backgroundColor: const Color.fromARGB(255, 250, 183, 178),title: Text(topic.name)),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: topic.steps.length,
-        itemBuilder: (context, index) {
-          final step = topic.steps[index];
-          return _StepCard(
-            step: step,
-            showImage: _showStepImages,
-          );
-        },
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 250, 183, 178),
+        title: Text(widget.topic.name),
+      ),
+      body: Column(
+        children: [
+          // ── TTS Button Banner ──────────────────────────────────────
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: _toggleSpeech,
+                icon: Icon(
+                  _isSpeaking ? Icons.stop_circle_outlined : Icons.volume_up_rounded,
+                  size: 22,
+                ),
+                label: Text(
+                  _isSpeaking ? 'Stop Reading' : 'Read Steps Aloud',
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _isSpeaking
+                      ? const Color.fromARGB(255, 220, 100, 90)
+                      : const Color.fromARGB(255, 250, 183, 178),
+                  foregroundColor: Colors.black87,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 2,
+                ),
+              ),
+            ),
+          ),
+          // ── Steps List ────────────────────────────────────────────
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: widget.topic.steps.length,
+              itemBuilder: (context, index) {
+                final step = widget.topic.steps[index];
+                return _StepCard(
+                  step: step,
+                  showImage: Module._showStepImages,
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -48,7 +117,6 @@ class _StepCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Step number + instruction
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
