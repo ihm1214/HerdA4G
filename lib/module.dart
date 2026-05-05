@@ -16,6 +16,21 @@ class Module extends StatefulWidget {
 class _ModuleState extends State<Module> {
   final FlutterTts _tts = FlutterTts();
   bool _isSpeaking = false;
+  int _currentStep = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _tts.setCompletionHandler(() {
+      if (!_isSpeaking) return;
+      _currentStep++;
+      if (_currentStep < widget.topic.steps.length) {
+        _speakStep(_currentStep);
+      } else {
+        setState(() => _isSpeaking = false);
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -23,18 +38,24 @@ class _ModuleState extends State<Module> {
     super.dispose();
   }
 
+  Future<void> _speakStep(int index) async {
+    final step = widget.topic.steps[index];
+    await _tts.speak("Step ${index + 1}. ${step.instruction}");
+  }
+
   Future<void> _toggleSpeech() async {
     if (_isSpeaking) {
       await _tts.stop();
-      setState(() => _isSpeaking = false);
+      setState(() {
+        _isSpeaking = false;
+        _currentStep = 0;
+      });
     } else {
-      setState(() => _isSpeaking = true);
-      for (int i = 0; i < widget.topic.steps.length; i++) {
-        if (!_isSpeaking) break;
-        await _tts.speak("Step ${i + 1}. ${widget.topic.steps[i].instruction}");
-        await _tts.awaitSpeakCompletion(true);
-      }
-      setState(() => _isSpeaking = false);
+      setState(() {
+        _isSpeaking = true;
+        _currentStep = 0;
+      });
+      await _speakStep(0);
     }
   }
 
@@ -56,18 +77,20 @@ class _ModuleState extends State<Module> {
                 onPressed: _toggleSpeech,
                 icon: Icon(
                   _isSpeaking ? Icons.stop_circle_outlined : Icons.volume_up_rounded,
-                  size: 22,
+                  //adjust volume icon size here
+                  size: 30,
                 ),
                 label: Text(
                   _isSpeaking ? 'Stop Reading' : 'Read Steps Aloud',
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  //adjust font size here
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _isSpeaking
                       ? const Color.fromARGB(255, 220, 100, 90)
                       : const Color.fromARGB(255, 250, 183, 178),
                   foregroundColor: Colors.black87,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  padding: const EdgeInsets.symmetric(vertical: 30),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
