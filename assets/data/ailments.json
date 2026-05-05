@@ -1,5 +1,3 @@
-// INFORMATION GATHERED FROM AMERICAN RED CROSS
-
 {
   "categories": [
     {
@@ -15,22 +13,10 @@
           "name": "Minor Cuts",
           "description": "Small cuts and scrapes",
           "steps": [
-            {
-              "step": 1,
-              "instruction": "Wash your hands before touching the wound."
-            },
-            {
-              "step": 2,
-              "instruction": "Rinse the cut with clean running water to remove dirt and debris."
-            },
-            {
-              "step": 3,
-              "instruction": "Apply gentle pressure with clean gauze until bleeding stops."
-            },
-            {
-              "step": 4,
-              "instruction": "Cover the area with a sterile bandage and change it daily."
-            }
+            { "step": 1, "instruction": "Wash your hands before touching the wound." },
+            { "step": 2, "instruction": "Rinse the cut with clean running water to remove dirt and debris." },
+            { "step": 3, "instruction": "Apply gentle pressure with clean gauze until bleeding stops." },
+            { "step": 4, "instruction": "Cover the area with a sterile bandage and change it daily." }
           ]
         },
         {
@@ -39,18 +25,9 @@
           "name": "Deeper Cuts",
           "description": "Cuts that may need extra care",
           "steps": [
-            {
-              "step": 1,
-              "instruction": "Apply firm pressure with a clean cloth or gauze."
-            },
-            {
-              "step": 2,
-              "instruction": "Elevate the injured area if possible."
-            },
-            {
-              "step": 3,
-              "instruction": "If bleeding does not stop after 10 minutes, seek urgent medical care."
-            }
+            { "step": 1, "instruction": "Apply firm pressure with a clean cloth or gauze." },
+            { "step": 2, "instruction": "Elevate the injured area if possible." },
+            { "step": 3, "instruction": "If bleeding does not stop after 10 minutes, seek urgent medical care." }
           ]
         }
       ]
@@ -68,18 +45,9 @@
           "name": "Minor Burns",
           "description": "Small surface burns",
           "steps": [
-            {
-              "step": 1,
-              "instruction": "Cool the burn under cool running water for 20 minutes."
-            },
-            {
-              "step": 2,
-              "instruction": "Remove rings or tight items before swelling starts."
-            },
-            {
-              "step": 3,
-              "instruction": "Cover loosely with a clean non-stick dressing."
-            }
+            { "step": 1, "instruction": "Cool the burn under cool running water for 20 minutes." },
+            { "step": 2, "instruction": "Remove rings or tight items before swelling starts." },
+            { "step": 3, "instruction": "Cover loosely with a clean non-stick dressing." }
           ]
         },
         {
@@ -88,18 +56,9 @@
           "name": "Severe Burns",
           "description": "Large, deep, or blistering burns",
           "steps": [
-            {
-              "step": 1,
-              "instruction": "Call emergency services for large or deep burns."
-            },
-            {
-              "step": 2,
-              "instruction": "Do not apply ice, butter, or ointments to the burned area."
-            },
-            {
-              "step": 3,
-              "instruction": "Cover with a clean cloth and monitor for shock."
-            }
+            { "step": 1, "instruction": "Call emergency services for large or deep burns." },
+            { "step": 2, "instruction": "Do not apply ice, butter, or ointments to the burned area." },
+            { "step": 3, "instruction": "Cover with a clean cloth and monitor for shock." }
           ]
         }
       ]
@@ -117,22 +76,10 @@
           "name": "Ankle Sprain",
           "description": "Swelling or pain after twisting the ankle",
           "steps": [
-            {
-              "step": 1,
-              "instruction": "Rest the ankle and avoid putting weight on it."
-            },
-            {
-              "step": 2,
-              "instruction": "Apply ice wrapped in cloth for 15 to 20 minutes at a time."
-            },
-            {
-              "step": 3,
-              "instruction": "Use a compression wrap if it does not cause extra pain."
-            },
-            {
-              "step": 4,
-              "instruction": "Elevate the foot above heart level when possible."
-            }
+            { "step": 1, "instruction": "Rest the ankle and avoid putting weight on it." },
+            { "step": 2, "instruction": "Apply ice wrapped in cloth for 15 to 20 minutes at a time." },
+            { "step": 3, "instruction": "Use a compression wrap if it does not cause extra pain." },
+            { "step": 4, "instruction": "Elevate the foot above heart level when possible." }
           ]
         },
         {
@@ -141,18 +88,9 @@
           "name": "Wrist Sprain",
           "description": "Pain and tenderness after a fall or strain",
           "steps": [
-            {
-              "step": 1,
-              "instruction": "Stop using the wrist and rest it in a comfortable position."
-            },
-            {
-              "step": 2,
-              "instruction": "Apply ice and a light compression bandage."
-            },
-            {
-              "step": 3,
-              "instruction": "Seek medical assessment if the wrist looks deformed or pain is severe."
-            }
+            { "step": 1, "instruction": "Stop using the wrist and rest it in a comfortable position." },
+            { "step": 2, "instruction": "Apply ice and a light compression bandage." },
+            { "step": 3, "instruction": "Seek medical assessment if the wrist looks deformed or pain is severe." }
           ]
         }
       ]
@@ -166,26 +104,14 @@
       "topics": [
         {
           "id": "adult",
-          "icon": "🫁",
+          "icon": "assets/icons/blooddrop.png",
           "name": "Adult Choking",
           "description": "A conscious adult unable to cough or speak",
           "steps": [
-            {
-              "step": 1,
-              "instruction": "Ask if the person can speak or cough."
-            },
-            {
-              "step": 2,
-              "instruction": "If they cannot breathe, give five back blows between the shoulder blades."
-            },
-            {
-              "step": 3,
-              "instruction": "Follow with five abdominal thrusts and repeat until the object clears."
-            },
-            {
-              "step": 4,
-              "instruction": "Call emergency services if the airway does not clear quickly."
-            }
+            { "step": 1, "instruction": "Ask if the person can speak or cough." },
+            { "step": 2, "instruction": "If they cannot breathe, give five back blows between the shoulder blades." },
+            { "step": 3, "instruction": "Follow with five abdominal thrusts and repeat until the object clears." },
+            { "step": 4, "instruction": "Call emergency services if the airway does not clear quickly." }
           ]
         },
         {
@@ -194,25 +120,16 @@
           "name": "Child Choking",
           "description": "Choking response for children",
           "steps": [
-            {
-              "step": 1,
-              "instruction": "Keep the child calm and check if they can cough."
-            },
-            {
-              "step": 2,
-              "instruction": "Give age-appropriate back blows and thrusts if the airway is blocked."
-            },
-            {
-              "step": 3,
-              "instruction": "Call emergency services immediately if breathing is impaired."
-            }
+            { "step": 1, "instruction": "Keep the child calm and check if they can cough." },
+            { "step": 2, "instruction": "Give age-appropriate back blows and thrusts if the airway is blocked." },
+            { "step": 3, "instruction": "Call emergency services immediately if breathing is impaired." }
           ]
         }
       ]
     },
     {
       "id": "fever",
-     "icon": "assets/icons/feber.webp",
+      "icon": "assets/icons/feber.webp",
       "name": "Fever",
       "description": "Temperature and hydration care",
       "progress": 0,
@@ -223,193 +140,445 @@
           "name": "Home Care",
           "description": "Steps for mild fever management",
           "steps": [
-            {
-              "step": 1,
-              "instruction": "Drink plenty of fluids and rest."
-            },
-            {
-              "step": 2,
-              "instruction": "Wear light clothing and keep the room comfortably cool."
-            },
-            {
-              "step": 3,
-              "instruction": "Use fever medicine only as directed on the label or by a clinician."
-            }
+            { "step": 1, "instruction": "Drink plenty of fluids and rest." },
+            { "step": 2, "instruction": "Wear light clothing and keep the room comfortably cool." },
+            { "step": 3, "instruction": "Use fever medicine only as directed on the label or by a clinician." }
           ]
         },
         {
           "id": "warning-signs",
-         "icon": "assets/icons/blooddrop.png",
+          "icon": "assets/icons/blooddrop.png",
           "name": "Warning Signs",
           "description": "When fever needs medical help",
           "steps": [
-            {
-              "step": 1,
-              "instruction": "Seek care for trouble breathing, confusion, or a stiff neck."
-            },
-            {
-              "step": 2,
-              "instruction": "Get help for fever that lasts several days or keeps returning."
-            },
-            {
-              "step": 3,
-              "instruction": "Watch closely for dehydration, especially in children and older adults."
-            }
+            { "step": 1, "instruction": "Seek care for trouble breathing, confusion, or a stiff neck." },
+            { "step": 2, "instruction": "Get help for fever that lasts several days or keeps returning." },
+            { "step": 3, "instruction": "Watch closely for dehydration, especially in children and older adults." }
           ]
         }
       ]
-  }
-],
- "Questions": [
+    },
+    {
+      "id": "frostbite",
+      "icon": "assets/icons/frostbite.png",
+      "name": "Frostbite",
+      "description": "Cold injury to skin and tissue",
+      "progress": 0,
+      "topics": [
         {
-            "question": "What is the FIRST step in treating a cut?",
-            "answers": [
-                "Apply ointment",
-                "Clean the wound",
-                "Apply direct pressure",
-                "Elevate the limb"
-            ],
-            "correctAnswer": "Clean the wound"
+          "id": "early-frostbite",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Early Frostbite",
+          "description": "Numb, red, or tingling skin from cold",
+          "steps": [
+            { "step": 1, "instruction": "Get the person out of the cold and into a warm place." },
+            { "step": 2, "instruction": "Remove wet clothing and any jewelry from the affected area." },
+            { "step": 3, "instruction": "Soak the area in warm (not hot) water around 100-105°F until it feels warm again." },
+            { "step": 4, "instruction": "Do not rub the skin or use direct heat from a stove or fire." }
+          ]
         },
         {
-            "question": "If blood soaks through a bandage, what should you do?",
-            "answers": [
-                "Remove it and replace it",
-                "Add more bandages on top",
-                "Stop applying pressure",
-                "Wash the wound again"
-            ],
-            "correctAnswer": "Add more bandages on top"
-        },
-        {
-            "question": "Which of the following is BEST for cleaning a minor cut?",
-            "answers": [
-                "Hydrogen peroxide",
-                "Alcohol",
-                "Clean running water",
-                "Soap poured directly inside"
-            ],
-            "correctAnswer": "Clean running water"
-        },
-        {
-            "question": "When should you seek medical attention for a cut?",
-            "answers": [
-                "Small scratch",
-                "Bleeding stops quickly",
-                "Deep or won’t stop bleeding",
-                "Slight redness"
-            ],
-            "correctAnswer": "Deep or won’t stop bleeding"
-        },
-        {
-            "question": "What is a sign of infection?",
-            "answers": [
-                "Slight pain immediately",
-                "Clear fluid",
-                "Redness and swelling",
-                "Dry skin"
-            ],
-            "correctAnswer": "Redness and swelling"
-        },
-        {
-            "question": "When should you seek medical attention for a cut?",
-            "answers": [
-                "The cut is deep or won't stop bleeding",
-                "Signs of infection appear",
-                "It was caused by something rusty or dirty",
-                "All of the above"
-            ],
-            "correctAnswer": "All of the above"
-        },
-        {
-            "question": "When should you seek medical care for burns?",
-            "answers": [
-                "The burn affects the face or respiratory tract",
-                "The victim has a third degree burn",
-                "The burn affects more than one body part or more than 15% of the body",
-                "All of the above"
-            ],
-            "correctAnswer": "All of the above"
-        },
-        {
-            "question": "How should you treat mild burns?",
-            "answers": [
-                "Flush the area with large amounts of cool water",
-                "Apply ointment",
-                "Goon",
-                "Goon"
-            ],
-            "correctAnswer": "Flush the area with large amounts of cool water"
-        },
-        {
-            "question": "What should you do after cooling and cleaning a burn?",
-            "answers": [
-                "Apply a non-stick dressing to the burn site",
-                "Goon",
-                "Goon",
-                "Goon"
-            ],
-            "correctAnswer": "Apply a non-stick dressing to the burn site"
-        },
-        {
-            "question": "How should you treat blisters on a burn?",
-            "answers": [
-                "Do not break the blisters and wrap it in a sterile non-stick dressing",
-                "Goon",
-                "Goon",
-                "Goon"
-            ],
-            "correctAnswer": "Do not break the blisters and wrap it in a sterile non-stick dressing"
-        },
-        {
-            "question": "What are the signs of a 1st degree burn?",
-            "answers": [
-                "Only the top layer of skin is affected",
-                "Mild swelling",
-                "Redness, dry skin, or skin peeling",
-                "All of the above"
-            ],
-            "correctAnswer": "All of the above"
-        },
-        {
-            "question": "What are the signs of a second degree burn?",
-            "answers": [
-                "Blisters form",
-                "The burn and skin look wet, shiny, or moist",
-                "There is significant swelling around the burned area",
-                "All of the above"
-            ],
-            "correctAnswer": "All of the above"
-        },
-        {
-            "question": "What are the signs of a third degree burn?",
-            "answers": [
-                "Dry and charred skin, the area feeling very painful or not at all, and significant swelling",
-                "Blisters forming and mild swelling",
-                "Not very painful, skin is red and shiny or moist",
-                "None of the above"
-            ],
-            "correctAnswer": "Dry and charred skin, the area feeling very painful or not at all, and significant swelling"
-        },
-        {
-            "question": "What are the care steps for a severe burn?",
-            "answers": [
-                "Call 911 immediately and do not remove clothing stuck to the burn",
-                "Apply cool, not cold, water for five minutes then gently dry",
-                "If you can, elevate the burn above the heart and cover with a dressing",
-                "All of the above, in this order"
-            ],
-            "correctAnswer": "All of the above, in this order"
-        },
-        {
-            "question": "What are the care steps for a severe burn?",
-            "answers": [
-                "Call 911 immediately and do not remove clothing stuck to the burn",
-                "Apply cool, not cold, water for five minutes then gently dry",
-                "If you can, elevate the burn above the heart and cover with a dressing",
-                "All of the above, in this order"
-            ],
-            "correctAnswer": "All of the above, in this order"
+          "id": "deep-frostbite",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Deep Frostbite",
+          "description": "Hard, white, or waxy skin with blisters",
+          "steps": [
+            { "step": 1, "instruction": "Call emergency services right away." },
+            { "step": 2, "instruction": "Do not rewarm the area if it might refreeze before getting help." },
+            { "step": 3, "instruction": "Protect the area with a loose, dry covering and avoid walking on frostbitten feet." }
+          ]
         }
-    ]
+      ]
+    },
+    {
+      "id": "hypothermia",
+      "icon": "assets/icons/hypothermia.png",
+      "name": "Hypothermia",
+      "description": "Dangerously low body temperature",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "mild-hypothermia",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Mild Hypothermia",
+          "description": "Shivering, cold skin, and clumsy movement",
+          "steps": [
+            { "step": 1, "instruction": "Move the person to a warm, dry place." },
+            { "step": 2, "instruction": "Remove any wet clothing and replace with dry layers or blankets." },
+            { "step": 3, "instruction": "If alert, give warm, sweet, non-alcoholic drinks." },
+            { "step": 4, "instruction": "Keep them still and avoid rough handling." }
+          ]
+        },
+        {
+          "id": "severe-hypothermia",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Severe Hypothermia",
+          "description": "Confusion, weak pulse, or unresponsive",
+          "steps": [
+            { "step": 1, "instruction": "Call emergency services immediately." },
+            { "step": 2, "instruction": "Do not give food or drink to anyone who is not fully alert." },
+            { "step": 3, "instruction": "Wrap them gently in blankets and keep them lying still." },
+            { "step": 4, "instruction": "If they are not breathing normally, begin CPR." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heatExhaustion",
+      "icon": "assets/icons/heat-exhaustion.png",
+      "name": "Heat Exhaustion",
+      "description": "Body overheating from heat or exertion",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "cool-down",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Cooling Down",
+          "description": "Heavy sweating with pale, clammy skin",
+          "steps": [
+            { "step": 1, "instruction": "Move the person to a cool, shaded, or air-conditioned place." },
+            { "step": 2, "instruction": "Loosen tight clothing and apply cool, wet cloths to the skin." },
+            { "step": 3, "instruction": "Have them sip cool water or a sports drink slowly." },
+            { "step": 4, "instruction": "Let them rest until symptoms fully resolve." }
+          ]
+        },
+        {
+          "id": "when-to-call",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "When to Get Help",
+          "description": "Signs that go beyond heat exhaustion",
+          "steps": [
+            { "step": 1, "instruction": "Call for help if symptoms last longer than one hour or get worse." },
+            { "step": 2, "instruction": "Get emergency care if the person becomes confused or faints." },
+            { "step": 3, "instruction": "Treat as heat stroke if the skin becomes hot and the person stops sweating." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heatStroke",
+      "icon": "assets/icons/heat-stroke.png",
+      "name": "Heat Stroke",
+      "description": "Life-threatening overheating emergency",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "emergency-care",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Emergency Care",
+          "description": "Hot skin, confusion, or unresponsiveness",
+          "steps": [
+            { "step": 1, "instruction": "Call 911 immediately." },
+            { "step": 2, "instruction": "Move the person to a cool place out of the sun." },
+            { "step": 3, "instruction": "Cool them quickly with cold wet cloths or ice packs at the neck, armpits, and groin." },
+            { "step": 4, "instruction": "Do not give fluids if they are not fully awake and able to swallow." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stroke",
+      "icon": "assets/icons/stroke.png",
+      "name": "Stroke",
+      "description": "Sudden loss of brain function",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "fast-check",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "F.A.S.T. Check",
+          "description": "How to recognize a stroke",
+          "steps": [
+            { "step": 1, "instruction": "Face: ask the person to smile and look for one side drooping." },
+            { "step": 2, "instruction": "Arms: ask them to raise both arms and watch for one drifting down." },
+            { "step": 3, "instruction": "Speech: listen for slurred or strange-sounding words." },
+            { "step": 4, "instruction": "Time: call 911 right away and note the time symptoms began." }
+          ]
+        },
+        {
+          "id": "while-waiting",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "While Waiting for Help",
+          "description": "Care after calling 911",
+          "steps": [
+            { "step": 1, "instruction": "Keep the person calm and lying down with the head slightly raised." },
+            { "step": 2, "instruction": "Do not give them food, drink, or medication." },
+            { "step": 3, "instruction": "Stay with them and watch their breathing until help arrives." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "seizure",
+      "icon": "assets/icons/seizure.png",
+      "name": "Seizure",
+      "description": "Sudden uncontrolled brain activity",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "during-seizure",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "During a Seizure",
+          "description": "Keeping the person safe",
+          "steps": [
+            { "step": 1, "instruction": "Move sharp or hard objects away from the person." },
+            { "step": 2, "instruction": "Place something soft under their head if possible." },
+            { "step": 3, "instruction": "Do not hold them down or put anything in their mouth." },
+            { "step": 4, "instruction": "Time the seizure from start to finish." }
+          ]
+        },
+        {
+          "id": "after-seizure",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "After a Seizure",
+          "description": "Care once the seizure ends",
+          "steps": [
+            { "step": 1, "instruction": "Roll them gently onto their side in the recovery position." },
+            { "step": 2, "instruction": "Stay with them and reassure them as they wake up." },
+            { "step": 3, "instruction": "Call 911 if it lasted longer than 5 minutes, repeats, or it is their first seizure." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cpr",
+      "icon": "assets/icons/cpr.png",
+      "name": "CPR",
+      "description": "Cardiopulmonary resuscitation",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "adult-cpr",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Adult CPR",
+          "description": "For unresponsive adults not breathing normally",
+          "steps": [
+            { "step": 1, "instruction": "Check the scene for safety, then check responsiveness and call 911." },
+            { "step": 2, "instruction": "Place the heel of one hand on the center of the chest and stack your other hand on top." },
+            { "step": 3, "instruction": "Push hard and fast: at least 2 inches deep, 100-120 compressions per minute." },
+            { "step": 4, "instruction": "Give 30 compressions followed by 2 rescue breaths and repeat." },
+            { "step": 5, "instruction": "Use an AED as soon as one is available and follow its prompts." }
+          ]
+        },
+        {
+          "id": "hands-only",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Hands-Only CPR",
+          "description": "If you are untrained or unable to give breaths",
+          "steps": [
+            { "step": 1, "instruction": "Call 911 first." },
+            { "step": 2, "instruction": "Place both hands on the center of the chest and push hard and fast." },
+            { "step": 3, "instruction": "Aim for 100-120 compressions per minute and let the chest rise fully between pushes." },
+            { "step": 4, "instruction": "Continue until help arrives or the person starts breathing on their own." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bugBites",
+      "icon": "assets/icons/bug-bite.png",
+      "name": "Bug Bites & Stings",
+      "description": "Insect, spider, and tick injuries",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "bee-sting",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Bee or Wasp Sting",
+          "description": "Painful sting with possible swelling",
+          "steps": [
+            { "step": 1, "instruction": "Scrape the stinger out with a flat-edged object like a credit card." },
+            { "step": 2, "instruction": "Wash the area with soap and water." },
+            { "step": 3, "instruction": "Apply a cold pack to reduce pain and swelling." },
+            { "step": 4, "instruction": "Watch closely for signs of a severe allergic reaction." }
+          ]
+        },
+        {
+          "id": "tick-bite",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Tick Bite",
+          "description": "A tick attached to the skin",
+          "steps": [
+            { "step": 1, "instruction": "Use fine-tipped tweezers to grasp the tick close to the skin." },
+            { "step": 2, "instruction": "Pull straight up with steady, even pressure until it releases." },
+            { "step": 3, "instruction": "Clean the area with soap and water or rubbing alcohol." },
+            { "step": 4, "instruction": "Watch for a rash or flu-like symptoms in the following weeks." }
+          ]
+        },
+        {
+          "id": "spider-bite",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Spider Bite",
+          "description": "Most spider bites are minor, but some are dangerous",
+          "steps": [
+            { "step": 1, "instruction": "Wash the bite with soap and water." },
+            { "step": 2, "instruction": "Apply a cold pack to reduce swelling." },
+            { "step": 3, "instruction": "Get emergency care if the spider may have been a black widow or brown recluse." },
+            { "step": 4, "instruction": "Watch for severe pain, muscle cramps, or trouble breathing." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shock",
+      "icon": "assets/icons/shock.png",
+      "name": "Shock",
+      "description": "Body not getting enough blood flow",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "recognize-shock",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Recognizing Shock",
+          "description": "Pale, cool skin with rapid pulse",
+          "steps": [
+            { "step": 1, "instruction": "Look for pale, cool, clammy skin and rapid breathing or heart rate." },
+            { "step": 2, "instruction": "Watch for confusion, weakness, or sudden sleepiness." },
+            { "step": 3, "instruction": "Treat any obvious cause first, such as severe bleeding or an allergic reaction." }
+          ]
+        },
+        {
+          "id": "treat-shock",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Treating Shock",
+          "description": "Care while waiting for help",
+          "steps": [
+            { "step": 1, "instruction": "Call 911 immediately." },
+            { "step": 2, "instruction": "Have the person lie flat on their back if no spinal injury is suspected." },
+            { "step": 3, "instruction": "Keep them warm with a blanket and reassure them to stay calm." },
+            { "step": 4, "instruction": "Do not give them food or drink." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dehydration",
+      "icon": "assets/icons/dehydration.png",
+      "name": "Dehydration",
+      "description": "Not enough fluids in the body",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "rehydrating",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Rehydrating",
+          "description": "Steps for mild to moderate dehydration",
+          "steps": [
+            { "step": 1, "instruction": "Move to a cool place and rest." },
+            { "step": 2, "instruction": "Sip water or an oral rehydration drink slowly and steadily." },
+            { "step": 3, "instruction": "Avoid alcohol, coffee, and very sugary drinks." },
+            { "step": 4, "instruction": "Get medical care if symptoms are severe or do not improve." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vomiting",
+      "icon": "assets/icons/vomiting.png",
+      "name": "Vomiting",
+      "description": "Care during and after vomiting",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "during-vomiting",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "During Vomiting",
+          "description": "Keeping the person safe",
+          "steps": [
+            { "step": 1, "instruction": "Help them lean forward or roll onto their side to protect the airway." },
+            { "step": 2, "instruction": "Stay with them and offer reassurance." },
+            { "step": 3, "instruction": "Do not give fluids until vomiting has stopped." }
+          ]
+        },
+        {
+          "id": "after-vomiting",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "After Vomiting",
+          "description": "Recovery and rehydration",
+          "steps": [
+            { "step": 1, "instruction": "Help them rinse their mouth with water." },
+            { "step": 2, "instruction": "Start with small sips of water or an oral rehydration drink." },
+            { "step": 3, "instruction": "Get medical help if there is blood in the vomit, severe pain, or signs of dehydration." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "brokenBone",
+      "icon": "assets/icons/broken-bone.png",
+      "name": "Broken Bone",
+      "description": "Suspected fractures",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "closed-fracture",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Closed Fracture",
+          "description": "Pain, swelling, or deformity without an open wound",
+          "steps": [
+            { "step": 1, "instruction": "Keep the injured area still and supported." },
+            { "step": 2, "instruction": "Apply a cold pack wrapped in a thin cloth to reduce swelling." },
+            { "step": 3, "instruction": "Do not try to straighten or push the bone back into place." },
+            { "step": 4, "instruction": "Get medical care to confirm and treat the injury." }
+          ]
+        },
+        {
+          "id": "open-fracture",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Open Fracture",
+          "description": "Bone visible through a wound or breaking the skin",
+          "steps": [
+            { "step": 1, "instruction": "Call 911 immediately." },
+            { "step": 2, "instruction": "Control bleeding gently around the wound without pressing on the bone." },
+            { "step": 3, "instruction": "Cover the wound loosely with a clean dressing." },
+            { "step": 4, "instruction": "Keep the area still and treat for shock if needed." }
+          ]
+        },
+        {
+          "id": "spine-or-neck",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Spine or Neck Injury",
+          "description": "Suspected back, neck, or head injury",
+          "steps": [
+            { "step": 1, "instruction": "Call 911 right away and do not move the person." },
+            { "step": 2, "instruction": "Support their head and neck in the position you found them." },
+            { "step": 3, "instruction": "Only move them if they are in immediate danger from fire or other hazards." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "allergies",
+      "icon": "assets/icons/allergies.png",
+      "name": "Allergies",
+      "description": "Mild reactions and anaphylaxis",
+      "progress": 0,
+      "topics": [
+        {
+          "id": "mild-reaction",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Mild Reaction",
+          "description": "Itchy skin, sneezing, or small rash",
+          "steps": [
+            { "step": 1, "instruction": "Move the person away from the suspected trigger." },
+            { "step": 2, "instruction": "Wash any contact area with soap and water." },
+            { "step": 3, "instruction": "Consider an over-the-counter antihistamine if appropriate for them." },
+            { "step": 4, "instruction": "Watch closely for any sign that symptoms are getting worse." }
+          ]
+        },
+        {
+          "id": "anaphylaxis",
+          "icon": "assets/icons/blooddrop.png",
+          "name": "Anaphylaxis",
+          "description": "Severe, life-threatening allergic reaction",
+          "steps": [
+            { "step": 1, "instruction": "Call 911 immediately." },
+            { "step": 2, "instruction": "Help the person use their epinephrine auto-injector in the outer thigh." },
+            { "step": 3, "instruction": "Have them lie flat with legs raised, unless this makes breathing harder." },
+            { "step": 4, "instruction": "Be ready to begin CPR if they stop breathing normally." }
+          ]
+        }
+      ]
+    }
+  ]
 }

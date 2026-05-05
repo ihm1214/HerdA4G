@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:a4g/services/primary_service.dart';
 //TriviaApp structure inspired by : https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html
 class TriviaApp extends StatelessWidget {
   final String categoryId;
@@ -73,11 +75,18 @@ class TriviaScreen extends StatefulWidget {
 }
 
 class _TriviaScreenState extends State<TriviaScreen> {
+  final FirstAidService _service = FirstAidService();
   int _questionIndex = 0;
   int? _selectedAnswer;
+  final Map<int, int> _selectedAnswersByQuestion = {};
+  final Map<int, bool> _questionResults = {};
   List<TriviaQuestion> _questions = [];
   bool _loading = true;
   String? _error;
+
+  String get _sessionIndexKey => 'trivia_${widget.category}_index';
+  String get _sessionResultsKey => 'trivia_${widget.category}_results';
+  String get _sessionAnswersKey => 'trivia_${widget.category}_answers';
 
   TriviaQuestion get _current => _questions[_questionIndex];
   bool get _answered => _selectedAnswer != null;
@@ -89,7 +98,63 @@ class _TriviaScreenState extends State<TriviaScreen> {
     _loadQuestions();
   }
   //Loading assets in loadQuestions inspired by: https://docs.flutter.dev/ui/assets/assets-and-images
-Future<void> _loadQuestions() async {
+  Future<void> _saveSession() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_sessionIndexKey, _questionIndex);
+    await prefs.setString(_sessionResultsKey, jsonEncode(_questionResults));
+    await prefs.setString(
+      _sessionAnswersKey,
+      jsonEncode(_selectedAnswersByQuestion),
+    );
+  }
+
+  Future<void> _clearSession() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_sessionIndexKey);
+    await prefs.remove(_sessionResultsKey);
+    await prefs.remove(_sessionAnswersKey);
+  }
+
+  Map<int, int> _decodeIntMap(String? encoded) {
+    if (encoded == null || encoded.isEmpty) {
+      return <int, int>{};
+    }
+
+    final decoded = jsonDecode(encoded);
+    if (decoded is! Map) {
+      return <int, int>{};
+    }
+
+    return decoded.map<int, int>((key, value) {
+      return MapEntry(int.parse(key.toString()), value as int);
+    });
+  }
+
+  Map<int, bool> _decodeBoolMap(String? encoded) {
+    if (encoded == null || encoded.isEmpty) {
+      return <int, bool>{};
+    }
+
+    final decoded = jsonDecode(encoded);
+    if (decoded is! Map) {
+      return <int, bool>{};
+    }
+
+    return decoded.map<int, bool>((key, value) {
+      return MapEntry(int.parse(key.toString()), value as bool);
+    });
+  }
+
+  void _syncStoredProgress() {
+    final correctAnswers = _questionResults.values.where((value) => value).length;
+    _service.setCategoryQuizProgress(
+      categoryId: widget.category,
+      correctAnswers: correctAnswers,
+      totalQuestions: _questions.length,
+    );
+  }
+  
+  Future<void> _loadQuestions() async {
   try {
     final raw = await DefaultAssetBundle.of(context)
         .loadString('assets/data/questions.json');
@@ -117,10 +182,29 @@ Future<void> _loadQuestions() async {
         .map((e) => TriviaQuestion.fromJson(e as Map<String, dynamic>))
         .toList();
 
+    final prefs = await SharedPreferences.getInstance();
+    final savedIndex = prefs.getInt(_sessionIndexKey) ?? 0;
+    final savedAnswers = _decodeIntMap(prefs.getString(_sessionAnswersKey));
+    final savedResults = _decodeBoolMap(prefs.getString(_sessionResultsKey));
+
+    final restoredIndex = loaded.isEmpty
+        ? 0
+        : savedIndex.clamp(0, loaded.length - 1).toInt();
+
     setState(() {
       _questions = loaded;
+      _questionIndex = restoredIndex;
+      _selectedAnswersByQuestion
+        ..clear()
+        ..addAll(savedAnswers);
+      _questionResults
+        ..clear()
+        ..addAll(savedResults);
+      _selectedAnswer = _selectedAnswersByQuestion[_questionIndex];
       _loading = false;
     });
+
+    _syncStoredProgress();
   } catch (e, stack) {
     debugPrint('Load error: $e\n$stack');
     setState(() {
@@ -132,15 +216,24 @@ Future<void> _loadQuestions() async {
 
   void _pickAnswer(int index) {
     if (_answered) return;
-    setState(() => _selectedAnswer = index);
+    setState(() {
+      _selectedAnswer = index;
+      _selectedAnswersByQuestion[_questionIndex] = index;
+      _questionResults[_questionIndex] = index == _current.correctIndex;
+    });
+
+    _syncStoredProgress();
+    _saveSession();
   }
 
   void _goNext() {
     if (!_isLast) {
       setState(() {
         _questionIndex++;
-        _selectedAnswer = null;
+        _selectedAnswer = _selectedAnswersByQuestion[_questionIndex];
       });
+
+      _saveSession();
     }
   }
 
@@ -148,8 +241,10 @@ Future<void> _loadQuestions() async {
     if (_questionIndex > 0) {
       setState(() {
         _questionIndex--;
-        _selectedAnswer = null;
+        _selectedAnswer = _selectedAnswersByQuestion[_questionIndex];
       });
+
+      _saveSession();
     }
   }
 
@@ -448,6 +543,7 @@ Future<void> _loadQuestions() async {
                 ]
               : [],
         ),
+        
         child: Padding(
           padding:
               const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -512,7 +608,8 @@ Future<void> _loadQuestions() async {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: _isLast
-            ? () {
+            ? () async {
+                await _clearSession();
                 Navigator.of(context, rootNavigator: true).pop();
               }
             : _goNext,

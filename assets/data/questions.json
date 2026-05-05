@@ -1,240 +1,1174 @@
-    // INFORMATION GATHERED FROM AMERICAN RED CROSS
-    
-    {
-        "Questions": [
-            {
-                "id": "cuts",
-                "items": [
-                    {
-                        "question": "What is the FIRST step in treating a cut?",
-                        "answers": [
-                            "Apply ointment",
-                            "Clean the wound",
-                            "Apply direct pressure",
-                            "Elevate the limb"
-                        ],
-                        "correctAnswer": "Clean the wound"
-                    },
-                    {
-                        "question": ". If blood soaks through a bandage, what should you do?",
-                        "answers": [
-                            "Remove it and replace it",
-                            "Add more bandages on top",
-                            "Stop applying pressure",
-                            "Wash the wound again"
-                        ],
-                        "correctAnswer": "Add more bandages on top"
-                    },
-                    {
-                        "question": "Which of the following is BEST for cleaning a minor cut?",
-                        "answers": [
-                            "Hydrogen peroxide",
-                            "Alcohol",
-                            "Clean running water",
-                            "Soap poured directly inside"
-                        ],
-                        "correctAnswer": "Clean running water"
-                    },
-                    {
-                        "question": "When should you seek medical attention for a cut?",
-                        "answers": [
-                            "Small scratch",
-                            "Bleeding stops quickly",
-                            "Deep or won’t stop bleeding",
-                            "Slight redness"
-                        ],
-                        "correctAnswer": "Deep or won’t stop bleeding"
-                    },
-                    {
-                        "question": "What is a sign of infection?",
-                        "answers": [
-                            "Slight pain immediately",
-                            "Clear fluid",
-                            "Redness and swelling",
-                            "Dry skin"
-                        ],
-                        "correctAnswer": "Redness and swelling"
-                    },
-                    {
-                        "question": "When should you seek medical attention for a cut?",
-                        "answers": [
-                            "The cut is deep or won't stop bleeding",
-                            "Signs of infection appear",
-                            "It was caused by something rusty or dirty",
-                            "All of the above"
-                        ],
-                        "correctAnswer": "All of the above"
-                    }
-                ]
-            },
-            {
-                "id": "burns",
-                "items": [
-                    {
-                        "question": "When should you seek medical care for burns?",
-                        "answers": [
-                            "The burn affects the face or respiratory tract",
-                            "The victim has a third degree burn",
-                            "The burn affects more than one body part or more than 15% of the body",
-                            "All of the above"
-                        ],
-                        "correctAnswer": "All of the above"
-                    },
-                    {
-                        "question": "How should you treat mild burns?",
-                        "answers": [
-                            "Flush the area with large amounts of cool water",
-                            "Apply ointment",
-                            "Goon",
-                            "Goon"
-                        ],
-                        "correctAnswer": "Flush the area with large amounts of cool water"
-                    },
-                    {
-                        "question": "What should you do after cooling and cleaning a burn?",
-                        "answers": [
-                            "Apply a non-stick dressing to the burn site",
-                            "Goon",
-                            "Goon",
-                            "Goon"
-                        ],
-                        "correctAnswer": "Apply a non-stick dressing to the burn site"
-                    },
-                    {
-                        "question": "How should you treat blisters on a burn?",
-                        "answers": [
-                            "Do not break the blisters and wrap it in a sterile non-stick dressing",
-                            "Goon",
-                            "Goon",
-                            "Goon"
-                        ],
-                        "correctAnswer": "Do not break the blisters and wrap it in a sterile non-stick dressing"
-                    },
-                    {
-                        "question": "What are the signs of a 1st degree burn?",
-                        "answers": [
-                            "Only the top layer of skin is affected",
-                            "Mild swelling",
-                            "Redness, dry skin, or skin peeling",
-                            "All of the above"
-                        ],
-                        "correctAnswer": "All of the above"
-                    },
-                    {
-                        "question": "What are the signs of a second degree burn?",
-                        "answers": [
-                            "Blisters form",
-                            "The burn and skin look wet, shiny, or moist",
-                            "There is significant swelling around the burned area",
-                            "All of the above"
-                        ],
-                        "correctAnswer": "All of the above"
-                    },
-                    {
-                        "question": "What are the signs of a third degree burn?",
-                        "answers": [
-                            "Dry and charred skin, the area feeling very painful or not at all, and significant swelling",
-                            "Blisters forming and mild swelling",
-                            "Not very painful, skin is red and shiny or moist",
-                            "None of the above"
-                        ],
-                        "correctAnswer": "Dry and charred skin, the area feeling very painful or not at all, and significant swelling"
-                    },
-                    {
-                        "question": "What are the care steps for a severe burn?",
-                        "answers": [
-                            "Call 911 immediately and do not remove clothing stuck to the burn",
-                            "Apply cool, not cold, water for five minutes then gently dry",
-                            "If you can, elevate the burn above the heart and cover with a dressing",
-                            "All of the above, in this order"
-                        ],
-                        "correctAnswer": "All of the above, in this order"
-                    },
-                    {
-                        "question": "What are the care steps for a severe burn?",
-                        "answers": [
-                            "Call 911 immediately and do not remove clothing stuck to the burn",
-                            "Apply cool, not cold, water for five minutes then gently dry",
-                            "If you can, elevate the burn above the heart and cover with a dressing",
-                            "All of the above, in this order"
-                        ],
-                        "correctAnswer": "All of the above, in this order"
-                    }
-                ]
-            },
-            {
-                "id": "choking",
-                "items": [
-                    {
-                        "question": "What are signs of complete choking?",
-                        "answers": [
-                            "Being unable to cough, speak, or breath",
-                            "Hands clutching the throat",
-                            "Skin that becomes bluish or paler than normal",
-                            "All of the above"
-                        ],
-                        "correctAnswer": "All of the above"
-                    },
-                    {
-                        "question": "How can you reduce the risk of choking?",
-                        "answers": [
-                            "Chewing food well before swallowing",
-                            "Eating slowly and calmly",
-                            "Avoid talking and physical activity while chewing",
-                            "All of the above"
-                        ],
-                        "correctAnswer": "All of the above"
-                    },
-                    {
-                        "question": "How can you tell if someone is partially choking but not completely choking?",
-                        "answers": [
-                            "One or both hands are around their throat",
-                            "If they are coughing, wheezing, or gasping",
-                            "A look of panic"
-                        ],
-                        "correctAnswer": "If they are coughing, wheezing, or gasping"
-                    },
-                    {
-                        "question": "Why should someone who has suffered complete choking always seek medical attention?",
-                        "answers": [
-                            "The lodged object could have damaged the airway",
-                            "Back blows or abdominal thrusts could have caused damage",
-                            "A and B",
-                            "None of the above"
-                        ],
-                        "correctAnswer": "A and B"
-                    },
-                    {
-                        "question": "What should you do when a choking person becomes unresponsive?",
-                        "answers": [
-                            "Immediately begin CPR",
-                            "Goon",
-                            "Goon",
-                            "Goon"
-                        ],
-                        "correctAnswer": "Immediately begin CPR"
-                    },
-                    {
-                        "question": "Why should someone who has suffered complete choking always seek medical attention?",
-                        "answers": [
-                            "The lodged object could have damaged the airway",
-                            "Back blows or abdominal thrusts could have caused damage",
-                            "A and B",
-                            "None of the above"
-                        ],
-                        "correctAnswer": "A and B"
-                    },
-                    {
-                        "question": "What should you do when a choking person becomes unresponsive?",
-                        "answers": [
-                            "Immediately begin CPR",
-                            "Goon",
-                            "Goon",
-                            "Goon"
-                        ],
-                        "correctAnswer": "Immediately begin CPR"
-                    }
-                ]
-            }
-        ]
-    }
+{
+    "Questions": [
+        {
+            "id": "cuts",
+            "items": [
+                {
+                    "question": "What is the FIRST step in treating a cut?",
+                    "answers": [
+                        "Apply ointment",
+                        "Clean the wound",
+                        "Apply direct pressure",
+                        "Elevate the limb"
+                    ],
+                    "correctAnswer": "Clean the wound"
+                },
+                {
+                    "question": "If blood soaks through a bandage, what should you do?",
+                    "answers": [
+                        "Remove it and replace it",
+                        "Add more bandages on top",
+                        "Stop applying pressure",
+                        "Wash the wound again"
+                    ],
+                    "correctAnswer": "Add more bandages on top"
+                },
+                {
+                    "question": "Which of the following is BEST for cleaning a minor cut?",
+                    "answers": [
+                        "Hydrogen peroxide",
+                        "Alcohol",
+                        "Clean running water",
+                        "Soap poured directly inside"
+                    ],
+                    "correctAnswer": "Clean running water"
+                },
+                {
+                    "question": "When should you seek medical attention for a cut?",
+                    "answers": [
+                        "Small scratch",
+                        "Bleeding stops quickly",
+                        "Deep or won't stop bleeding",
+                        "Slight redness"
+                    ],
+                    "correctAnswer": "Deep or won't stop bleeding"
+                },
+                {
+                    "question": "What is a sign of infection?",
+                    "answers": [
+                        "Slight pain immediately",
+                        "Clear fluid",
+                        "Redness and swelling",
+                        "Dry skin"
+                    ],
+                    "correctAnswer": "Redness and swelling"
+                },
+                {
+                    "question": "When should you seek medical attention for a cut?",
+                    "answers": [
+                        "The cut is deep or won't stop bleeding",
+                        "Signs of infection appear",
+                        "It was caused by something rusty or dirty",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                }
+            ]
+        },
+        {
+            "id": "burns",
+            "items": [
+                {
+                    "question": "When should you seek medical care for burns?",
+                    "answers": [
+                        "The burn affects the face or respiratory tract",
+                        "The victim has a third degree burn",
+                        "The burn affects more than one body part or more than 15% of the body",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "How should you treat mild burns?",
+                    "answers": [
+                        "Flush the area with large amounts of cool water",
+                        "Apply butter or grease to soothe the skin",
+                        "Rub ice directly on the burn",
+                        "Cover it tightly with a wool cloth"
+                    ],
+                    "correctAnswer": "Flush the area with large amounts of cool water"
+                },
+                {
+                    "question": "What should you do after cooling and cleaning a burn?",
+                    "answers": [
+                        "Apply a non-stick dressing to the burn site",
+                        "Wrap it tightly with duct tape",
+                        "Leave it open and rub it with a towel",
+                        "Apply toothpaste to seal the area"
+                    ],
+                    "correctAnswer": "Apply a non-stick dressing to the burn site"
+                },
+                {
+                    "question": "How should you treat blisters on a burn?",
+                    "answers": [
+                        "Do not break the blisters and wrap them in a sterile non-stick dressing",
+                        "Pop the blisters with a sterilized needle",
+                        "Squeeze the blisters to drain the fluid",
+                        "Peel away the loose skin around the blister"
+                    ],
+                    "correctAnswer": "Do not break the blisters and wrap them in a sterile non-stick dressing"
+                },
+                {
+                    "question": "What are the signs of a 1st degree burn?",
+                    "answers": [
+                        "Only the top layer of skin is affected",
+                        "Mild swelling",
+                        "Redness, dry skin, or skin peeling",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What are the signs of a second degree burn?",
+                    "answers": [
+                        "Blisters form",
+                        "The burn and skin look wet, shiny, or moist",
+                        "There is significant swelling around the burned area",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What are the signs of a third degree burn?",
+                    "answers": [
+                        "Dry and charred skin, the area feeling very painful or not at all, and significant swelling",
+                        "Blisters forming and mild swelling",
+                        "Not very painful, skin is red and shiny or moist",
+                        "None of the above"
+                    ],
+                    "correctAnswer": "Dry and charred skin, the area feeling very painful or not at all, and significant swelling"
+                },
+                {
+                    "question": "What are the care steps for a severe burn?",
+                    "answers": [
+                        "Call 911 immediately and do not remove clothing stuck to the burn",
+                        "Apply cool, not cold, water for five minutes then gently dry",
+                        "If you can, elevate the burn above the heart and cover with a dressing",
+                        "All of the above, in this order"
+                    ],
+                    "correctAnswer": "All of the above, in this order"
+                }
+            ]
+        },
+        {
+            "id": "choking",
+            "items": [
+                {
+                    "question": "What are signs of complete choking?",
+                    "answers": [
+                        "Being unable to cough, speak, or breathe",
+                        "Hands clutching the throat",
+                        "Skin that becomes bluish or paler than normal",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "How can you reduce the risk of choking?",
+                    "answers": [
+                        "Chewing food well before swallowing",
+                        "Eating slowly and calmly",
+                        "Avoid talking and physical activity while chewing",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "How can you tell if someone is partially choking but not completely choking?",
+                    "answers": [
+                        "Both hands are around their throat",
+                        "They are coughing, wheezing, or gasping",
+                        "They have a look of panic",
+                        "Their skin has turned blue"
+                    ],
+                    "correctAnswer": "They are coughing, wheezing, or gasping"
+                },
+                {
+                    "question": "Why should someone who has suffered complete choking always seek medical attention?",
+                    "answers": [
+                        "The lodged object could have damaged the airway",
+                        "Back blows or abdominal thrusts could have caused damage",
+                        "A and B",
+                        "None of the above"
+                    ],
+                    "correctAnswer": "A and B"
+                },
+                {
+                    "question": "What should you do when a choking person becomes unresponsive?",
+                    "answers": [
+                        "Immediately begin CPR",
+                        "Pour water on their face to wake them",
+                        "Sit them upright in a chair and wait",
+                        "Continue back blows while they are on the ground"
+                    ],
+                    "correctAnswer": "Immediately begin CPR"
+                },
+                {
+                    "question": "What is the recommended technique for helping a conscious adult who is completely choking?",
+                    "answers": [
+                        "Only abdominal thrusts",
+                        "Only back blows",
+                        "Alternating sets of 5 back blows and 5 abdominal thrusts",
+                        "Shaking them by the shoulders"
+                    ],
+                    "correctAnswer": "Alternating sets of 5 back blows and 5 abdominal thrusts"
+                },
+                {
+                    "question": "What should you do FIRST if you see someone who appears to be choking but is coughing forcefully?",
+                    "answers": [
+                        "Begin abdominal thrusts immediately",
+                        "Encourage them to keep coughing",
+                        "Give them water to drink",
+                        "Lay them flat on their back"
+                    ],
+                    "correctAnswer": "Encourage them to keep coughing"
+                }
+            ]
+        },
+        {
+            "id": "frostbite",
+            "items": [
+                {
+                    "question": "What body parts are MOST at risk for frostbite?",
+                    "answers": [
+                        "The chest and back",
+                        "Fingers, toes, ears, nose, and cheeks",
+                        "The thighs and stomach",
+                        "The lower back"
+                    ],
+                    "correctAnswer": "Fingers, toes, ears, nose, and cheeks"
+                },
+                {
+                    "question": "Which of the following is an early sign of frostbite?",
+                    "answers": [
+                        "Skin that is warm and sweating",
+                        "Skin that is red, cold, and tingling or numb",
+                        "Bright pink skin with no other symptoms",
+                        "Skin that is itchy and dry"
+                    ],
+                    "correctAnswer": "Skin that is red, cold, and tingling or numb"
+                },
+                {
+                    "question": "What should you do FIRST when treating frostbite?",
+                    "answers": [
+                        "Rub the area vigorously to warm it",
+                        "Get the person to a warm place and out of the cold",
+                        "Apply ice to numb the pain",
+                        "Break any blisters that have formed"
+                    ],
+                    "correctAnswer": "Get the person to a warm place and out of the cold"
+                },
+                {
+                    "question": "How should you rewarm a frostbitten body part?",
+                    "answers": [
+                        "Soak it in hot water above 110°F",
+                        "Hold it directly over an open flame",
+                        "Soak it in warm (not hot) water around 100-105°F",
+                        "Rub it briskly with snow"
+                    ],
+                    "correctAnswer": "Soak it in warm (not hot) water around 100-105°F"
+                },
+                {
+                    "question": "Why should you NEVER rub or massage frostbitten skin?",
+                    "answers": [
+                        "It can cause further damage to the tissue",
+                        "It will make the area sweat",
+                        "It might tickle the person",
+                        "It will speed up rewarming too quickly"
+                    ],
+                    "correctAnswer": "It can cause further damage to the tissue"
+                },
+                {
+                    "question": "What should you do if there is a chance the frostbitten area might refreeze before reaching medical care?",
+                    "answers": [
+                        "Rewarm it anyway",
+                        "Do not rewarm the area",
+                        "Apply ice to keep it numb",
+                        "Wrap it tightly in plastic"
+                    ],
+                    "correctAnswer": "Do not rewarm the area"
+                },
+                {
+                    "question": "When should you seek emergency care for frostbite?",
+                    "answers": [
+                        "When the skin is hard, white, or waxy",
+                        "When blisters or blackened skin appear",
+                        "When numbness does not go away after rewarming",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                }
+            ]
+        },
+        {
+            "id": "hypothermia",
+            "items": [
+                {
+                    "question": "What is hypothermia?",
+                    "answers": [
+                        "A dangerously high body temperature",
+                        "A dangerously low body temperature",
+                        "An allergic skin reaction to cold",
+                        "A type of frostbite affecting the fingers only"
+                    ],
+                    "correctAnswer": "A dangerously low body temperature"
+                },
+                {
+                    "question": "Which of the following is a sign of hypothermia?",
+                    "answers": [
+                        "Uncontrollable shivering",
+                        "Confusion or slurred speech",
+                        "Drowsiness and loss of coordination",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What is the FIRST step in helping someone with hypothermia?",
+                    "answers": [
+                        "Give them a hot alcoholic drink",
+                        "Move them to a warm, dry place",
+                        "Have them run in place to warm up",
+                        "Put them in a hot bath right away"
+                    ],
+                    "correctAnswer": "Move them to a warm, dry place"
+                },
+                {
+                    "question": "What should you do with wet clothing on a hypothermia victim?",
+                    "answers": [
+                        "Leave it on for warmth",
+                        "Remove it and replace with dry clothing or blankets",
+                        "Add more wet layers on top",
+                        "Cut holes in it for ventilation"
+                    ],
+                    "correctAnswer": "Remove it and replace with dry clothing or blankets"
+                },
+                {
+                    "question": "Why should you NOT give an alcoholic drink to a hypothermia victim?",
+                    "answers": [
+                        "Alcohol causes the body to lose heat faster",
+                        "Alcohol tastes bad in the cold",
+                        "Alcohol thickens the blood",
+                        "Alcohol makes you shiver more"
+                    ],
+                    "correctAnswer": "Alcohol causes the body to lose heat faster"
+                },
+                {
+                    "question": "If the victim is conscious and able to swallow, what is best to give them?",
+                    "answers": [
+                        "An ice-cold drink",
+                        "A warm, sweet, non-alcoholic, non-caffeinated drink",
+                        "A cup of strong coffee",
+                        "Nothing at all, ever"
+                    ],
+                    "correctAnswer": "A warm, sweet, non-alcoholic, non-caffeinated drink"
+                },
+                {
+                    "question": "When should you call 911 for hypothermia?",
+                    "answers": [
+                        "If the victim is unconscious or not breathing normally",
+                        "If they are confused or unable to stop shivering",
+                        "If symptoms do not improve with warming",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                }
+            ]
+        },
+        {
+            "id": "heatExhaustion",
+            "items": [
+                {
+                    "question": "Which of the following is a sign of heat exhaustion?",
+                    "answers": [
+                        "Heavy sweating and pale, cool, clammy skin",
+                        "Hot, dry skin with no sweating",
+                        "Sudden inability to speak",
+                        "Bright red rash on the chest"
+                    ],
+                    "correctAnswer": "Heavy sweating and pale, cool, clammy skin"
+                },
+                {
+                    "question": "What should you do FIRST when someone shows signs of heat exhaustion?",
+                    "answers": [
+                        "Move them to a cool, shaded place",
+                        "Have them keep exercising to sweat it out",
+                        "Wrap them in heavy blankets",
+                        "Give them a hot drink"
+                    ],
+                    "correctAnswer": "Move them to a cool, shaded place"
+                },
+                {
+                    "question": "What is the BEST thing to give a conscious heat exhaustion victim to drink?",
+                    "answers": [
+                        "Coffee or energy drinks",
+                        "Cool water or a sports drink",
+                        "Hot tea",
+                        "Alcoholic beverages"
+                    ],
+                    "correctAnswer": "Cool water or a sports drink"
+                },
+                {
+                    "question": "How can you help cool someone with heat exhaustion?",
+                    "answers": [
+                        "Loosen tight clothing and apply cool, wet cloths",
+                        "Spray or sponge them with cool water",
+                        "Fan them to encourage evaporation",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "Which of the following are common symptoms of heat exhaustion?",
+                    "answers": [
+                        "Headache, dizziness, and weakness",
+                        "Nausea or vomiting",
+                        "Muscle cramps",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "When should heat exhaustion be treated as an emergency?",
+                    "answers": [
+                        "When symptoms last longer than 1 hour or get worse",
+                        "If the person becomes confused or loses consciousness",
+                        "If they cannot keep fluids down",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                }
+            ]
+        },
+        {
+            "id": "heatStroke",
+            "items": [
+                {
+                    "question": "What is heat stroke?",
+                    "answers": [
+                        "A mild reaction to warm weather",
+                        "A life-threatening condition where the body cannot cool itself",
+                        "A normal response to exercise",
+                        "A type of skin infection"
+                    ],
+                    "correctAnswer": "A life-threatening condition where the body cannot cool itself"
+                },
+                {
+                    "question": "Which of the following is a sign of heat stroke?",
+                    "answers": [
+                        "Hot, red skin that may be dry or moist",
+                        "Confusion, agitation, or loss of consciousness",
+                        "Very high body temperature",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What is the FIRST thing you should do if you suspect heat stroke?",
+                    "answers": [
+                        "Give them salt tablets",
+                        "Call 911 immediately",
+                        "Wait to see if they get better",
+                        "Have them sit in a hot tub"
+                    ],
+                    "correctAnswer": "Call 911 immediately"
+                },
+                {
+                    "question": "While waiting for emergency services, how should you cool a heat stroke victim?",
+                    "answers": [
+                        "Move them to a cool place and apply cold, wet cloths or ice packs to neck, armpits, and groin",
+                        "Cover them in heavy blankets",
+                        "Place them in direct sunlight",
+                        "Have them run to keep their heart rate up"
+                    ],
+                    "correctAnswer": "Move them to a cool place and apply cold, wet cloths or ice packs to neck, armpits, and groin"
+                },
+                {
+                    "question": "Should you give water to an unconscious heat stroke victim?",
+                    "answers": [
+                        "Yes, pour it down their throat",
+                        "No, never give fluids to an unconscious person",
+                        "Only if they are breathing",
+                        "Only with ice cubes"
+                    ],
+                    "correctAnswer": "No, never give fluids to an unconscious person"
+                },
+                {
+                    "question": "What is the main difference between heat exhaustion and heat stroke?",
+                    "answers": [
+                        "Heat stroke is more dangerous and often involves altered mental state",
+                        "There is no difference",
+                        "Heat exhaustion only happens at night",
+                        "Heat stroke only affects children"
+                    ],
+                    "correctAnswer": "Heat stroke is more dangerous and often involves altered mental state"
+                }
+            ]
+        },
+        {
+            "id": "stroke",
+            "items": [
+                {
+                    "question": "What does the F in F.A.S.T. stand for when checking for a stroke?",
+                    "answers": [
+                        "Feet swelling",
+                        "Face drooping",
+                        "Fever",
+                        "Fast heartbeat"
+                    ],
+                    "correctAnswer": "Face drooping"
+                },
+                {
+                    "question": "What does the A in F.A.S.T. stand for?",
+                    "answers": [
+                        "Arm weakness",
+                        "Allergy",
+                        "Anxiety",
+                        "Appetite loss"
+                    ],
+                    "correctAnswer": "Arm weakness"
+                },
+                {
+                    "question": "What does the S in F.A.S.T. stand for?",
+                    "answers": [
+                        "Sleeping",
+                        "Speech difficulty",
+                        "Sweating",
+                        "Stomach pain"
+                    ],
+                    "correctAnswer": "Speech difficulty"
+                },
+                {
+                    "question": "What does the T in F.A.S.T. stand for?",
+                    "answers": [
+                        "Take an aspirin",
+                        "Tell a friend",
+                        "Time to call 911",
+                        "Take their temperature"
+                    ],
+                    "correctAnswer": "Time to call 911"
+                },
+                {
+                    "question": "What should you do if you suspect someone is having a stroke?",
+                    "answers": [
+                        "Give them food and water immediately",
+                        "Call 911 right away and note the time symptoms began",
+                        "Have them lie down and sleep it off",
+                        "Drive them yourself only if it's quicker"
+                    ],
+                    "correctAnswer": "Call 911 right away and note the time symptoms began"
+                },
+                {
+                    "question": "Why is it important to note the time stroke symptoms began?",
+                    "answers": [
+                        "Treatment options may depend on how long ago symptoms started",
+                        "It helps decide if you should sleep",
+                        "It is needed for billing only",
+                        "It is not actually important"
+                    ],
+                    "correctAnswer": "Treatment options may depend on how long ago symptoms started"
+                },
+                {
+                    "question": "Which of the following is also a sign of a stroke?",
+                    "answers": [
+                        "Sudden severe headache with no known cause",
+                        "Sudden trouble seeing in one or both eyes",
+                        "Sudden trouble walking, dizziness, or loss of balance",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                }
+            ]
+        },
+        {
+            "id": "seizure",
+            "items": [
+                {
+                    "question": "What should you do FIRST when someone is having a seizure?",
+                    "answers": [
+                        "Hold them down to stop the shaking",
+                        "Move objects away from them and protect their head",
+                        "Put something in their mouth",
+                        "Pour water on their face"
+                    ],
+                    "correctAnswer": "Move objects away from them and protect their head"
+                },
+                {
+                    "question": "Should you put something in the mouth of someone having a seizure?",
+                    "answers": [
+                        "Yes, a wallet to bite on",
+                        "Yes, a spoon to hold the tongue",
+                        "No, never put anything in their mouth",
+                        "Only soft food"
+                    ],
+                    "correctAnswer": "No, never put anything in their mouth"
+                },
+                {
+                    "question": "After the seizure has stopped, how should you position the person if they are unresponsive but breathing?",
+                    "answers": [
+                        "Flat on their back with pillows under their head",
+                        "On their side in the recovery position",
+                        "Sitting upright in a chair",
+                        "Standing up to walk it off"
+                    ],
+                    "correctAnswer": "On their side in the recovery position"
+                },
+                {
+                    "question": "When should you call 911 for a seizure?",
+                    "answers": [
+                        "If the seizure lasts longer than 5 minutes",
+                        "If another seizure happens right after",
+                        "If the person is injured, pregnant, or has no history of seizures",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "Should you try to restrain someone who is having a seizure?",
+                    "answers": [
+                        "Yes, hold them tightly until it stops",
+                        "No, never try to restrain their movements",
+                        "Only if they are an adult",
+                        "Only if a doctor tells you to"
+                    ],
+                    "correctAnswer": "No, never try to restrain their movements"
+                },
+                {
+                    "question": "What should you do after a seizure ends?",
+                    "answers": [
+                        "Stay with the person, reassure them, and let them rest",
+                        "Force them to walk around",
+                        "Give them a large meal",
+                        "Wake them up with cold water"
+                    ],
+                    "correctAnswer": "Stay with the person, reassure them, and let them rest"
+                },
+                {
+                    "question": "What is a sign that someone is about to have a seizure or is currently having one?",
+                    "answers": [
+                        "Sudden loss of awareness or staring blankly",
+                        "Uncontrollable jerking of arms and legs",
+                        "Loss of consciousness",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                }
+            ]
+        },
+        {
+            "id": "cpr",
+            "items": [
+                {
+                    "question": "What should you do FIRST before starting CPR?",
+                    "answers": [
+                        "Begin chest compressions right away",
+                        "Check the scene for safety, then check responsiveness and call 911",
+                        "Give two rescue breaths first",
+                        "Give the person water"
+                    ],
+                    "correctAnswer": "Check the scene for safety, then check responsiveness and call 911"
+                },
+                {
+                    "question": "Where should you place your hands for chest compressions on an adult?",
+                    "answers": [
+                        "On the stomach",
+                        "On the center of the chest, on the lower half of the breastbone",
+                        "On the left side of the chest only",
+                        "On the throat"
+                    ],
+                    "correctAnswer": "On the center of the chest, on the lower half of the breastbone"
+                },
+                {
+                    "question": "How deep should chest compressions be on an adult?",
+                    "answers": [
+                        "About half an inch",
+                        "About 1 inch",
+                        "At least 2 inches",
+                        "At least 5 inches"
+                    ],
+                    "correctAnswer": "At least 2 inches"
+                },
+                {
+                    "question": "What is the correct rate for chest compressions?",
+                    "answers": [
+                        "About 60 per minute",
+                        "100 to 120 per minute",
+                        "About 200 per minute",
+                        "As fast as you can possibly go"
+                    ],
+                    "correctAnswer": "100 to 120 per minute"
+                },
+                {
+                    "question": "What is the standard CPR ratio of compressions to rescue breaths for an adult?",
+                    "answers": [
+                        "15 compressions to 2 breaths",
+                        "30 compressions to 2 breaths",
+                        "5 compressions to 1 breath",
+                        "50 compressions to 5 breaths"
+                    ],
+                    "correctAnswer": "30 compressions to 2 breaths"
+                },
+                {
+                    "question": "If you are untrained or unwilling to give rescue breaths, what should you do?",
+                    "answers": [
+                        "Do nothing and wait for help",
+                        "Perform hands-only CPR (continuous chest compressions)",
+                        "Only check the pulse",
+                        "Pour water on the person"
+                    ],
+                    "correctAnswer": "Perform hands-only CPR (continuous chest compressions)"
+                },
+                {
+                    "question": "When should you stop performing CPR?",
+                    "answers": [
+                        "When the person starts to breathe normally on their own",
+                        "When trained help arrives and takes over",
+                        "When you are too exhausted to continue",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What is an AED?",
+                    "answers": [
+                        "A device that measures blood pressure",
+                        "An automated external defibrillator that can shock the heart back into rhythm",
+                        "An emergency drug",
+                        "A type of bandage"
+                    ],
+                    "correctAnswer": "An automated external defibrillator that can shock the heart back into rhythm"
+                }
+            ]
+        },
+        {
+            "id": "bugBites",
+            "items": [
+                {
+                    "question": "What should you do FIRST after a bee sting?",
+                    "answers": [
+                        "Squeeze the stinger out with tweezers",
+                        "Scrape the stinger out with a flat-edged object like a credit card",
+                        "Leave the stinger in place",
+                        "Suck the venom out with your mouth"
+                    ],
+                    "correctAnswer": "Scrape the stinger out with a flat-edged object like a credit card"
+                },
+                {
+                    "question": "After removing a stinger, what should you do?",
+                    "answers": [
+                        "Wash the area with soap and water",
+                        "Apply ice or a cold pack to reduce swelling",
+                        "Watch for signs of an allergic reaction",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "Which of the following is a sign of a SEVERE allergic reaction to an insect bite or sting?",
+                    "answers": [
+                        "Trouble breathing or swallowing",
+                        "Swelling of the face, lips, or tongue",
+                        "Hives or widespread rash",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What should you do if someone has a severe allergic reaction to a sting?",
+                    "answers": [
+                        "Tell them to walk it off",
+                        "Call 911 immediately and help them use an epinephrine auto-injector if they have one",
+                        "Give them coffee",
+                        "Apply heat to the sting site"
+                    ],
+                    "correctAnswer": "Call 911 immediately and help them use an epinephrine auto-injector if they have one"
+                },
+                {
+                    "question": "How should you remove a tick that is attached to the skin?",
+                    "answers": [
+                        "Burn it with a match",
+                        "Use fine-tipped tweezers to grasp it close to the skin and pull straight up steadily",
+                        "Cover it in petroleum jelly to suffocate it",
+                        "Pinch it off with your fingers and twist"
+                    ],
+                    "correctAnswer": "Use fine-tipped tweezers to grasp it close to the skin and pull straight up steadily"
+                },
+                {
+                    "question": "After removing a tick, what should you do?",
+                    "answers": [
+                        "Clean the bite area with soap and water or rubbing alcohol",
+                        "Watch for a rash or flu-like symptoms in the following weeks",
+                        "Save the tick in a sealed container in case identification is needed",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "Which of the following can help relieve itching from a typical bug bite?",
+                    "answers": [
+                        "A cold pack",
+                        "Over-the-counter anti-itch cream",
+                        "An oral antihistamine",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                }
+            ]
+        },
+        {
+            "id": "shock",
+            "items": [
+                {
+                    "question": "What is shock?",
+                    "answers": [
+                        "Being scared or surprised",
+                        "A life-threatening condition where not enough blood and oxygen reach the body's organs",
+                        "An electrical injury",
+                        "A mild headache"
+                    ],
+                    "correctAnswer": "A life-threatening condition where not enough blood and oxygen reach the body's organs"
+                },
+                {
+                    "question": "Which of the following is a sign of shock?",
+                    "answers": [
+                        "Pale, cool, and clammy skin",
+                        "Rapid breathing and rapid pulse",
+                        "Confusion, weakness, or sleepiness",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What is the FIRST thing you should do if you suspect shock?",
+                    "answers": [
+                        "Give the person food",
+                        "Call 911 immediately",
+                        "Have them stand up and walk",
+                        "Splash cold water on their face"
+                    ],
+                    "correctAnswer": "Call 911 immediately"
+                },
+                {
+                    "question": "How should you position a conscious person who may be in shock (and has no suspected spinal injury)?",
+                    "answers": [
+                        "Sitting up in a chair",
+                        "Lying flat on their back",
+                        "Standing up",
+                        "Curled into a ball on their side"
+                    ],
+                    "correctAnswer": "Lying flat on their back"
+                },
+                {
+                    "question": "Should you give food or water to a person in shock?",
+                    "answers": [
+                        "Yes, give them a big meal",
+                        "No, do not give food or drink",
+                        "Yes, give them coffee",
+                        "Only ice cream"
+                    ],
+                    "correctAnswer": "No, do not give food or drink"
+                },
+                {
+                    "question": "What else can help someone who is in shock while waiting for help?",
+                    "answers": [
+                        "Keep them warm with a blanket",
+                        "Reassure them and keep them calm",
+                        "Control any obvious bleeding",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "Which of the following can cause shock?",
+                    "answers": [
+                        "Severe bleeding",
+                        "Severe allergic reaction",
+                        "Major burns or trauma",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                }
+            ]
+        },
+        {
+            "id": "dehydration",
+            "items": [
+                {
+                    "question": "Which of the following is an early sign of dehydration?",
+                    "answers": [
+                        "Thirst and dry mouth",
+                        "Dark yellow urine",
+                        "Headache or fatigue",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What is the BEST drink for treating mild dehydration?",
+                    "answers": [
+                        "Coffee",
+                        "Alcohol",
+                        "Water or an oral rehydration drink",
+                        "A sugary soda"
+                    ],
+                    "correctAnswer": "Water or an oral rehydration drink"
+                },
+                {
+                    "question": "Which of the following is a sign of SEVERE dehydration?",
+                    "answers": [
+                        "Confusion or fainting",
+                        "Very little or no urination",
+                        "Rapid heartbeat and rapid breathing",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "When should you seek medical care for dehydration?",
+                    "answers": [
+                        "If symptoms are severe or the person is very young, elderly, or ill",
+                        "If they cannot keep fluids down",
+                        "If they show signs of confusion or fainting",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "How can you help prevent dehydration in hot weather?",
+                    "answers": [
+                        "Drink water regularly even before feeling thirsty",
+                        "Take breaks in the shade or in air conditioning",
+                        "Avoid drinks high in alcohol or caffeine",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "Why are children and elderly people at higher risk of dehydration?",
+                    "answers": [
+                        "They lose fluids more easily and may not recognize or communicate thirst as well",
+                        "They drink more water than other people",
+                        "They sweat less than anyone else",
+                        "They never need to drink water"
+                    ],
+                    "correctAnswer": "They lose fluids more easily and may not recognize or communicate thirst as well"
+                }
+            ]
+        },
+        {
+            "id": "vomiting",
+            "items": [
+                {
+                    "question": "What position is SAFEST for someone who is vomiting and may be drowsy or unresponsive?",
+                    "answers": [
+                        "Flat on their back",
+                        "On their side in the recovery position",
+                        "Sitting upright in a tight seatbelt",
+                        "Hanging upside down"
+                    ],
+                    "correctAnswer": "On their side in the recovery position"
+                },
+                {
+                    "question": "After someone has stopped vomiting, what should you give them first?",
+                    "answers": [
+                        "A large greasy meal",
+                        "Small sips of water or an oral rehydration drink",
+                        "A strong cup of coffee",
+                        "Nothing for a full day"
+                    ],
+                    "correctAnswer": "Small sips of water or an oral rehydration drink"
+                },
+                {
+                    "question": "Which of the following is a sign that vomiting may be a medical emergency?",
+                    "answers": [
+                        "Vomit that contains blood or looks like coffee grounds",
+                        "Severe abdominal pain or a stiff neck",
+                        "Signs of severe dehydration or confusion",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "If a child is vomiting, when should you call a doctor?",
+                    "answers": [
+                        "If vomiting lasts more than a day or the child cannot keep fluids down",
+                        "If they show signs of dehydration",
+                        "If there is blood in the vomit or they have a high fever",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What should you do AFTER someone vomits?",
+                    "answers": [
+                        "Help them rinse their mouth with water",
+                        "Let them rest and avoid solid food at first",
+                        "Watch for signs of dehydration",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "Should you give an unconscious person something to drink after they have vomited?",
+                    "answers": [
+                        "Yes, pour water in their mouth",
+                        "No, never give fluids to an unconscious person",
+                        "Only milk",
+                        "Only ice cubes"
+                    ],
+                    "correctAnswer": "No, never give fluids to an unconscious person"
+                }
+            ]
+        },
+        {
+            "id": "brokenBone",
+            "items": [
+                {
+                    "question": "Which of the following is a sign of a broken bone?",
+                    "answers": [
+                        "Pain, swelling, and bruising",
+                        "Visible deformity or unnatural angle",
+                        "Inability to move or bear weight on the area",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What should you do FIRST if someone may have a broken bone?",
+                    "answers": [
+                        "Try to push the bone back into place",
+                        "Keep the injured area still and call for help if needed",
+                        "Have them walk on it to test it",
+                        "Massage the area to reduce swelling"
+                    ],
+                    "correctAnswer": "Keep the injured area still and call for help if needed"
+                },
+                {
+                    "question": "Should you try to straighten a broken bone yourself?",
+                    "answers": [
+                        "Yes, always",
+                        "No, do not try to realign or push a broken bone back in place",
+                        "Only if it is in the arm",
+                        "Only with another person helping"
+                    ],
+                    "correctAnswer": "No, do not try to realign or push a broken bone back in place"
+                },
+                {
+                    "question": "How can you help reduce swelling and pain from a possible fracture?",
+                    "answers": [
+                        "Apply a cold pack wrapped in a thin cloth",
+                        "Heat the area with a hot water bottle",
+                        "Soak the limb in hot water",
+                        "Rub the area firmly"
+                    ],
+                    "correctAnswer": "Apply a cold pack wrapped in a thin cloth"
+                },
+                {
+                    "question": "What is an OPEN fracture?",
+                    "answers": [
+                        "A bone that is bent but not broken",
+                        "A break where the bone breaks through the skin or a wound exposes the bone",
+                        "A small crack in the bone",
+                        "A dislocated joint"
+                    ],
+                    "correctAnswer": "A break where the bone breaks through the skin or a wound exposes the bone"
+                },
+                {
+                    "question": "What should you do for an open fracture?",
+                    "answers": [
+                        "Push the bone back inside",
+                        "Call 911, control bleeding gently around the wound, and keep the area still",
+                        "Wash the bone with hot water",
+                        "Wrap it tightly to push the bone back in"
+                    ],
+                    "correctAnswer": "Call 911, control bleeding gently around the wound, and keep the area still"
+                },
+                {
+                    "question": "When should you call 911 for a possible broken bone?",
+                    "answers": [
+                        "When the bone is sticking out of the skin",
+                        "When the injury is to the head, neck, back, hip, pelvis, or thigh",
+                        "When the person cannot move the limb or is in severe pain",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                }
+            ]
+        },
+        {
+            "id": "allergies",
+            "items": [
+                {
+                    "question": "Which of the following is a sign of a SEVERE allergic reaction (anaphylaxis)?",
+                    "answers": [
+                        "Trouble breathing or wheezing",
+                        "Swelling of the face, lips, or tongue",
+                        "Sudden drop in blood pressure or fainting",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "What is the FIRST thing you should do if someone is having a severe allergic reaction?",
+                    "answers": [
+                        "Give them water",
+                        "Call 911 immediately",
+                        "Have them lie face down",
+                        "Wait to see if they get better"
+                    ],
+                    "correctAnswer": "Call 911 immediately"
+                },
+                {
+                    "question": "What is an epinephrine auto-injector (such as an EpiPen) used for?",
+                    "answers": [
+                        "To stop a headache",
+                        "To treat severe allergic reactions",
+                        "To lower a fever",
+                        "To stop bleeding"
+                    ],
+                    "correctAnswer": "To treat severe allergic reactions"
+                },
+                {
+                    "question": "Where is an epinephrine auto-injector typically given?",
+                    "answers": [
+                        "Into the outer thigh muscle",
+                        "Into a vein in the arm",
+                        "Under the tongue",
+                        "On the skin of the face"
+                    ],
+                    "correctAnswer": "Into the outer thigh muscle"
+                },
+                {
+                    "question": "After using an epinephrine auto-injector, what should you do next?",
+                    "answers": [
+                        "Send the person home alone",
+                        "Call 911 (if not already called) because the person still needs medical care",
+                        "Have them eat a big meal",
+                        "Give them another injection right away no matter what"
+                    ],
+                    "correctAnswer": "Call 911 (if not already called) because the person still needs medical care"
+                },
+                {
+                    "question": "Which of the following can trigger a severe allergic reaction?",
+                    "answers": [
+                        "Foods like peanuts, tree nuts, or shellfish",
+                        "Insect stings",
+                        "Certain medications",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                },
+                {
+                    "question": "Which of the following is a sign of a MILD allergic reaction?",
+                    "answers": [
+                        "Itchy skin or a small rash",
+                        "Mild sneezing or a runny nose",
+                        "Watery eyes",
+                        "All of the above"
+                    ],
+                    "correctAnswer": "All of the above"
+                }
+            ]
+        }
+    ]
+}
