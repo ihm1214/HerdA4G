@@ -1,5 +1,6 @@
 import 'package:flutter_tts/flutter_tts.dart';
 
+// TTS singleton service pattern adapted from https://dart.dev/language/constructors#factory-constructors
 class TtsService {
   static final TtsService _instance = TtsService._internal();
   factory TtsService() => _instance;
@@ -9,7 +10,8 @@ class TtsService {
   bool _isSpeaking = false;
 
   bool get isSpeaking => _isSpeaking;
-
+  
+  // Step-by-step speech chaining adapted from https://pub.dev/packages/flutter_tts
   Future<void> speakSteps(List<String> instructions) async {
     await stop();
     _isSpeaking = true;

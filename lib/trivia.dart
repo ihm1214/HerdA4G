@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+//import 'package:audioplayers/audioplayers.dart';
+
 //TriviaApp structure inspired by : https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html
 class TriviaApp extends StatelessWidget {
   final String categoryId;
@@ -82,7 +84,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
   TriviaQuestion get _current => _questions[_questionIndex];
   bool get _answered => _selectedAnswer != null;
   bool get _isLast => _questionIndex == _questions.length - 1;
-
+  //final AudioPlayer _audioPlayer = AudioPlayer();
   @override
   void initState() {
     super.initState();
@@ -133,6 +135,11 @@ Future<void> _loadQuestions() async {
   void _pickAnswer(int index) {
     if (_answered) return;
     setState(() => _selectedAnswer = index);
+    
+  //   final isCorrect = index == _current.correctIndex;
+  //   _audioPlayer.play(
+  //   AssetSource(isCorrect ? 'sounds/correct.wav' : 'sounds/incorrect.wav'),
+  // );
   }
 
   void _goNext() {
@@ -537,33 +544,6 @@ Future<void> _loadQuestions() async {
     ),
   );
 }
-  // Widget _buildNextButton() {
-  //   return AnimatedOpacity(
-  //     opacity: _answered ? 1.0 : 0.0,
-  //     duration: const Duration(milliseconds: 300),
-  //     child: SizedBox(
-  //       width: double.infinity,
-  //       child: ElevatedButton(
-  //         onPressed: _isLast ? null : _goNext,
-  //         style: ElevatedButton.styleFrom(
-  //           backgroundColor: kRed,
-  //           foregroundColor: kWhite,
-  //           disabledBackgroundColor: kBorder,
-  //           disabledForegroundColor: kTextMuted,
-  //           padding: const EdgeInsets.symmetric(vertical: 14),
-  //           shape: RoundedRectangleBorder(
-  //               borderRadius: BorderRadius.circular(10)),
-  //           elevation: 0,
-  //         ),
-  //         child: Text(
-  //           _isLast ? 'Finished!' : 'Next Question',
-  //           style: const TextStyle(
-  //               fontSize: 16, fontWeight: FontWeight.w700),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   // Nav Bar inspired by: https://docs.flutter.dev/cookbook/navigation/navigation-basics
   //                  and https://api.flutter.dev/flutter/widgets/Navigator/pop.html

@@ -18,6 +18,7 @@ class _ModuleState extends State<Module> {
   bool _isSpeaking = false;
   int _currentStep = 0;
 
+// TTS completion handler pattern from https://pub.dev/packages/flutter_tts#handlers
   @override
   void initState() {
     super.initState();
