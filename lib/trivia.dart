@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:a4g/services/primary_service.dart';
+import 'services/primary_service.dart';
 //TriviaApp structure inspired by : https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html
 class TriviaApp extends StatelessWidget {
   final String categoryId;

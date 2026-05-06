@@ -17,7 +17,8 @@
             { "step": 2, "instruction": "Rinse the cut with clean running water to remove dirt and debris." },
             { "step": 3, "instruction": "Apply gentle pressure with clean gauze until bleeding stops." },
             { "step": 4, "instruction": "Cover the area with a sterile bandage and change it daily." }
-          ]
+          ],
+          "video": "https://www.youtube.com/watch?v=-K4qJ9xJ51g"
         },
         {
           "id": "deep",
