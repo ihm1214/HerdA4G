@@ -77,6 +77,7 @@ class AilmentTopic {
   final String description;
   final String id;
   final String icon;
+  final String? video;
 
   AilmentTopic({
     required this.steps,
@@ -84,6 +85,7 @@ class AilmentTopic {
     required this.description,
     required this.id,
     required this.icon,
+    this.video,
   });
 
   factory AilmentTopic.fromJson(Map<String, dynamic> json) {
@@ -95,6 +97,7 @@ class AilmentTopic {
       description: json['description'],
       id: json['id'],
       icon: json['icon'],
+      video: json['video'],
     );
   }
 }
