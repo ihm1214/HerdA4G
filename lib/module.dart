@@ -79,6 +79,32 @@ class _TopicVideoSectionState extends State<_TopicVideoSection> {
 
     final controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
 
+    try {
+      await controller.initialize();
+
+      if (!mounted) {
+        controller.dispose();
+        return;
+      }
+
+      setState(() {
+        _videoController = controller;
+        _isLoading = false;
+      });
+    } catch (_) {
+      await controller.dispose();
+
+      if (!mounted) {
+        return;
+      }
+
+      setState(() {
+        _isLoading = false;
+        _error = 'Could not load video for this topic.';
+      });
+    }
+  }
+
   @override
   void dispose() {
     _youtubeController?.close();
