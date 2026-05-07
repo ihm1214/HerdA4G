@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'model.dart';
@@ -6,7 +7,7 @@ import 'model.dart';
 // Initialization made with help from Flutter template
 class Module extends StatefulWidget {
   final AilmentTopic topic;
-  static const bool _showStepImages = false;
+  //static const bool _showStepImages = false;
 
   const Module({super.key, required this.topic});
 
@@ -15,6 +16,7 @@ class Module extends StatefulWidget {
 }
 
 class _ModuleState extends State<Module> {
+  bool _showStepImages = true;
   final FlutterTts _tts = FlutterTts();
   bool _isSpeaking = false;
   int _currentStep = 0;
@@ -64,17 +66,21 @@ class _ModuleState extends State<Module> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( backgroundColor: const Color.fromARGB(255, 250, 183, 178),title: Text(topic.name)),
+      appBar: AppBar( backgroundColor: const Color.fromARGB(255, 250, 183, 178),title: Text(widget.topic.name)),
+      //appBar: AppBar( backgroundColor: const Color.fromARGB(255, 250, 183, 178),title: Text(topic.name)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          for (final step in topic.steps)
+          for (final step in widget.topic.steps)
+          //for (final step in topic.steps)
             _StepCard(
               step: step,
               showImage: _showStepImages,
             ),
-          if (topic.video != null && topic.video!.isNotEmpty)
-            _TopicVideoSection(videoUrl: topic.video!),
+          if (widget.topic.video != null && widget.topic.video!.isNotEmpty)
+          //if (topic.video != null && topic.video!.isNotEmpty)
+            _TopicVideoSection(videoUrl: widget.topic.video!),
+            //_TopicVideoSection(videoUrl: topic.video!),
         ],
       ),
     );
