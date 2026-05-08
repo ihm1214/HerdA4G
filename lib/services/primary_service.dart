@@ -36,6 +36,23 @@ class FirstAidService extends ChangeNotifier {
     return _categoryTotalQuestions[categoryId] ?? 0;
   }
 
+  void resetAllProgress() {
+    _categoryCorrectAnswers.clear();
+    _categoryTotalQuestions.clear();
+    _correctAnswers = 0;
+    _totalQuestions = 0;
+    notifyListeners();
+    _saveStoredQuizProgress();
+  }
+
+  CategoryQuizProgress getOverallProgress() {
+    return CategoryQuizProgress(
+      categoryId: 'overall',
+      correctAnswers: _correctAnswers,
+      totalQuestions: _totalQuestions,
+    );
+  }
+
   double getCategoryProgress(String categoryId) {
     final total = getCategoryTotalQuestions(categoryId);
     if (total == 0) return 0;

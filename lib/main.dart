@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'categories.dart';
 import 'services/primary_service.dart';
 import 'model.dart';
+import 'settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -92,10 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (_matchedIndex != null && _matchedIndex! >= 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        // Calculate cross-axis count same as GridView
         final width = MediaQuery.of(context).size.width;
         final crossAxisCount = width > 800 ? 4 : width > 600 ? 3 : 2;
-        const itemHeight = 160.0; // approximate card height + spacing
+        const itemHeight = 160.0;
         final row = (_matchedIndex! / crossAxisCount).floor();
         final offset = row * itemHeight;
         _scrollController.animateTo(
@@ -133,6 +133,19 @@ class _HomeScreenState extends State<HomeScreen> {
             const Text('First Aid Education'),
           ],
         ),
+        // ── Settings button ───────────────────────────────────────────
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            tooltip: 'Settings',
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => SettingsScreen(service: _service),
+              ),
+            ),
+          ),
+        ],
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
@@ -171,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
-                      // ── Search bar ────────────────────────────────────
+                      // ── Search bar ──────────────────────────────────
                       TextField(
                         controller: _searchController,
                         onChanged: _onSearchChanged,
@@ -198,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
-                      // ── No-match banner ───────────────────────────────
+                      // ── No-match banner ─────────────────────────────
                       if (_query.isNotEmpty && _matchedIndex == -1)
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
@@ -218,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       const SizedBox(height: 12),
 
-                      // ── Grid ──────────────────────────────────────────
+                      // ── Grid ────────────────────────────────────────
                       Expanded(
                         child: GridView.builder(
                           controller: _scrollController,
