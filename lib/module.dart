@@ -66,23 +66,71 @@ class _ModuleState extends State<Module> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( backgroundColor: const Color.fromARGB(255, 250, 183, 178),title: Text(widget.topic.name)),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 250, 183, 178),
+        title: Text(widget.topic.name),
+      ),
+      //appBar: AppBar( backgroundColor: const Color.fromARGB(255, 250, 183, 178),title: Text(widget.topic.name)),
       //appBar: AppBar( backgroundColor: const Color.fromARGB(255, 250, 183, 178),title: Text(topic.name)),
-      body: ListView(
+      body: Column(
+        children: [
+          Padding(
+           padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: _toggleSpeech,
+                icon: Icon(
+                  _isSpeaking ? Icons.stop_circle_outlined : Icons.volume_up_rounded,
+                  size: 30,
+                ),
+                label: Text(
+                  _isSpeaking ? 'Stop Reading' : 'Read Steps Aloud',
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _isSpeaking
+                      ? const Color.fromARGB(255, 220, 100, 90)
+                      : const Color.fromARGB(255, 250, 183, 178),
+                  foregroundColor: Colors.black87,
+                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 2,
+                ),
+              ),
+            ),
+          ),
+    Expanded(
+      child: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           for (final step in widget.topic.steps)
-          //for (final step in topic.steps)
-            _StepCard(
-              step: step,
-              showImage: _showStepImages,
-            ),
+            _StepCard(step: step, showImage: _showStepImages),
           if (widget.topic.video != null && widget.topic.video!.isNotEmpty)
-          //if (topic.video != null && topic.video!.isNotEmpty)
             _TopicVideoSection(videoUrl: widget.topic.video!),
-            //_TopicVideoSection(videoUrl: topic.video!),
         ],
       ),
+    ),
+  ],
+),
+      
+      // body: ListView(
+      //   padding: const EdgeInsets.all(16),
+      //   children: [
+      //     for (final step in widget.topic.steps)
+      //     //for (final step in topic.steps)
+      //       _StepCard(
+      //         step: step,
+      //         showImage: _showStepImages,
+      //       ),
+      //     if (widget.topic.video != null && widget.topic.video!.isNotEmpty)
+      //     //if (topic.video != null && topic.video!.isNotEmpty)
+      //       _TopicVideoSection(videoUrl: widget.topic.video!),
+      //       //_TopicVideoSection(videoUrl: topic.video!),
+      //   ],
+      // ),
     );
   }
 }

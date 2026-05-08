@@ -22,7 +22,7 @@ class TriviaApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Roboto',
       ),
-      home: TriviaScreen(category: categoryId), // ← uncomment and wire up
+      home: TriviaScreen(category: categoryId),
     );
   }
 }
