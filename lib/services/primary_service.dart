@@ -147,7 +147,6 @@ class FirstAidService extends ChangeNotifier {
       final map = entry as Map<String, dynamic>;
       final id = map['id']?.toString().trim() ?? '';
       final items = map['items'] as List<dynamic>? ?? [];
-      debugPrint('SEED: id="$id" items=${items.length}');
       // Always overwrite total from JSON — it's the source of truth
       _categoryTotalQuestions[id] = items.length;
     }

@@ -204,9 +204,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
       _loading = false;
     });
 
-    _syncStoredProgress();
+    if (savedResults.isNotEmpty) {
+      _syncStoredProgress();
+    }
   } catch (e, stack) {
-    debugPrint('Load error: $e\n$stack');
     setState(() {
       _error = 'Failed to load questions: $e';
       _loading = false;
