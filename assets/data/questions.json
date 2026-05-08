@@ -1169,6 +1169,156 @@
                     "correctAnswer": "All of the above"
                 }
             ]
-        }
-    ]
-}
+        },
+            {
+                "id": "sprains",
+                "items": [
+                    {
+                        "question": "What does the R.I.C.E. method stand for?",
+                        "answers": [
+                            "Run, Ice, Compress, Elevate",
+                            "Rest, Ice, Compress, Elevate",
+                            "Rest, Inject, Cool, Exercise",
+                            "Rub, Ice, Circulate, Examine"
+                        ],
+                        "correctAnswer": "Rest, Ice, Compress, Elevate"
+                    },
+                    {
+                        "question": "How long should you apply ice to a sprain at a time?",
+                        "answers": [
+                            "5 minutes",
+                            "30–45 minutes continuously",
+                            "15–20 minutes at a time",
+                            "Until the skin turns red"
+                        ],
+                        "correctAnswer": "15–20 minutes at a time"
+                    },
+                    {
+                        "question": "Which of the following is a sign of a sprain?",
+                        "answers": [
+                            "Pain, swelling, and bruising around a joint",
+                            "A visible bone sticking out",
+                            "Numbness spreading to the whole limb",
+                            "Fever and chills"
+                        ],
+                        "correctAnswer": "Pain, swelling, and bruising around a joint"
+                    },
+                    {
+                        "question": "Why should you elevate a sprained limb?",
+                        "answers": [
+                            "To make it easier to wrap",
+                            "To help reduce swelling by letting fluid drain away from the injury",
+                            "To increase blood flow to the area",
+                            "To keep the person comfortable while sleeping"
+                        ],
+                        "correctAnswer": "To help reduce swelling by letting fluid drain away from the injury"
+                    },
+                    {
+                        "question": "Should you apply ice directly to the skin on a sprain?",
+                        "answers": [
+                            "Yes, for maximum cooling",
+                            "No, always wrap ice in a cloth or towel first",
+                            "Only if the swelling is severe",
+                            "Only for the first 5 minutes"
+                        ],
+                        "correctAnswer": "No, always wrap ice in a cloth or towel first"
+                    },
+                    {
+                        "question": "When should you see a doctor for a sprain?",
+                        "answers": [
+                            "If you cannot bear any weight on the injured area",
+                            "If there is significant swelling, numbness, or the joint looks deformed",
+                            "If the pain does not improve after a few days",
+                            "All of the above"
+                        ],
+                        "correctAnswer": "All of the above"
+                    },
+                    {
+                        "question": "What is the difference between a sprain and a strain?",
+                        "answers": [
+                            "A sprain involves ligaments; a strain involves muscles or tendons",
+                            "A sprain only happens in the ankle; a strain only happens in the back",
+                            "There is no difference",
+                            "A strain is always more serious than a sprain"
+                        ],
+                        "correctAnswer": "A sprain involves ligaments; a strain involves muscles or tendons"
+                    }
+                ]
+            },
+            {
+                "id": "fever",
+                "items": [
+                    {
+                        "question": "At what temperature is a fever generally considered to begin in adults?",
+                        "answers": [
+                            "97°F (36.1°C)",
+                            "98.6°F (37°C)",
+                            "100.4°F (38°C)",
+                            "103°F (39.4°C)"
+                        ],
+                        "correctAnswer": "100.4°F (38°C)"
+                    },
+                    {
+                        "question": "Which of the following is a common sign of a fever?",
+                        "answers": [
+                            "Feeling hot and sweating, or chills and shivering",
+                            "Cold, clammy skin with no temperature change",
+                            "Bright blue fingernails",
+                            "Sudden loss of vision"
+                        ],
+                        "correctAnswer": "Feeling hot and sweating, or chills and shivering"
+                    },
+                    {
+                        "question": "What is the BEST way to help someone with a mild fever feel more comfortable?",
+                        "answers": [
+                            "Bundle them in heavy blankets to sweat it out",
+                            "Give them cool fluids and use a cool damp cloth on the forehead",
+                            "Have them exercise to raise their heart rate",
+                            "Place them in a cold ice bath immediately"
+                        ],
+                        "correctAnswer": "Give them cool fluids and use a cool damp cloth on the forehead"
+                    },
+                    {
+                        "question": "Why is it important to drink plenty of fluids during a fever?",
+                        "answers": [
+                            "Fever can cause dehydration through sweating",
+                            "Fluids make the fever go away faster",
+                            "It is not important",
+                            "Only cold drinks help with fever"
+                        ],
+                        "correctAnswer": "Fever can cause dehydration through sweating"
+                    },
+                    {
+                        "question": "When should you seek emergency care for a fever in an adult?",
+                        "answers": [
+                            "When the fever reaches 103°F (39.4°C) or higher, or is accompanied by a stiff neck, confusion, or difficulty breathing",
+                            "Any fever above 99°F",
+                            "Only if the person is shivering",
+                            "Never — fevers always go away on their own"
+                        ],
+                        "correctAnswer": "When the fever reaches 103°F (39.4°C) or higher, or is accompanied by a stiff neck, confusion, or difficulty breathing"
+                    },
+                    {
+                        "question": "When is a fever in an infant under 3 months considered a medical emergency?",
+                        "answers": [
+                            "Any fever at or above 100.4°F (38°C) requires immediate medical attention",
+                            "Only if the baby is crying",
+                            "Only if the fever is above 104°F",
+                            "Never — infants always have high temperatures"
+                        ],
+                        "correctAnswer": "Any fever at or above 100.4°F (38°C) requires immediate medical attention"
+                    },
+                    {
+                        "question": "Which of the following can you give an adult to help reduce a fever?",
+                        "answers": [
+                            "Over-the-counter medications such as acetaminophen or ibuprofen as directed",
+                            "Aspirin for children and adults alike",
+                            "Antibiotics to kill the fever",
+                            "Ice packs placed directly inside the mouth"
+                        ],
+                        "correctAnswer": "Over-the-counter medications such as acetaminophen or ibuprofen as directed"
+                    }
+                ]
+            }
+        ]
+    }

@@ -73,7 +73,11 @@ class FirstAidService extends ChangeNotifier {
     required int totalQuestions,
   }) {
     _categoryCorrectAnswers[categoryId] = correctAnswers;
-    _categoryTotalQuestions[categoryId] = totalQuestions;
+    // Only update total if the new value is meaningful, to avoid
+    // overwriting a seeded total with 0 during an edge-case load
+    if (totalQuestions > 0) {
+      _categoryTotalQuestions[categoryId] = totalQuestions;
+    }
     _syncOverallProgress();
     notifyListeners();
     _saveStoredQuizProgress();
@@ -121,8 +125,37 @@ class FirstAidService extends ChangeNotifier {
       ..addAll(_decodeIntMap(storedTotalQuestions));
 
     _syncOverallProgress();
+
+    // Seed question counts from JSON for any category not yet stored in prefs.
+    // This ensures the home screen shows "0/N" instead of "0/0" before the
+    // user has ever opened a quiz.
+    await loadCategoryQuestionCounts();
     notifyListeners();
   }
+
+  /// Reads questions.json and populates _categoryTotalQuestions for any
+  /// category that doesn't already have a stored total.
+ Future<void> loadCategoryQuestionCounts() async {
+  try {
+    final String raw =
+        await rootBundle.loadString('assets/data/questions.json');
+    final Map<String, dynamic> decoded = jsonDecode(raw);
+    final List<dynamic> allCategories =
+        decoded['Questions'] as List<dynamic>;
+
+    for (final entry in allCategories) {
+      final map = entry as Map<String, dynamic>;
+      final id = map['id']?.toString().trim() ?? '';
+      final items = map['items'] as List<dynamic>? ?? [];
+      debugPrint('SEED: id="$id" items=${items.length}');
+      // Always overwrite total from JSON — it's the source of truth
+      _categoryTotalQuestions[id] = items.length;
+    }
+
+    _syncOverallProgress();
+  } catch (e) {
+  }
+}
 
   Future<void> _saveStoredQuizProgress() async {
     final prefs = await SharedPreferences.getInstance();
@@ -143,7 +176,7 @@ class FirstAidService extends ChangeNotifier {
 
     final decoded = jsonDecode(encoded);
     if (decoded is! Map<String, dynamic>) {
-      return <String, int>{};
+      return <String, int>{}; 
     }
 
     return decoded.map((key, value) => MapEntry(key, value as int));
