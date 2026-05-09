@@ -7,11 +7,11 @@ import 'services/primary_service.dart';
 // trivia.dart is the quiz screen where users test their first aid knowledge
 // it loads questions from questions.json, tracks which ones were answered,
 // and saves progress so the quiz can be resumed if the app is closed mid-quiz
-// SharedPreferences docs: https://pub.dev/packages/shared_preferences
+// SharedPreferences inspired by: https://pub.dev/packages/shared_preferences
 
 //TriviaApp structure inspired by : https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html
 // TriviaApp is a mini MaterialApp wrapper just for the quiz screen
-// it gets its own theme (red color scheme) separate from the main app's pink theme
+// TriviaApp has own red theme separate from the main app's pink theme
 class TriviaApp extends StatelessWidget {
   final String categoryId;
   final String categoryName;
@@ -26,7 +26,7 @@ class TriviaApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFCC0000), // red seed for the quiz's color palette
+          seedColor: const Color(0xFFCC0000), // red color theme
           brightness: Brightness.light,
         ),
         useMaterial3: true,
@@ -38,7 +38,7 @@ class TriviaApp extends StatelessWidget {
 }
 
 //Global color scheme inspired by : https://api.flutter.dev/flutter/dart-ui/Color-class.html
-// these constants define the quiz screen's color palette so they're easy to reuse everywhere
+// these constants define the quiz screen's color palette for reuse everywhere in TriviaApp
 const Color kRed = Color(0xFFCC0000);
 const Color kRedLight = Color(0xFFFFEBEB);   // faint red for backgrounds
 const Color kRedDark = Color(0xFF990000);    // darker red for text on light backgrounds
@@ -53,7 +53,7 @@ const Color kTextMuted = Color(0xFF666666);  // grey for disabled/secondary text
 
 // Screen Setup inspired by: https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html
 class TriviaScreen extends StatefulWidget {
-  final String category; // e.g. "burns", "cuts" - matches IDs in questions.json
+  final String category; // matches IDs in questions.json
 
   const TriviaScreen({super.key, required this.category});
 
@@ -62,17 +62,23 @@ class TriviaScreen extends StatefulWidget {
 }
 
 class _TriviaScreenState extends State<TriviaScreen> {
-  final FirstAidService _service = FirstAidService(); // the singleton service for saving scores
-  int _questionIndex = 0;                              // which question is currently showing
-  int? _selectedAnswer;                                // index of the answer the user picked (null = not answered yet)
-  final Map<int, int> _selectedAnswersByQuestion = {}; // maps question index → selected answer index
-  final Map<int, bool> _questionResults = {};          // maps question index → true/false (correct/wrong)
-  List<TriviaQuestion> _questions = [];                // all questions for this category
+  final FirstAidService _service = FirstAidService(); // saves scores
+  int _questionIndex = 0;                              // index of displayed question
+  int? _selectedAnswer;                                // index of the user input answer (null = not answered)
+  final Map<int, int> _selectedAnswersByQuestion = {}; // maps question index -> selected answer index
+  final Map<int, bool> _questionResults = {};          // maps question index -> true/false (correct/wrong)
+  List<TriviaQuestion> _questions = [];                // all questions in category
   bool _loading = true;
   String? _error;
-
-  // SharedPreferences keys for saving quiz session state between app restarts
-  // each key includes the category name so different categories don't overwrite each other
+  //SharedPreferences key types inspired by: https://pub.dev/documentation/shared_preferences/latest/shared_preferences/SharedPreferences-class.html
+  //setInt/setString/setBool methods inspired by: https://pub.dev/documentation/shared_preferences/latest/shared_preferences/SharedPreferences/setInt.html
+  //prefs.remove() for clearing keys inspired by: https://pub.dev/documentation/shared_preferences/latest/shared_preferences/SharedPreferences/remove.html
+  //jsonEncode for serializing maps to strings inspired by: https://api.dart.dev/stable/dart-convert/jsonEncode.html
+  //jsonDecode for deserializing strings back to maps inspired by: https://api.dart.dev/stable/dart-convert/jsonDecode.html
+  //MapEntry used in map conversion inspired by: https://api.dart.dev/stable/dart-core/MapEntry-class.html
+  // SharedPreferences saves data from quiz session statse between app restarts
+  // each key includes a category name to differentiate data from different
+  //categories
   String get _sessionIndexKey => 'trivia_${widget.category}_index';
   String get _sessionResultsKey => 'trivia_${widget.category}_results';
   String get _sessionAnswersKey => 'trivia_${widget.category}_answers';
@@ -89,8 +95,14 @@ class _TriviaScreenState extends State<TriviaScreen> {
   }
 
   //Loading assets in loadQuestions inspired by: https://docs.flutter.dev/ui/assets/assets-and-images
-  // _saveSession writes the current question index and all answers to SharedPreferences
-  // called after every answer and navigation so progress survives the app being closed
+  //jsonDecode returning dynamic Map inspired by: https://api.dart.dev/stable/dart-convert/JsonCodec/decode.html
+  //casting dynamic JSON list to List<dynamic> inspired by: https://dart.dev/guides/language/type-system
+  //firstWhere with orElse to avoid StateError inspired by: https://api.dart.dev/stable/dart-core/Iterable/firstWhere.html
+  //.map().toList() for converting JSON list to model list inspired by: https://dart.dev/guides/libraries/library-tour#collections
+  //clamp() to keep restored index in bounds inspired by: https://api.dart.dev/stable/dart-core/num/clamp.html
+  //DefaultAssetBundle.of(context).loadString inspired by: https://api.flutter.dev/flutter/widgets/DefaultAssetBundle-class.html
+  //_saveSession writes the current question index and all answers to SharedPreferences
+  //so progress survives when app is closed
   Future<void> _saveSession() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_sessionIndexKey, _questionIndex);
@@ -102,8 +114,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // _clearSession wipes the saved session when the quiz is completed
-  // this ensures the quiz starts fresh next time but the category score stays saved
+  //_clearSession wipes the saved session when the quiz is completed
+  //this ensures the quiz starts fresh next time but the category score stays saved
   Future<void> _clearSession() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_sessionIndexKey);
@@ -111,8 +123,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
     await prefs.remove(_sessionAnswersKey);
   }
 
-  // _decodeIntMap converts a JSON string like '{"0":2,"1":3}' back into a Dart Map<int,int>
-  // used to restore the selected answers map from SharedPreferences
+  //_decodeIntMap converts a JSON string like '{"0":2,"1":3}' back into a Dart Map<int,int>
+  //used to restore the selected answers map from SharedPreferences
   Map<int, int> _decodeIntMap(String? encoded) {
     if (encoded == null || encoded.isEmpty) {
       return <int, int>{}; // nothing stored = return empty map
@@ -123,14 +135,14 @@ class _TriviaScreenState extends State<TriviaScreen> {
       return <int, int>{}; // malformed data = return empty map
     }
 
-    // JSON keys are always strings so we convert them back to ints
+    //JSON keys are always strings so we convert them back to ints
     return decoded.map<int, int>((key, value) {
       return MapEntry(int.parse(key.toString()), value as int);
     });
   }
 
-  // _decodeBoolMap converts a JSON string like '{"0":true,"1":false}' back into Map<int,bool>
-  // used to restore the correct/wrong results map from SharedPreferences
+  //_decodeBoolMap converts a JSON string like '{"0":true,"1":false}' back into Map<int,bool>
+  //used to restore the correct/wrong results map from SharedPreferences
   Map<int, bool> _decodeBoolMap(String? encoded) {
     if (encoded == null || encoded.isEmpty) {
       return <int, bool>{};
@@ -146,10 +158,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
     });
   }
 
-  // _syncStoredProgress counts up the correct answers from the session results
-  // and saves that count to the service so it shows on the home screen progress bar
+  //_syncStoredProgress counts up the correct answers from the session results
+  //and saves that count to the service so it shows on the home screen progress bar
   void _syncStoredProgress() {
-    // count how many values in _questionResults are true (correct)
+    //count how many values in _questionResults are true (correct)
     final correctAnswers =
         _questionResults.values.where((value) => value).length;
     _service.setCategoryQuizProgress(
@@ -159,8 +171,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // _loadQuestions reads questions.json, finds the right category block,
-  // then restores any saved session data from SharedPreferences
+  //_loadQuestions reads questions.json, finds the right category block,
+  //then restores any saved session data from SharedPreferences
   Future<void> _loadQuestions() async {
     try {
       // DefaultAssetBundle is how Flutter loads files from the assets/ folder
@@ -188,40 +200,40 @@ class _TriviaScreenState extends State<TriviaScreen> {
         return;
       }
 
-      // parse each item in the "items" list into a TriviaQuestion model
+      //parse each item in the "items" list into a TriviaQuestion model
       final items = categoryBlock['items'] as List<dynamic>;
       final loaded = items
           .map((e) => TriviaQuestion.fromJson(e as Map<String, dynamic>))
           .toList();
 
-      // read back any previously saved session state from SharedPreferences
+      //read back any previously saved session state from SharedPreferences
       final prefs = await SharedPreferences.getInstance();
       final savedIndex = prefs.getInt(_sessionIndexKey) ?? 0;
       final savedAnswers = _decodeIntMap(prefs.getString(_sessionAnswersKey));
       final savedResults = _decodeBoolMap(prefs.getString(_sessionResultsKey));
 
-      // clamp the saved index so we don't go out of bounds if question count changed
+      //clamp the saved index so we don't go out of bounds if question count changed
       final restoredIndex =
           loaded.isEmpty ? 0 : savedIndex.clamp(0, loaded.length - 1).toInt();
 
       setState(() {
         _questions = loaded;
         _questionIndex = restoredIndex;
-        // restore the answer selections so previously answered questions stay filled in
+        //restore the answer selections so previously answered questions stay filled in
         _selectedAnswersByQuestion
           ..clear()
           ..addAll(savedAnswers);
         _questionResults
           ..clear()
           ..addAll(savedResults);
-        // restore the selection indicator for whichever question we're resuming on
+        //restore the selection indicator for whichever question we're resuming on
         _selectedAnswer = _selectedAnswersByQuestion[_questionIndex];
         _loading = false;
       });
 
-      // only sync progress if the saved session actually has answers
-      // if savedResults is empty it means no answers were recorded yet,
-      // and we don't want to accidentally overwrite a real score with 0
+      //only sync progress if the saved session actually has answers
+      //if savedResults is empty it means no answers were recorded yet,
+      //and we don't want to accidentally overwrite a real score with 0
       if (savedResults.isNotEmpty) {
         _syncStoredProgress();
       }
@@ -233,27 +245,27 @@ class _TriviaScreenState extends State<TriviaScreen> {
     }
   }
 
-  // _pickAnswer is called when the user taps one of the four answer tiles
-  // it records the selection, marks it correct/wrong, then saves everything
+  //_pickAnswer is called when the user taps one of the four answer tiles
+  //it records the selection, marks it correct/wrong, then saves everything
   void _pickAnswer(int index) {
     if (_answered) return; // already answered - don't let them change it
     setState(() {
       _selectedAnswer = index;
       _selectedAnswersByQuestion[_questionIndex] = index; // remember which answer they picked
-      // record whether this question was answered correctly (true/false)
+      //record whether this question was answered correctly (true/false)
       _questionResults[_questionIndex] = index == _current.correctIndex;
     });
 
-    _syncStoredProgress(); // update the home screen progress bar immediately
-    _saveSession();        // persist to device storage so it survives app close
+    _syncStoredProgress(); //update the home screen progress bar immediately
+    _saveSession();        //persist to device storage so it survives app close
   }
 
-  // _goNext moves forward one question and restores that question's previous selection if any
+  //_goNext moves forward one question and restores that question's previous selection if any
   void _goNext() {
     if (!_isLast) {
       setState(() {
         _questionIndex++;
-        // if this question was already answered before, restore the selection so it shows
+        //if this question was already answered before, restore the selection so it shows
         _selectedAnswer = _selectedAnswersByQuestion[_questionIndex];
       });
 
@@ -261,7 +273,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
     }
   }
 
-  // _goPrev moves back one question and restores the previous answer selection
+  //_goPrev moves back one question and restores the previous answer selection
   void _goPrev() {
     if (_questionIndex > 0) {
       setState(() {
@@ -287,7 +299,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
       );
     }
 
-    // show an error screen if questions failed to load
+    //show an error screen if questions failed to load
     if (_error != null) {
       return Scaffold(
         backgroundColor: kBackground,
@@ -331,7 +343,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
     return Scaffold(
       backgroundColor: kBackground,
       //SafeArea inspired by: https://docs.flutter.dev/ui/adaptive-responsive/safearea-mediaquery
-      // SafeArea keeps content away from the phone's notch and home gesture bar
+      //SafeArea keeps content away from the phone's notch and home gesture bar
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
@@ -359,7 +371,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
   }
 
   // Header
-  // _buildHeader creates the red top bar with a back button, title, and "Q/Total" counter
+  //_buildHeader creates the red top bar with a back button, title, and "Q/Total" counter
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -375,8 +387,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
       ),
       child: Row(
         children: [
-          // Back Button - pops back to the categories screen
-          // rootNavigator: true makes sure it pops the TriviaApp MaterialApp wrapper too
+          //Back Button -> return to the categories screen
+          //rootNavigator: true makes sure it pops the TriviaApp MaterialApp wrapper too
           GestureDetector(
             onTap: () => Navigator.of(context, rootNavigator: true).pop(),
             child: Container(
@@ -399,8 +411,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
                 fontWeight: FontWeight.w700,
                 letterSpacing: 0.5),
           ),
-          const Spacer(), // pushes the counter pill to the right edge
-          // pill showing current question number out of total, like "2 / 5"
+          const Spacer(), //pushes the counter to the right edge
+          //showing current question number out of total, like "2 / 5"
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
@@ -418,8 +430,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // Question Block
-  // _buildQuestionCard shows the "Q1" badge and the question text in a white card
+  //Question Block
+  //_buildQuestionCard shows the "Q1" badge and the question text in a white card
   Widget _buildQuestionCard() {
     return Container(
       width: double.infinity,
@@ -438,7 +450,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // "Q1", "Q2" etc. badge in the top left of the card
+          //"Q1", "Q2" etc. badge in the top left of the card
           Container(
             margin: const EdgeInsets.only(top: 2),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -454,7 +466,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             ),
           ),
           const SizedBox(width: 14),
-          // the actual question text, expands to fill remaining width
+          //the actual question text, expands to fill remaining width
           Expanded(
             child: Text(
               _current.question,
@@ -471,16 +483,16 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // 2 x 2 question layout inspired by: https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html
-  // _buildAnswerGrid arranges the 4 answer tiles in a 2x2 grid on wide screens
-  // or a single column on narrow screens
+  //2 x 2 question layout inspired by: https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html
+  //_buildAnswerGrid arranges the 4 answer tiles in a 2x2 grid on wide screens
+  //or a single column on narrow screens
   Widget _buildAnswerGrid() {
     return Expanded(
       child: LayoutBuilder(
         builder: (context, constraints) {
           final wide = constraints.maxWidth > 500; // wide enough for 2 columns?
           if (wide) {
-            // 2x2 grid layout for tablets/wide phones
+            //2x2 grid layout for tablets/wide phones
             return Column(
               children: [
                 Expanded(
@@ -501,7 +513,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
               ],
             );
           } else {
-            // single column layout for narrow phones - all 4 tiles stacked vertically
+            //single column layout for narrow phones - all 4 tiles stacked vertically
             return Column(
               children: List.generate(
                 4,
@@ -639,10 +651,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // Next Button inspired by: https://docs.flutter.dev/cookbook/animation/opacity-animation
+  //Next Button inspired by: https://docs.flutter.dev/cookbook/animation/opacity-animation
   //                      and https://api.flutter.dev/flutter/material/ElevatedButton-class.html
-  // _buildNextButton shows "Next Question" or "Finished!" depending on whether this is the last question
-  // it fades in with AnimatedOpacity after an answer is selected
+  //_buildNextButton shows "Next Question" or "Finished!" depending on whether this is the last question
+  //it fades in with AnimatedOpacity after an answer is selected
   Widget _buildNextButton() {
     return AnimatedOpacity(
       opacity: _answered ? 1.0 : 0.0, // fade in when answered, invisible when not
@@ -652,14 +664,14 @@ class _TriviaScreenState extends State<TriviaScreen> {
         child: ElevatedButton(
           onPressed: _isLast
               ? () async {
-                  // on the last question: clear the session and go back
-                  // clearSession removes the in-progress save so next open starts fresh
+                  //on the last question: clear the session and go back
+                  //clearSession removes the in-progress save so next open starts fresh
                   await _clearSession();
                   Navigator.of(context, rootNavigator: true).pop();
                 }
-              : _goNext, // on any other question: just advance
+              : _goNext, //on any other question: just advance
           style: ElevatedButton.styleFrom(
-            backgroundColor: _isLast ? kGreen : kRed, // green on the final question
+            backgroundColor: _isLast ? kGreen : kRed, //green on the final question
             foregroundColor: kWhite,
             padding: const EdgeInsets.symmetric(vertical: 14),
             shape: RoundedRectangleBorder(
@@ -680,10 +692,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 
-  // Nav Bar inspired by: https://docs.flutter.dev/cookbook/navigation/navigation-basics
+  //Nav Bar inspired by: https://docs.flutter.dev/cookbook/navigation/navigation-basics
   //                  and https://api.flutter.dev/flutter/widgets/Navigator/pop.html
   //                  and https://docs.flutter.dev/ui/navigation
-  // _buildNavBar shows Prev/Next buttons and a row of animated dots showing the current position
+  //_buildNavBar shows Prev/Next buttons and a row of animated dots showing the current position
   Widget _buildNavBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -701,7 +713,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
             enabled: _questionIndex > 0, // disabled on the first question
             onTap: _goPrev,
           ),
-          // animated dot row - active question gets a wider pill, others get small circles
+          //animated dot row - active question gets a wider pill, others get small circles
           Row(
             children: List.generate(_questions.length, (i) {
               final active = i == _questionIndex;
@@ -751,7 +763,7 @@ class _NavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // grey color when disabled, red when enabled
+    //grey color when disabled, red when enabled
     final color = enabled ? kRed : kTextMuted.withOpacity(0.4);
     final kids = <Widget>[
       if (!reversed) ...[
@@ -767,11 +779,11 @@ class _NavButton extends StatelessWidget {
       ],
     ];
     return GestureDetector(
-      onTap: enabled ? onTap : null, // null = GestureDetector ignores taps
+      onTap: enabled ? onTap : null, //null = GestureDetector ignores taps
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          // light red background when enabled, transparent when disabled
+          //light red background when enabled, transparent when disabled
           color: enabled ? kRedLight : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(

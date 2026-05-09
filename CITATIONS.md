@@ -6,7 +6,11 @@ YouTube tutorials — Flutter model/JSON basics (iV8CObuvPAE), JSON linking (tgv
 
 ## AI REPORT
 
-Claude AI (Anthropic) — bug fixes, and refactoring throughout development
+Claude AI (Anthropic) — bug fixes throughout development & Finding information
+
+Prompts involved giving Claude the line of the error and asking it to explain why the error was used. This was only used between 5-7 times total. An example prompt would be, "Please explain why this line of code is producing an error and give a step by step solution on how to remove the error. import 'shared_preferences.dart';" the lines of code editted were never longer than 4 lines long.
+
+Claude was used to gather sources of information to be used for questions, steps, and videos. The prompt used was, "Please find me 4 relevant sources for X (topic) for questions, steps, and videos that can be used in an informational setting".
 
 ## SOURCES USED FOR VIDEOS & INFORMATION
 
