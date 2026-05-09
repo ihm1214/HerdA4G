@@ -10,7 +10,7 @@ class TtsService {
   bool _isSpeaking = false;
 
   bool get isSpeaking => _isSpeaking;
-  
+
   // Step-by-step speech chaining adapted from https://pub.dev/packages/flutter_tts
   Future<void> speakSteps(List<String> instructions) async {
     await stop();

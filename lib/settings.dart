@@ -91,7 +91,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   _ProgressStat(
                     label: 'Total Questions Answered',
-                    value: '${summary.correctAnswers}/${summary.totalQuestions}',
+                    value:
+                        '${summary.correctAnswers}/${summary.totalQuestions}',
                     icon: Icons.quiz_outlined,
                   ),
                   const Divider(height: 1),
@@ -105,7 +106,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           children: [
                             const Text(
                               'Overall completion',
-                              style: TextStyle(fontSize: 13, color: Colors.grey),
+                              style:
+                                  TextStyle(fontSize: 13, color: Colors.grey),
                             ),
                             Text(
                               '${(summary.progress * 100).toStringAsFixed(0)}%',

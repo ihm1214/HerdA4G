@@ -135,26 +135,24 @@ class FirstAidService extends ChangeNotifier {
 
   /// Reads questions.json and populates _categoryTotalQuestions for any
   /// category that doesn't already have a stored total.
- Future<void> loadCategoryQuestionCounts() async {
-  try {
-    final String raw =
-        await rootBundle.loadString('assets/data/questions.json');
-    final Map<String, dynamic> decoded = jsonDecode(raw);
-    final List<dynamic> allCategories =
-        decoded['Questions'] as List<dynamic>;
+  Future<void> loadCategoryQuestionCounts() async {
+    try {
+      final String raw =
+          await rootBundle.loadString('assets/data/questions.json');
+      final Map<String, dynamic> decoded = jsonDecode(raw);
+      final List<dynamic> allCategories = decoded['Questions'] as List<dynamic>;
 
-    for (final entry in allCategories) {
-      final map = entry as Map<String, dynamic>;
-      final id = map['id']?.toString().trim() ?? '';
-      final items = map['items'] as List<dynamic>? ?? [];
-      // Always overwrite total from JSON — it's the source of truth
-      _categoryTotalQuestions[id] = items.length;
-    }
+      for (final entry in allCategories) {
+        final map = entry as Map<String, dynamic>;
+        final id = map['id']?.toString().trim() ?? '';
+        final items = map['items'] as List<dynamic>? ?? [];
+        // Always overwrite total from JSON — it's the source of truth
+        _categoryTotalQuestions[id] = items.length;
+      }
 
-    _syncOverallProgress();
-  } catch (e) {
+      _syncOverallProgress();
+    } catch (e) {}
   }
-}
 
   Future<void> _saveStoredQuizProgress() async {
     final prefs = await SharedPreferences.getInstance();
@@ -175,7 +173,7 @@ class FirstAidService extends ChangeNotifier {
 
     final decoded = jsonDecode(encoded);
     if (decoded is! Map<String, dynamic>) {
-      return <String, int>{}; 
+      return <String, int>{};
     }
 
     return decoded.map((key, value) => MapEntry(key, value as int));
