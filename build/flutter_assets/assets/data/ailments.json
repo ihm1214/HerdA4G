@@ -18,7 +18,7 @@
             { "step": 3, "instruction": "Apply gentle pressure with clean gauze until bleeding stops." },
             { "step": 4, "instruction": "Cover the area with a sterile bandage and change it daily." }
           ],
-          "video": "https://www.youtube.com/watch?v=-K4qJ9xJ51g"
+          "video": "https://www.youtube.com/watch?v=4e7evinsfm0"
         },
         {
           "id": "deep",
@@ -30,7 +30,7 @@
             { "step": 2, "instruction": "Elevate the injured area if possible." },
             { "step": 3, "instruction": "If bleeding does not stop after 10 minutes, seek urgent medical care." }
           ],
-          "video": "https://www.youtube.com/watch?v=r_qNTFa13uQ"
+          "video": "https://www.youtube.com/watch?v=NxO5LvgqZe0"
         }
       ]
     },
@@ -51,7 +51,7 @@
             { "step": 2, "instruction": "Remove rings or tight items before swelling starts." },
             { "step": 3, "instruction": "Cover loosely with a clean non-stick dressing." }
           ],
-          "video": "https://www.youtube.com/watch?v=EaJmzB8YgS0"
+          "video": "https://www.youtube.com/watch?v=TLr2qsEhpC8"
         },
         {
           "id": "severe-burns",
@@ -63,7 +63,7 @@
             { "step": 2, "instruction": "Do not apply ice, butter, or ointments to the burned area." },
             { "step": 3, "instruction": "Cover with a clean cloth and monitor for shock." }
           ],
-          "video": "https://www.youtube.com/watch?v=TLr2qsEhpC8"
+          "video": "https://youtu.be/yOxtk35LiBE?si=WpKytGAM3wO2_mtS"
         }
       ]
     },
@@ -85,7 +85,7 @@
             { "step": 3, "instruction": "Use a compression wrap if it does not cause extra pain." },
             { "step": 4, "instruction": "Elevate the foot above heart level when possible." }
           ],
-          "video": "https://www.youtube.com/watch?v=3gOtKC_QDew"
+          "video": "https://www.youtube.com/watch?v=TLQcoCl2m5I"
         },
         {
           "id": "wrist",
@@ -119,7 +119,7 @@
             { "step": 3, "instruction": "Follow with five abdominal thrusts and repeat until the object clears." },
             { "step": 4, "instruction": "Call emergency services if the airway does not clear quickly." }
           ],
-          "video": "https://www.youtube.com/watch?v=UVNxP7K2ATE"
+          "video": "https://www.youtube.com/watch?v=XOTbjDGZ7wg"
         },
         {
           "id": "child",
@@ -131,7 +131,7 @@
             { "step": 2, "instruction": "Give age-appropriate back blows and thrusts if the airway is blocked." },
             { "step": 3, "instruction": "Call emergency services immediately if breathing is impaired." }
           ],
-          "video": "https://www.youtube.com/watch?v=3G_0YxMEViE"
+          "video": "https://www.youtube.com/watch?v=WxsQBvr7K7E"
         },
         {
           "id": "infant",
@@ -144,7 +144,7 @@
             { "step": 3, "instruction": "Turn the infant face-up and give five chest thrusts with two fingers." },
             { "step": 4, "instruction": "Call emergency services if the object does not clear quickly." }
           ],
-          "video": "https://www.youtube.com/watch?v=X9BtHyaYIaM"
+          "video": "https://www.youtube.com/watch?v=ShaNuST_58A"
         }
       ]
     },
@@ -233,7 +233,7 @@
             { "step": 3, "instruction": "If alert, give warm, sweet, non-alcoholic drinks." },
             { "step": 4, "instruction": "Keep them still and avoid rough handling." }
           ],
-          "video": "https://www.youtube.com/watch?v=HS-yhCsFKnI"
+          "video": "https://www.youtube.com/watch?v=DewzkBh2onc"
         },
         {
           "id": "severe-hypothermia",
@@ -246,7 +246,7 @@
             { "step": 3, "instruction": "Wrap them gently in blankets and keep them lying still." },
             { "step": 4, "instruction": "If they are not breathing normally, begin CPR." }
           ],
-          "video": "https://www.youtube.com/watch?v=DewzkBh2onc"
+          "video": "https://youtu.be/YjjSeiXwEbI?si=bvtxxGhdg5zUrYzX"
         }
       ]
     },
@@ -280,7 +280,7 @@
             { "step": 2, "instruction": "Get emergency care if the person becomes confused or faints." },
             { "step": 3, "instruction": "Treat as heat stroke if the skin becomes hot and the person stops sweating." }
           ],
-          "video": "https://www.youtube.com/watch?v=jvGC_dQJUtE"
+          "video": "https://www.youtube.com/watch?v=R6VdoV8dZRc"
         }
       ]
     },
@@ -324,7 +324,7 @@
             { "step": 3, "instruction": "Speech: listen for slurred or strange-sounding words." },
             { "step": 4, "instruction": "Time: call 911 right away and note the time symptoms began." }
           ],
-          "video": "https://www.youtube.com/watch?v=PhH9a0kIwmk"
+          "video": "https://www.youtube.com/watch?v=j8pvpdyGb7w"
         },
         {
           "id": "while-waiting",
@@ -348,29 +348,31 @@
       "progress": 0,
       "topics": [
         {
-          "id": "during-seizure",
+          "id": "adult-seizure",
           "icon": "assets/icons/seuizure.jpeg",
-          "name": "During a Seizure",
-          "description": "Keeping the person safe",
+          "name": "Adult Seizure",
+          "description": "Responding to a seizure in an adult",
           "steps": [
-            { "step": 1, "instruction": "Move sharp or hard objects away from the person." },
-            { "step": 2, "instruction": "Place something soft under their head if possible." },
-            { "step": 3, "instruction": "Do not hold them down or put anything in their mouth." },
-            { "step": 4, "instruction": "Time the seizure from start to finish." }
+            { "step": 1, "instruction": "Stay calm and clear the area of any sharp or hard objects." },
+            { "step": 2, "instruction": "Cushion their head with something soft." },
+            { "step": 3, "instruction": "Do not restrain them or put anything in their mouth." },
+            { "step": 4, "instruction": "Time the seizure from start to finish." },
+            { "step": 5, "instruction": "Call 911 if it lasts longer than 5 minutes, repeats, or the person is injured." }
           ],
           "video": "https://www.youtube.com/watch?v=Ovsw7tdneqE"
         },
         {
-          "id": "after-seizure",
+          "id": "seizure-recovery",
           "icon": "assets/icons/seuizure.jpeg",
-          "name": "After a Seizure",
+          "name": "Recovery",
           "description": "Care once the seizure ends",
           "steps": [
-            { "step": 1, "instruction": "Roll them gently onto their side in the recovery position." },
-            { "step": 2, "instruction": "Stay with them and reassure them as they wake up." },
-            { "step": 3, "instruction": "Call 911 if it lasted longer than 5 minutes, repeats, or it is their first seizure." }
+            { "step": 1, "instruction": "Once shaking stops, gently roll the person onto their side into the recovery position." },
+            { "step": 2, "instruction": "Stay with them and speak calmly until they are fully awake." },
+            { "step": 3, "instruction": "Check for any injuries that may have occurred during the seizure." },
+            { "step": 4, "instruction": "Call 911 if it lasted longer than 5 minutes, repeats, or it was their first known seizure." }
           ],
-          "video": "https://www.youtube.com/watch?v=0aV9NS0ogiM"
+          "video": "https://www.youtube.com/watch?v=dv3agW-DZ5I"
         }
       ]
     },
@@ -440,7 +442,8 @@
             { "step": 2, "instruction": "Pull straight up with steady, even pressure until it releases." },
             { "step": 3, "instruction": "Clean the area with soap and water or rubbing alcohol." },
             { "step": 4, "instruction": "Watch for a rash or flu-like symptoms in the following weeks." }
-          ]
+          ],
+          "video": "https://www.youtube.com/watch?v=5J9L-CDY9Q0"
         },
         {
           "id": "spider-bite",
@@ -452,7 +455,8 @@
             { "step": 2, "instruction": "Apply a cold pack to reduce swelling." },
             { "step": 3, "instruction": "Get emergency care if the spider may have been a black widow or brown recluse." },
             { "step": 4, "instruction": "Watch for severe pain, muscle cramps, or trouble breathing." }
-          ]
+          ],
+          "video": "https://www.youtube.com/watch?v=QQVYRvD55Uc&t=19s"
         }
       ]
     },
@@ -486,7 +490,7 @@
             { "step": 3, "instruction": "Keep them warm with a blanket and reassure them to stay calm." },
             { "step": 4, "instruction": "Do not give them food or drink." }
           ],
-          "video": "https://www.youtube.com/watch?v=r_qNTFa13uQ"
+          "video": "https://www.youtube.com/watch?v=61urGQrmeNM"
         }
       ]
     },
@@ -508,7 +512,7 @@
             { "step": 3, "instruction": "Avoid alcohol, coffee, and very sugary drinks." },
             { "step": 4, "instruction": "Get medical care if symptoms are severe or do not improve." }
           ],
-          "video": "https://www.youtube.com/watch?v=DXo5hmiFQmQ"
+          "video": "https://www.youtube.com/watch?v=YccW41ydnDQ"
         }
       ]
     },
@@ -529,7 +533,7 @@
             { "step": 2, "instruction": "Stay with them and offer reassurance." },
             { "step": 3, "instruction": "Do not give fluids until vomiting has stopped." }
           ],
-          "video": "https://www.youtube.com/watch?v=GmqXqwSV3bo"
+          "video": "https://youtu.be/HLSJIgGhaSY?si=soAo4wmThnrveJ_Q"
         },
         {
           "id": "after-vomiting",
@@ -540,7 +544,8 @@
             { "step": 1, "instruction": "Help them rinse their mouth with water." },
             { "step": 2, "instruction": "Start with small sips of water or an oral rehydration drink." },
             { "step": 3, "instruction": "Get medical help if there is blood in the vomit, severe pain, or signs of dehydration." }
-          ]
+          ],
+          "video": "https://www.youtube.com/watch?v=GmqXqwSV3bo"
         }
       ]
     },
@@ -574,7 +579,8 @@
             { "step": 2, "instruction": "Control bleeding gently around the wound without pressing on the bone." },
             { "step": 3, "instruction": "Cover the wound loosely with a clean dressing." },
             { "step": 4, "instruction": "Keep the area still and treat for shock if needed." }
-          ]
+          ],
+          "video": "https://youtu.be/ibpZfteF2zg?si=fiBzcHQcO2_1J6IZ"
         },
         {
           "id": "spine-or-neck",
@@ -585,7 +591,8 @@
             { "step": 1, "instruction": "Call 911 right away and do not move the person." },
             { "step": 2, "instruction": "Support their head and neck in the position you found them." },
             { "step": 3, "instruction": "Only move them if they are in immediate danger from fire or other hazards." }
-          ]
+          ],
+          "video": "https://www.youtube.com/watch?v=EAW71i6x6K4&t=68s"
         }
       ]
     },
@@ -606,7 +613,8 @@
             { "step": 2, "instruction": "Wash any contact area with soap and water." },
             { "step": 3, "instruction": "Consider an over-the-counter antihistamine if appropriate for them." },
             { "step": 4, "instruction": "Watch closely for any sign that symptoms are getting worse." }
-          ]
+          ],
+          "video": "https://www.youtube.com/watch?v=H2DIcKgpKoE"
         },
         {
           "id": "anaphylaxis",
