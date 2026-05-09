@@ -40,6 +40,7 @@ A Flutter-based mobile application that provides quick access to first aid infor
 - **Text-to-speech** — read steps aloud with a single tap; stops automatically when all steps finish
 - **Trivia quiz** — per-category multiple-choice quiz with answer feedback; progress (correct/total) persists across app restarts
 - **Settings** — view overall progress and reset all quiz scores
+- **Progress Tracker** — trivia answers are tracked based on correctness and displayed on the home screen
 
 ## Project Structure
 
@@ -61,9 +62,7 @@ assets/
 ├── data/
 │   ├── ailments.json          # Category and topic definitions with steps and video URLs
 │   └── questions.json         # Per-category multiple-choice quiz questions
-├── icons/                     # Category and topic icon images
-└── images/                    # Step instruction images
-```
+└── icons/                     # Category and topic icon images
 
 ## Dependencies
 

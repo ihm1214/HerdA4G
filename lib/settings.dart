@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'services/primary_service.dart';
 
+// settings.dart shows the app's settings screen
+// right now it has a progress summary and a "Reset All Progress" button
+// Settings screen UI inspired by: https://docs.flutter.dev/cookbook/design/themes
+//                             and https://api.flutter.dev/flutter/material/AlertDialog-class.html
+
+// StatefulWidget because we need to rebuild when quiz scores change
+// StatefulWidget docs: https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html
 class SettingsScreen extends StatefulWidget {
-  final FirstAidService service;
+  final FirstAidService service; // passed in from main.dart so we reuse the same singleton
 
   const SettingsScreen({super.key, required this.service});
 
@@ -14,6 +21,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   static const Color _primaryPink = Color.fromARGB(255, 250, 183, 178);
   static const Color _darkRed = Color(0xFFB71C1C);
 
+  // _confirmResetProgress shows a "are you sure?" dialog before wiping all scores
+  // AlertDialog docs: https://api.flutter.dev/flutter/material/AlertDialog-class.html
   void _confirmResetProgress(BuildContext context) {
     showDialog(
       context: context,
@@ -31,6 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           'This action cannot be undone.',
         ),
         actions: [
+          // Cancel just closes the dialog without doing anything
           TextButton(
             onPressed: () => Navigator.pop(ctx),
             child: const Text('Cancel'),
@@ -44,8 +54,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             onPressed: () {
-              Navigator.pop(ctx);
-              widget.service.resetAllProgress();
+              Navigator.pop(ctx);                  // close the dialog
+              widget.service.resetAllProgress();   // wipe all scores from memory and storage
+              // show a brief confirmation message floating at the bottom of the screen
+              // ScaffoldMessenger docs: https://api.flutter.dev/flutter/material/ScaffoldMessenger-class.html
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: const Row(
@@ -70,6 +82,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  // build() assembles the settings screen: progress section then about section
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,12 +96,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
           // ── Progress section ──────────────────────────────────────────
           _SectionHeader(title: 'Progress'),
           const SizedBox(height: 8),
+          // AnimatedBuilder watches the service and rebuilds this card automatically
+          // whenever quiz scores change (like right after clicking Reset)
+          // AnimatedBuilder docs: https://api.flutter.dev/flutter/widgets/AnimatedBuilder-class.html
           AnimatedBuilder(
             animation: widget.service,
             builder: (context, _) {
               final summary = widget.service.getOverallProgress();
               return _SettingsCard(
                 children: [
+                  // row showing "X/Y" total correct answers
                   _ProgressStat(
                     label: 'Total Questions Answered',
                     value:
@@ -109,6 +126,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               style:
                                   TextStyle(fontSize: 13, color: Colors.grey),
                             ),
+                            // toStringAsFixed(0) chops off the decimal so it shows "60%" not "60.0%"
                             Text(
                               '${(summary.progress * 100).toStringAsFixed(0)}%',
                               style: const TextStyle(
@@ -119,10 +137,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ],
                         ),
                         const SizedBox(height: 6),
+                        // the main progress bar showing overall quiz completion
+                        // LinearProgressIndicator docs: https://api.flutter.dev/flutter/material/LinearProgressIndicator-class.html
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: LinearProgressIndicator(
-                            value: summary.progress,
+                            value: summary.progress, // 0.0 = nothing done, 1.0 = all correct
                             minHeight: 8,
                             backgroundColor: Colors.grey.shade200,
                             color: _primaryPink,
@@ -138,6 +158,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           const SizedBox(height: 8),
 
+          // reset button in its own separate card
           _SettingsCard(
             children: [
               _SettingsTile(
@@ -185,6 +206,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
 // ── Helper widgets ─────────────────────────────────────────────────────────────
 
+// _SectionHeader shows the small all-caps label above each group of settings
+// like "PROGRESS" or "ABOUT"
 class _SectionHeader extends StatelessWidget {
   final String title;
   const _SectionHeader({required this.title});
@@ -194,11 +217,11 @@ class _SectionHeader extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 4, bottom: 4),
       child: Text(
-        title.toUpperCase(),
+        title.toUpperCase(), // force uppercase no matter what was passed in
         style: TextStyle(
           fontSize: 11,
           fontWeight: FontWeight.w700,
-          letterSpacing: 1.2,
+          letterSpacing: 1.2, // extra space between letters for the small-caps label look
           color: Colors.grey.shade500,
         ),
       ),
@@ -206,6 +229,8 @@ class _SectionHeader extends StatelessWidget {
   }
 }
 
+// _SettingsCard is a white rounded container that groups settings tiles together
+// Container docs: https://api.flutter.dev/flutter/widgets/Container-class.html
 class _SettingsCard extends StatelessWidget {
   final List<Widget> children;
   const _SettingsCard({required this.children});
@@ -218,7 +243,7 @@ class _SettingsCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
       ),
-      clipBehavior: Clip.hardEdge,
+      clipBehavior: Clip.hardEdge, // clips children so they don't overflow the rounded corners
       child: Column(
         children: children,
       ),
@@ -226,13 +251,16 @@ class _SettingsCard extends StatelessWidget {
   }
 }
 
+// _SettingsTile is one tappable row inside a settings card
+// shows a colored icon box, a title, an optional subtitle, and an optional trailing widget
+// InkWell docs: https://api.flutter.dev/flutter/material/InkWell-class.html
 class _SettingsTile extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final String title;
-  final String? subtitle;
-  final Widget? trailing;
-  final VoidCallback? onTap;
+  final String? subtitle;    // optional - not every tile needs a subtitle
+  final Widget? trailing;    // optional - like a chevron arrow or a toggle switch
+  final VoidCallback? onTap; // optional - if null, the tile isn't tappable
 
   const _SettingsTile({
     required this.icon,
@@ -246,21 +274,23 @@ class _SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: onTap, // null = not tappable (for info-only tiles like the disclaimer)
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         child: Row(
           children: [
+            // colored square icon badge on the left side
             Container(
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: iconColor.withOpacity(0.1),
+                color: iconColor.withOpacity(0.1), // faint tint of the icon color as background
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(icon, color: iconColor, size: 20),
             ),
             const SizedBox(width: 14),
+            // title and subtitle stacked vertically, takes remaining horizontal space
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -272,6 +302,7 @@ class _SettingsTile extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  // only render the subtitle if one was provided
                   if (subtitle != null) ...[
                     const SizedBox(height: 2),
                     Text(
@@ -285,7 +316,7 @@ class _SettingsTile extends StatelessWidget {
                 ],
               ),
             ),
-            if (trailing != null) trailing!,
+            if (trailing != null) trailing!, // render trailing widget if one was given
           ],
         ),
       ),
@@ -293,9 +324,11 @@ class _SettingsTile extends StatelessWidget {
   }
 }
 
+// _ProgressStat shows one stat row with a pink icon, a label, and a value on the right
+// used for the "Total Questions Answered: X/Y" row in the progress card
 class _ProgressStat extends StatelessWidget {
   final String label;
-  final String value;
+  final String value; // pre-formatted string like "7/20"
   final IconData icon;
 
   const _ProgressStat({
@@ -310,6 +343,7 @@ class _ProgressStat extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Row(
         children: [
+          // pink icon box
           Container(
             width: 36,
             height: 36,
@@ -321,6 +355,7 @@ class _ProgressStat extends StatelessWidget {
                 color: const Color.fromARGB(255, 250, 183, 178), size: 20),
           ),
           const SizedBox(width: 14),
+          // label fills the middle, value is pinned to the far right
           Expanded(
             child: Text(
               label,
